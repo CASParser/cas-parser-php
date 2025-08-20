@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace CasParser\Contracts;
 
-use CasParser\CasGenerator\CasGeneratorGenerateCasParams;
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
 use CasParser\RequestOptions;
 use CasParser\Responses\CasGenerator\CasGeneratorGenerateCasResponse;
@@ -12,17 +11,20 @@ use CasParser\Responses\CasGenerator\CasGeneratorGenerateCasResponse;
 interface CasGeneratorContract
 {
     /**
-     * @param array{
-     *   email: string,
-     *   fromDate: string,
-     *   password: string,
-     *   toDate: string,
-     *   casAuthority?: CasAuthority::*,
-     *   panNo?: string,
-     * }|CasGeneratorGenerateCasParams $params
+     * @param string $email Email address to receive the CAS document
+     * @param string $fromDate Start date for the CAS period (format YYYY-MM-DD)
+     * @param string $password Password to protect the generated CAS PDF
+     * @param string $toDate End date for the CAS period (format YYYY-MM-DD)
+     * @param CasAuthority::* $casAuthority CAS authority to generate the document from (currently only kfintech is supported)
+     * @param string $panNo PAN number (optional for some CAS authorities)
      */
     public function generateCas(
-        array|CasGeneratorGenerateCasParams $params,
+        $email,
+        $fromDate,
+        $password,
+        $toDate,
+        $casAuthority = null,
+        $panNo = null,
         ?RequestOptions $requestOptions = null,
     ): CasGeneratorGenerateCasResponse;
 }

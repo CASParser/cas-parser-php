@@ -2,7 +2,6 @@
 
 namespace Tests\Resources;
 
-use CasParser\CasGenerator\CasGeneratorGenerateCasParams;
 use CasParser\Client;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -34,13 +33,12 @@ final class CasGeneratorTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $params = CasGeneratorGenerateCasParams::with(
+        $result = $this->client->casGenerator->generateCas(
             email: 'user@example.com',
             fromDate: '2023-01-01',
             password: 'Abcdefghi12$',
             toDate: '2023-12-31',
         );
-        $result = $this->client->casGenerator->generateCas($params);
 
         $this->assertTrue(true); // @phpstan-ignore-line
     }
@@ -52,7 +50,7 @@ final class CasGeneratorTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $params = CasGeneratorGenerateCasParams::with(
+        $result = $this->client->casGenerator->generateCas(
             email: 'user@example.com',
             fromDate: '2023-01-01',
             password: 'Abcdefghi12$',
@@ -60,7 +58,6 @@ final class CasGeneratorTest extends TestCase
             casAuthority: 'kfintech',
             panNo: 'ABCDE1234F',
         );
-        $result = $this->client->casGenerator->generateCas($params);
 
         $this->assertTrue(true); // @phpstan-ignore-line
     }

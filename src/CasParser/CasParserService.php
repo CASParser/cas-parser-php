@@ -17,17 +17,19 @@ final class CasParserService implements CasParserContract
      * This endpoint specifically parses CAMS/KFintech CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
      * Use this endpoint when you know the PDF is from CAMS or KFintech.
      *
-     * @param array{
-     *   password?: string, pdfFile?: string, pdfURL?: string
-     * }|CasParserCamsKfintechParams $params
+     * @param string $password Password for the PDF file (if required)
+     * @param string $pdfFile Base64 encoded CAS PDF file
+     * @param string $pdfURL URL to the CAS PDF file
      */
     public function camsKfintech(
-        array|CasParserCamsKfintechParams $params,
+        $password = null,
+        $pdfFile = null,
+        $pdfURL = null,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
         [$parsed, $options] = CasParserCamsKfintechParams::parseRequest(
-            $params,
-            $requestOptions
+            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
+            $requestOptions,
         );
         $resp = $this->client->request(
             method: 'post',
@@ -44,17 +46,19 @@ final class CasParserService implements CasParserContract
      * This endpoint specifically parses CDSL CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
      * Use this endpoint when you know the PDF is from CDSL.
      *
-     * @param array{
-     *   password?: string, pdfFile?: string, pdfURL?: string
-     * }|CasParserCdslParams $params
+     * @param string $password Password for the PDF file (if required)
+     * @param string $pdfFile Base64 encoded CAS PDF file
+     * @param string $pdfURL URL to the CAS PDF file
      */
     public function cdsl(
-        array|CasParserCdslParams $params,
-        ?RequestOptions $requestOptions = null
+        $password = null,
+        $pdfFile = null,
+        $pdfURL = null,
+        ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
         [$parsed, $options] = CasParserCdslParams::parseRequest(
-            $params,
-            $requestOptions
+            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
+            $requestOptions,
         );
         $resp = $this->client->request(
             method: 'post',
@@ -71,17 +75,19 @@ final class CasParserService implements CasParserContract
      * This endpoint specifically parses NSDL CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
      * Use this endpoint when you know the PDF is from NSDL.
      *
-     * @param array{
-     *   password?: string, pdfFile?: string, pdfURL?: string
-     * }|CasParserNsdlParams $params
+     * @param string $password Password for the PDF file (if required)
+     * @param string $pdfFile Base64 encoded CAS PDF file
+     * @param string $pdfURL URL to the CAS PDF file
      */
     public function nsdl(
-        array|CasParserNsdlParams $params,
-        ?RequestOptions $requestOptions = null
+        $password = null,
+        $pdfFile = null,
+        $pdfURL = null,
+        ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
         [$parsed, $options] = CasParserNsdlParams::parseRequest(
-            $params,
-            $requestOptions
+            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
+            $requestOptions,
         );
         $resp = $this->client->request(
             method: 'post',
@@ -98,17 +104,19 @@ final class CasParserService implements CasParserContract
      * This endpoint parses CAS (Consolidated Account Statement) PDF files from NSDL, CDSL, or CAMS/KFintech and returns data in a unified format.
      * It auto-detects the CAS type and transforms the data into a consistent structure regardless of the source.
      *
-     * @param array{
-     *   password?: string, pdfFile?: string, pdfURL?: string
-     * }|CasParserSmartParseParams $params
+     * @param string $password Password for the PDF file (if required)
+     * @param string $pdfFile Base64 encoded CAS PDF file
+     * @param string $pdfURL URL to the CAS PDF file
      */
     public function smartParse(
-        array|CasParserSmartParseParams $params,
+        $password = null,
+        $pdfFile = null,
+        $pdfURL = null,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
         [$parsed, $options] = CasParserSmartParseParams::parseRequest(
-            $params,
-            $requestOptions
+            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
+            $requestOptions,
         );
         $resp = $this->client->request(
             method: 'post',
