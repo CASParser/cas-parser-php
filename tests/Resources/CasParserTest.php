@@ -2,10 +2,6 @@
 
 namespace Tests\Resources;
 
-use CasParser\CasParser\CasParserCamsKfintechParams;
-use CasParser\CasParser\CasParserCdslParams;
-use CasParser\CasParser\CasParserNsdlParams;
-use CasParser\CasParser\CasParserSmartParseParams;
 use CasParser\Client;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -37,8 +33,7 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $params = (new CasParserCamsKfintechParams);
-        $result = $this->client->casParser->camsKfintech($params);
+        $result = $this->client->casParser->camsKfintech();
 
         $this->assertTrue(true); // @phpstan-ignore-line
     }
@@ -50,8 +45,7 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $params = (new CasParserCdslParams);
-        $result = $this->client->casParser->cdsl($params);
+        $result = $this->client->casParser->cdsl();
 
         $this->assertTrue(true); // @phpstan-ignore-line
     }
@@ -63,8 +57,7 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $params = (new CasParserNsdlParams);
-        $result = $this->client->casParser->nsdl($params);
+        $result = $this->client->casParser->nsdl();
 
         $this->assertTrue(true); // @phpstan-ignore-line
     }
@@ -76,8 +69,7 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $params = (new CasParserSmartParseParams);
-        $result = $this->client->casParser->smartParse($params);
+        $result = $this->client->casParser->smartParse();
 
         $this->assertTrue(true); // @phpstan-ignore-line
     }
