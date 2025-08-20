@@ -50,8 +50,8 @@ $client = new Client(apiKey: getenv("CAS_PARSER_API_KEY") ?: "My API Key");
 $params = CasParserSmartParseParams::with(
   password: "ABCDF", pdfURL: "https://your-cas-pdf-url-here.com"
 );
-$unifiedResponse = $client->casParser->smartParse($params);
 
+$unifiedResponse = $client->casParser->smartParse($params);
 var_dump($unifiedResponse->demat_accounts);
 ```
 
@@ -77,7 +77,7 @@ try {
     echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
 } catch (APIStatusError $e) {
     echo "Another non-200-range status code was received", PHP_EOL;
-    var_dump($e->status);
+    echo $e->getMessage();
 }
 ```
 
