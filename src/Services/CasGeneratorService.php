@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace CasParser\CasGenerator;
+namespace CasParser\Services;
 
+use CasParser\CasGenerator\CasGeneratorGenerateCasParams;
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
 use CasParser\Client;
 use CasParser\Contracts\CasGeneratorContract;
 use CasParser\Core\Conversion;
+use CasParser\Core\Util;
 use CasParser\RequestOptions;
 use CasParser\Responses\CasGenerator\CasGeneratorGenerateCasResponse;
 
@@ -35,16 +37,18 @@ final class CasGeneratorService implements CasGeneratorContract
         $panNo = null,
         ?RequestOptions $requestOptions = null,
     ): CasGeneratorGenerateCasResponse {
+        $args = [
+            'email' => $email,
+            'fromDate' => $fromDate,
+            'password' => $password,
+            'toDate' => $toDate,
+            'casAuthority' => $casAuthority,
+            'panNo' => $panNo,
+        ];
+        $args = Util::array_filter_null($args, ['casAuthority', 'panNo']);
         [$parsed, $options] = CasGeneratorGenerateCasParams::parseRequest(
-            [
-                'email' => $email,
-                'fromDate' => $fromDate,
-                'password' => $password,
-                'toDate' => $toDate,
-                'casAuthority' => $casAuthority,
-                'panNo' => $panNo,
-            ],
-            $requestOptions,
+            $args,
+            $requestOptions
         );
         $resp = $this->client->request(
             method: 'post',

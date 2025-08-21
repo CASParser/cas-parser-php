@@ -49,10 +49,7 @@ use CasParser\Client;
 
 $client = new Client(apiKey: getenv("CAS_PARSER_API_KEY") ?: "My API Key");
 
-$unifiedResponse = $client->casParser->smartParse(
-  password: "ABCDF", pdfURL: "https://your-cas-pdf-url-here.com"
-);
-
+$unifiedResponse = $client->casParser->smartParse();
 var_dump($unifiedResponse->demat_accounts);
 ```
 
@@ -119,11 +116,7 @@ use CasParser\RequestOptions;
 $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
-$result = $client->casParser->smartParse(
-  password: "ABCDF",
-  pdfURL: "https://you-cas-pdf-url-here.com",
-  new RequestOptions(maxRetries: 5),
-);
+$result = $client->casParser->smartParse(new RequestOptions(maxRetries: 5));
 ```
 
 ## Advanced concepts
@@ -142,8 +135,6 @@ Note: the `extra_` parameters of the same name overrides the documented paramete
 use CasParser\RequestOptions;
 
 $unifiedResponse = $client->casParser->smartParse(
-  password: "ABCDF",
-  pdfURL: "https://you-cas-pdf-url-here.com",
   new RequestOptions(
     extraQueryParams: ["my_query_parameter" => "value"],
     extraBodyParams: ["my_body_parameter" => "value"],
