@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\Meta;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
@@ -15,7 +15,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class StatementPeriod implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     /**
      * Start date of the statement period.

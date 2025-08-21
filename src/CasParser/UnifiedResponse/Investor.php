@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
@@ -21,7 +21,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class Investor implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     /**
      * Address of the investor.

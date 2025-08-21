@@ -10,7 +10,7 @@ use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\DematMutualFund;
 use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\Equity;
 use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\GovernmentSecurity;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\ListOf;
 
@@ -25,7 +25,7 @@ use CasParser\Core\Conversion\ListOf;
  */
 final class Holdings implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     /** @var null|list<Aif> $aifs */
     #[Api(type: new ListOf(Aif::class), optional: true)]

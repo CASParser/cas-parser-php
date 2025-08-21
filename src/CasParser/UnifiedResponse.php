@@ -11,7 +11,7 @@ use CasParser\CasParser\UnifiedResponse\Meta;
 use CasParser\CasParser\UnifiedResponse\MutualFund;
 use CasParser\CasParser\UnifiedResponse\Summary;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\ListOf;
 
@@ -27,7 +27,7 @@ use CasParser\Core\Conversion\ListOf;
  */
 final class UnifiedResponse implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     /** @var null|list<DematAccount> $dematAccounts */
     #[Api(

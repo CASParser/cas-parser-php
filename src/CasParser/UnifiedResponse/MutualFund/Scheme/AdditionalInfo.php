@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
@@ -21,7 +21,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class AdditionalInfo implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     /**
      * Financial advisor name (CAMS/KFintech).

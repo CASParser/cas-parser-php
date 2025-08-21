@@ -7,7 +7,10 @@ namespace CasParser\Core\Concerns;
 use CasParser\Core\Conversion\Contracts\Converter;
 use CasParser\Core\Conversion\EnumOf;
 
-trait Enum
+/**
+ * @internal
+ */
+trait SdkEnum
 {
     private static Converter $converter;
 

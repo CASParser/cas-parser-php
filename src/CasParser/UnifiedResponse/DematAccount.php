@@ -8,7 +8,7 @@ use CasParser\CasParser\UnifiedResponse\DematAccount\AdditionalInfo;
 use CasParser\CasParser\UnifiedResponse\DematAccount\DematType;
 use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
@@ -25,7 +25,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class DematAccount implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     /**
      * Additional information specific to the demat account type.
