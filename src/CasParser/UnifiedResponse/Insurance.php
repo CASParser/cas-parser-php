@@ -19,7 +19,7 @@ final class Insurance implements BaseModel
 {
     use SdkModel;
 
-    /** @var null|list<LifeInsurancePolicy> $lifeInsurancePolicies */
+    /** @var list<LifeInsurancePolicy>|null $lifeInsurancePolicies */
     #[Api(
         'life_insurance_policies',
         type: new ListOf(LifeInsurancePolicy::class),
@@ -38,7 +38,7 @@ final class Insurance implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<LifeInsurancePolicy> $lifeInsurancePolicies
+     * @param list<LifeInsurancePolicy>|null $lifeInsurancePolicies
      */
     public static function with(?array $lifeInsurancePolicies = null): self
     {

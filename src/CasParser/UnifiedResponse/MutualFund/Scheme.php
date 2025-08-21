@@ -68,19 +68,19 @@ final class Scheme implements BaseModel
     /**
      * List of nominees.
      *
-     * @var null|list<string> $nominees
+     * @var list<string>|null $nominees
      */
     #[Api(type: new ListOf('string'), optional: true)]
     public ?array $nominees;
 
-    /** @var null|list<Transaction> $transactions */
+    /** @var list<Transaction>|null $transactions */
     #[Api(type: new ListOf(Transaction::class), optional: true)]
     public ?array $transactions;
 
     /**
      * Type of mutual fund scheme.
      *
-     * @var null|Type::* $type
+     * @var Type::*|null $type
      */
     #[Api(enum: Type::class, optional: true)]
     public ?string $type;
@@ -108,9 +108,9 @@ final class Scheme implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<string> $nominees
-     * @param null|list<Transaction> $transactions
-     * @param null|Type::* $type
+     * @param list<string>|null $nominees
+     * @param list<Transaction>|null $transactions
+     * @param Type::*|null $type
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,

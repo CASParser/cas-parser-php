@@ -60,7 +60,7 @@ final class AdditionalInfo implements BaseModel
     /**
      * List of linked PAN numbers (NSDL).
      *
-     * @var null|list<string> $linkedPans
+     * @var list<string>|null $linkedPans
      */
     #[Api('linked_pans', type: new ListOf('string'), optional: true)]
     public ?array $linkedPans;
@@ -88,7 +88,7 @@ final class AdditionalInfo implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<string> $linkedPans
+     * @param list<string>|null $linkedPans
      */
     public static function with(
         ?string $boStatus = null,

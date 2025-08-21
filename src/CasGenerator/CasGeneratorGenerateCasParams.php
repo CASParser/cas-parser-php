@@ -55,7 +55,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     /**
      * CAS authority to generate the document from (currently only kfintech is supported).
      *
-     * @var null|CasAuthority::* $casAuthority
+     * @var CasAuthority::*|null $casAuthority
      */
     #[Api('cas_authority', enum: CasAuthority::class, optional: true)]
     public ?string $casAuthority;
@@ -97,7 +97,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|CasAuthority::* $casAuthority
+     * @param CasAuthority::*|null $casAuthority
      */
     public static function with(
         string $email,

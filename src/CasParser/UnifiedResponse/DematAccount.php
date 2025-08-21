@@ -48,7 +48,7 @@ final class DematAccount implements BaseModel
     /**
      * Type of demat account.
      *
-     * @var null|DematType::* $dematType
+     * @var DematType::*|null $dematType
      */
     #[Api('demat_type', enum: DematType::class, optional: true)]
     public ?string $dematType;
@@ -85,7 +85,7 @@ final class DematAccount implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|DematType::* $dematType
+     * @param DematType::*|null $dematType
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,
