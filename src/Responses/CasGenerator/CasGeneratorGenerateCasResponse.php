@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CasParser\Responses\CasGenerator;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
@@ -15,7 +15,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class CasGeneratorGenerateCasResponse implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     #[Api(optional: true)]
     public ?string $msg;

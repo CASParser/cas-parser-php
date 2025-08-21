@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\DematAccount;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\ListOf;
 
@@ -25,7 +25,7 @@ use CasParser\Core\Conversion\ListOf;
  */
 final class AdditionalInfo implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     /**
      * Beneficiary Owner status (CDSL).

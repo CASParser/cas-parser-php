@@ -9,7 +9,7 @@ use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Gain;
 use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Transaction;
 use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Type;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\ListOf;
 
@@ -30,7 +30,7 @@ use CasParser\Core\Conversion\ListOf;
  */
 final class Scheme implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     /**
      * Additional information specific to the scheme.

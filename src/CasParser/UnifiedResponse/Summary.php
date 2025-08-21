@@ -6,7 +6,7 @@ namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\CasParser\UnifiedResponse\Summary\Accounts;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
@@ -14,7 +14,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class Summary implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     #[Api(optional: true)]
     public ?Accounts $accounts;

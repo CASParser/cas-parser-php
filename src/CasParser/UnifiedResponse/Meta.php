@@ -7,7 +7,7 @@ namespace CasParser\CasParser\UnifiedResponse;
 use CasParser\CasParser\UnifiedResponse\Meta\CasType;
 use CasParser\CasParser\UnifiedResponse\Meta\StatementPeriod;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
@@ -19,7 +19,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class Meta implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     /**
      * Type of CAS detected and processed.

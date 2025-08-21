@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CasParser\CasGenerator\CasGeneratorGenerateCasParams;
 
-use CasParser\Core\Concerns\Enum;
+use CasParser\Core\Concerns\SdkEnum;
 use CasParser\Core\Conversion\Contracts\ConverterSource;
 
 /**
@@ -14,7 +14,7 @@ use CasParser\Core\Conversion\Contracts\ConverterSource;
  */
 final class CasAuthority implements ConverterSource
 {
-    use Enum;
+    use SdkEnum;
 
     public const KFINTECH = 'kfintech';
 

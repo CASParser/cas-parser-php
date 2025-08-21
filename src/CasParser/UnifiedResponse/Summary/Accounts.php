@@ -8,7 +8,7 @@ use CasParser\CasParser\UnifiedResponse\Summary\Accounts\Demat;
 use CasParser\CasParser\UnifiedResponse\Summary\Accounts\Insurance;
 use CasParser\CasParser\UnifiedResponse\Summary\Accounts\MutualFunds;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
@@ -18,7 +18,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class Accounts implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     #[Api(optional: true)]
     public ?Demat $demat;

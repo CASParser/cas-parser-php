@@ -6,7 +6,7 @@ namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\CasParser\UnifiedResponse\Insurance\LifeInsurancePolicy;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\ListOf;
 
@@ -17,7 +17,7 @@ use CasParser\Core\Conversion\ListOf;
  */
 final class Insurance implements BaseModel
 {
-    use Model;
+    use SdkModel;
 
     /** @var null|list<LifeInsurancePolicy> $lifeInsurancePolicies */
     #[Api(
