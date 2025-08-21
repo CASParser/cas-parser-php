@@ -49,7 +49,7 @@ final class MutualFund implements BaseModel
     #[Api(optional: true)]
     public ?string $registrar;
 
-    /** @var null|list<Scheme> $schemes */
+    /** @var list<Scheme>|null $schemes */
     #[Api(type: new ListOf(Scheme::class), optional: true)]
     public ?array $schemes;
 
@@ -70,7 +70,7 @@ final class MutualFund implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<Scheme> $schemes
+     * @param list<Scheme>|null $schemes
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,

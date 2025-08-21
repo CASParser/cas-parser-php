@@ -24,7 +24,7 @@ final class Meta implements BaseModel
     /**
      * Type of CAS detected and processed.
      *
-     * @var null|CasType::* $casType
+     * @var CasType::*|null $casType
      */
     #[Api('cas_type', enum: CasType::class, optional: true)]
     public ?string $casType;
@@ -49,7 +49,7 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|CasType::* $casType
+     * @param CasType::*|null $casType
      */
     public static function with(
         ?string $casType = null,

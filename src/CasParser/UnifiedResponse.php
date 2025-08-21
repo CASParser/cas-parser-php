@@ -29,7 +29,7 @@ final class UnifiedResponse implements BaseModel
 {
     use SdkModel;
 
-    /** @var null|list<DematAccount> $dematAccounts */
+    /** @var list<DematAccount>|null $dematAccounts */
     #[Api(
         'demat_accounts',
         type: new ListOf(DematAccount::class),
@@ -46,7 +46,7 @@ final class UnifiedResponse implements BaseModel
     #[Api(optional: true)]
     public ?Meta $meta;
 
-    /** @var null|list<MutualFund> $mutualFunds */
+    /** @var list<MutualFund>|null $mutualFunds */
     #[Api('mutual_funds', type: new ListOf(MutualFund::class), optional: true)]
     public ?array $mutualFunds;
 
@@ -64,8 +64,8 @@ final class UnifiedResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<DematAccount> $dematAccounts
-     * @param null|list<MutualFund> $mutualFunds
+     * @param list<DematAccount>|null $dematAccounts
+     * @param list<MutualFund>|null $mutualFunds
      */
     public static function with(
         ?array $dematAccounts = null,

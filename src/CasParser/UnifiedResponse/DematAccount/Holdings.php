@@ -27,11 +27,11 @@ final class Holdings implements BaseModel
 {
     use SdkModel;
 
-    /** @var null|list<Aif> $aifs */
+    /** @var list<Aif>|null $aifs */
     #[Api(type: new ListOf(Aif::class), optional: true)]
     public ?array $aifs;
 
-    /** @var null|list<CorporateBond> $corporateBonds */
+    /** @var list<CorporateBond>|null $corporateBonds */
     #[Api(
         'corporate_bonds',
         type: new ListOf(CorporateBond::class),
@@ -39,7 +39,7 @@ final class Holdings implements BaseModel
     )]
     public ?array $corporateBonds;
 
-    /** @var null|list<DematMutualFund> $dematMutualFunds */
+    /** @var list<DematMutualFund>|null $dematMutualFunds */
     #[Api(
         'demat_mutual_funds',
         type: new ListOf(DematMutualFund::class),
@@ -47,11 +47,11 @@ final class Holdings implements BaseModel
     )]
     public ?array $dematMutualFunds;
 
-    /** @var null|list<Equity> $equities */
+    /** @var list<Equity>|null $equities */
     #[Api(type: new ListOf(Equity::class), optional: true)]
     public ?array $equities;
 
-    /** @var null|list<GovernmentSecurity> $governmentSecurities */
+    /** @var list<GovernmentSecurity>|null $governmentSecurities */
     #[Api(
         'government_securities',
         type: new ListOf(GovernmentSecurity::class),
@@ -70,11 +70,11 @@ final class Holdings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<Aif> $aifs
-     * @param null|list<CorporateBond> $corporateBonds
-     * @param null|list<DematMutualFund> $dematMutualFunds
-     * @param null|list<Equity> $equities
-     * @param null|list<GovernmentSecurity> $governmentSecurities
+     * @param list<Aif>|null $aifs
+     * @param list<CorporateBond>|null $corporateBonds
+     * @param list<DematMutualFund>|null $dematMutualFunds
+     * @param list<Equity>|null $equities
+     * @param list<GovernmentSecurity>|null $governmentSecurities
      */
     public static function with(
         ?array $aifs = null,
