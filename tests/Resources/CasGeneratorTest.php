@@ -55,8 +55,6 @@ final class CasGeneratorTest extends TestCase
             fromDate: '2023-01-01',
             password: 'Abcdefghi12$',
             toDate: '2023-12-31',
-            casAuthority: 'kfintech',
-            panNo: 'ABCDE1234F',
         );
 
         $this->assertTrue(true); // @phpstan-ignore-line
