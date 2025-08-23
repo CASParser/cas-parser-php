@@ -8,19 +8,6 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
-/**
- * @phpstan-type life_insurance_policy_alias = array{
- *   additionalInfo?: mixed,
- *   lifeAssured?: string,
- *   policyName?: string,
- *   policyNumber?: string,
- *   premiumAmount?: float,
- *   premiumFrequency?: string,
- *   provider?: string,
- *   status?: string,
- *   sumAssured?: float,
- * }
- */
 final class LifeInsurancePolicy implements BaseModel
 {
     use SdkModel;

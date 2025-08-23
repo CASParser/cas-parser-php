@@ -8,11 +8,6 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
-/**
- * @phpstan-type cas_generator_generate_cas_response_alias = array{
- *   msg?: string, status?: string
- * }
- */
 final class CasGeneratorGenerateCasResponse implements BaseModel
 {
     use SdkModel;

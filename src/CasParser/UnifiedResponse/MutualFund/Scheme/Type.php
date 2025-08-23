@@ -9,8 +9,6 @@ use CasParser\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Type of mutual fund scheme.
- *
- * @phpstan-type type_alias = Type::*
  */
 final class Type implements ConverterSource
 {

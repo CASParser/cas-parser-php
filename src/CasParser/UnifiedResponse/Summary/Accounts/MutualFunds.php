@@ -8,9 +8,6 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
-/**
- * @phpstan-type mutual_funds_alias = array{count?: int, totalValue?: float}
- */
 final class MutualFunds implements BaseModel
 {
     use SdkModel;

@@ -11,17 +11,6 @@ use CasParser\Core\Conversion\ListOf;
 
 /**
  * Additional information specific to the demat account type.
- *
- * @phpstan-type additional_info_alias = array{
- *   boStatus?: string,
- *   boSubStatus?: string,
- *   boType?: string,
- *   bsda?: string,
- *   email?: string,
- *   linkedPans?: list<string>,
- *   nominee?: string,
- *   status?: string,
- * }
  */
 final class AdditionalInfo implements BaseModel
 {

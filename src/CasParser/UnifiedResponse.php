@@ -15,16 +15,6 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\ListOf;
 
-/**
- * @phpstan-type unified_response_alias = array{
- *   dematAccounts?: list<DematAccount>,
- *   insurance?: Insurance,
- *   investor?: Investor,
- *   meta?: Meta,
- *   mutualFunds?: list<MutualFund>,
- *   summary?: Summary,
- * }
- */
 final class UnifiedResponse implements BaseModel
 {
     use SdkModel;

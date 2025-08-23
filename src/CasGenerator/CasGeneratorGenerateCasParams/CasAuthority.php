@@ -9,8 +9,6 @@ use CasParser\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * CAS authority to generate the document from (currently only kfintech is supported).
- *
- * @phpstan-type cas_authority_alias = CasAuthority::*
  */
 final class CasAuthority implements ConverterSource
 {

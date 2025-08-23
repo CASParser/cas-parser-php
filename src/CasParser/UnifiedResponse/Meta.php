@@ -10,13 +10,6 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
-/**
- * @phpstan-type meta_alias = array{
- *   casType?: CasType::*,
- *   generatedAt?: \DateTimeInterface,
- *   statementPeriod?: StatementPeriod,
- * }
- */
 final class Meta implements BaseModel
 {
     use SdkModel;
