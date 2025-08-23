@@ -8,15 +8,6 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
-/**
- * @phpstan-type corporate_bond_alias = array{
- *   additionalInfo?: mixed,
- *   isin?: string,
- *   name?: string,
- *   units?: float,
- *   value?: float,
- * }
- */
 final class CorporateBond implements BaseModel
 {
     use SdkModel;

@@ -12,10 +12,6 @@ use CasParser\Core\Contracts\BaseModel;
 /**
  * This endpoint parses CAS (Consolidated Account Statement) PDF files from NSDL, CDSL, or CAMS/KFintech and returns data in a unified format.
  * It auto-detects the CAS type and transforms the data into a consistent structure regardless of the source.
- *
- * @phpstan-type smart_parse_params = array{
- *   password?: string, pdfFile?: string, pdfURL?: string
- * }
  */
 final class CasParserSmartParseParams implements BaseModel
 {

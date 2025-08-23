@@ -10,10 +10,6 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * Additional folio information.
- *
- * @phpstan-type additional_info_alias = array{
- *   kyc?: string, pan?: string, pankyc?: string
- * }
  */
 final class AdditionalInfo implements BaseModel
 {

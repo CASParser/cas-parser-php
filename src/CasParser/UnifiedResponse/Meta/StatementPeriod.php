@@ -8,11 +8,6 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
-/**
- * @phpstan-type statement_period_alias = array{
- *   from?: \DateTimeInterface, to?: \DateTimeInterface
- * }
- */
 final class StatementPeriod implements BaseModel
 {
     use SdkModel;

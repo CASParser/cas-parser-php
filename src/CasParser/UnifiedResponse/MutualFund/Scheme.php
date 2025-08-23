@@ -13,21 +13,6 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\ListOf;
 
-/**
- * @phpstan-type scheme_alias = array{
- *   additionalInfo?: AdditionalInfo,
- *   cost?: float,
- *   gain?: Gain,
- *   isin?: string,
- *   name?: string,
- *   nav?: float,
- *   nominees?: list<string>,
- *   transactions?: list<Transaction>,
- *   type?: Type::*,
- *   units?: float,
- *   value?: float,
- * }
- */
 final class Scheme implements BaseModel
 {
     use SdkModel;

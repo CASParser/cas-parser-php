@@ -10,11 +10,6 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\ListOf;
 
-/**
- * @phpstan-type insurance_alias = array{
- *   lifeInsurancePolicies?: list<LifeInsurancePolicy>
- * }
- */
 final class Insurance implements BaseModel
 {
     use SdkModel;

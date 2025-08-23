@@ -9,9 +9,6 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
-/**
- * @phpstan-type summary_alias = array{accounts?: Accounts, totalValue?: float}
- */
 final class Summary implements BaseModel
 {
     use SdkModel;

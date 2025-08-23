@@ -11,16 +11,6 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\ListOf;
 
-/**
- * @phpstan-type mutual_fund_alias = array{
- *   additionalInfo?: AdditionalInfo,
- *   amc?: string,
- *   folioNumber?: string,
- *   registrar?: string,
- *   schemes?: list<Scheme>,
- *   value?: float,
- * }
- */
 final class MutualFund implements BaseModel
 {
     use SdkModel;

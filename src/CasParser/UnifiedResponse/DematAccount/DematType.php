@@ -9,8 +9,6 @@ use CasParser\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Type of demat account.
- *
- * @phpstan-type demat_type_alias = DematType::*
  */
 final class DematType implements ConverterSource
 {

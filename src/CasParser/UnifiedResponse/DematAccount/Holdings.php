@@ -14,15 +14,6 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\ListOf;
 
-/**
- * @phpstan-type holdings_alias = array{
- *   aifs?: list<Aif>,
- *   corporateBonds?: list<CorporateBond>,
- *   dematMutualFunds?: list<DematMutualFund>,
- *   equities?: list<Equity>,
- *   governmentSecurities?: list<GovernmentSecurity>,
- * }
- */
 final class Holdings implements BaseModel
 {
     use SdkModel;

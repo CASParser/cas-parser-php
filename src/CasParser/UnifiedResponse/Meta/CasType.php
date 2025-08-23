@@ -9,8 +9,6 @@ use CasParser\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Type of CAS detected and processed.
- *
- * @phpstan-type cas_type_alias = CasType::*
  */
 final class CasType implements ConverterSource
 {
