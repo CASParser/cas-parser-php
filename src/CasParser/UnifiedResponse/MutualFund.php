@@ -9,7 +9,6 @@ use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 final class MutualFund implements BaseModel
 {
@@ -40,7 +39,7 @@ final class MutualFund implements BaseModel
     public ?string $registrar;
 
     /** @var list<Scheme>|null $schemes */
-    #[Api(type: new ListOf(Scheme::class), optional: true)]
+    #[Api(list: Scheme::class, optional: true)]
     public ?array $schemes;
 
     /**
@@ -60,7 +59,7 @@ final class MutualFund implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Scheme>|null $schemes
+     * @param list<Scheme> $schemes
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,

@@ -42,7 +42,7 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CasType::*|null $casType
+     * @param CasType::* $casType
      */
     public static function with(
         ?string $casType = null,

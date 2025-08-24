@@ -73,7 +73,7 @@ final class DematAccount implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DematType::*|null $dematType
+     * @param DematType::* $dematType
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,
