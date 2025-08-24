@@ -29,10 +29,8 @@ final class CasGeneratorGenerateCasResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        ?string $msg = null,
-        ?string $status = null
-    ): self {
+    public static function with(?string $msg = null, ?string $status = null): self
+    {
         $obj = new self;
 
         null !== $msg && $obj->msg = $msg;

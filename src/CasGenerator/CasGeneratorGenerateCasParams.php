@@ -88,7 +88,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CasAuthority::*|null $casAuthority
+     * @param CasAuthority::* $casAuthority
      */
     public static function with(
         string $email,

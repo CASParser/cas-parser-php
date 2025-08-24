@@ -13,18 +13,13 @@ use CasParser\CasParser\UnifiedResponse\Summary;
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 final class UnifiedResponse implements BaseModel
 {
     use SdkModel;
 
     /** @var list<DematAccount>|null $dematAccounts */
-    #[Api(
-        'demat_accounts',
-        type: new ListOf(DematAccount::class),
-        optional: true
-    )]
+    #[Api('demat_accounts', list: DematAccount::class, optional: true)]
     public ?array $dematAccounts;
 
     #[Api(optional: true)]
@@ -37,7 +32,7 @@ final class UnifiedResponse implements BaseModel
     public ?Meta $meta;
 
     /** @var list<MutualFund>|null $mutualFunds */
-    #[Api('mutual_funds', type: new ListOf(MutualFund::class), optional: true)]
+    #[Api('mutual_funds', list: MutualFund::class, optional: true)]
     public ?array $mutualFunds;
 
     #[Api(optional: true)]
@@ -54,8 +49,8 @@ final class UnifiedResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DematAccount>|null $dematAccounts
-     * @param list<MutualFund>|null $mutualFunds
+     * @param list<DematAccount> $dematAccounts
+     * @param list<MutualFund> $mutualFunds
      */
     public static function with(
         ?array $dematAccounts = null,

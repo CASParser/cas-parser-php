@@ -12,41 +12,32 @@ use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\GovernmentSecurity
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 final class Holdings implements BaseModel
 {
     use SdkModel;
 
     /** @var list<Aif>|null $aifs */
-    #[Api(type: new ListOf(Aif::class), optional: true)]
+    #[Api(list: Aif::class, optional: true)]
     public ?array $aifs;
 
     /** @var list<CorporateBond>|null $corporateBonds */
-    #[Api(
-        'corporate_bonds',
-        type: new ListOf(CorporateBond::class),
-        optional: true
-    )]
+    #[Api('corporate_bonds', list: CorporateBond::class, optional: true)]
     public ?array $corporateBonds;
 
     /** @var list<DematMutualFund>|null $dematMutualFunds */
-    #[Api(
-        'demat_mutual_funds',
-        type: new ListOf(DematMutualFund::class),
-        optional: true,
-    )]
+    #[Api('demat_mutual_funds', list: DematMutualFund::class, optional: true)]
     public ?array $dematMutualFunds;
 
     /** @var list<Equity>|null $equities */
-    #[Api(type: new ListOf(Equity::class), optional: true)]
+    #[Api(list: Equity::class, optional: true)]
     public ?array $equities;
 
     /** @var list<GovernmentSecurity>|null $governmentSecurities */
     #[Api(
         'government_securities',
-        type: new ListOf(GovernmentSecurity::class),
-        optional: true,
+        list: GovernmentSecurity::class,
+        optional: true
     )]
     public ?array $governmentSecurities;
 
@@ -61,11 +52,11 @@ final class Holdings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Aif>|null $aifs
-     * @param list<CorporateBond>|null $corporateBonds
-     * @param list<DematMutualFund>|null $dematMutualFunds
-     * @param list<Equity>|null $equities
-     * @param list<GovernmentSecurity>|null $governmentSecurities
+     * @param list<Aif> $aifs
+     * @param list<CorporateBond> $corporateBonds
+     * @param list<DematMutualFund> $dematMutualFunds
+     * @param list<Equity> $equities
+     * @param list<GovernmentSecurity> $governmentSecurities
      */
     public static function with(
         ?array $aifs = null,

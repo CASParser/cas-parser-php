@@ -7,7 +7,6 @@ namespace CasParser\CasParser\UnifiedResponse\DematAccount;
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 /**
  * Additional information specific to the demat account type.
@@ -51,7 +50,7 @@ final class AdditionalInfo implements BaseModel
      *
      * @var list<string>|null $linkedPans
      */
-    #[Api('linked_pans', type: new ListOf('string'), optional: true)]
+    #[Api('linked_pans', list: 'string', optional: true)]
     public ?array $linkedPans;
 
     /**
@@ -77,7 +76,7 @@ final class AdditionalInfo implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $linkedPans
+     * @param list<string> $linkedPans
      */
     public static function with(
         ?string $boStatus = null,

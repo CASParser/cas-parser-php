@@ -8,7 +8,6 @@ use CasParser\CasParser\UnifiedResponse\Insurance\LifeInsurancePolicy;
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 final class Insurance implements BaseModel
 {
@@ -17,8 +16,8 @@ final class Insurance implements BaseModel
     /** @var list<LifeInsurancePolicy>|null $lifeInsurancePolicies */
     #[Api(
         'life_insurance_policies',
-        type: new ListOf(LifeInsurancePolicy::class),
-        optional: true,
+        list: LifeInsurancePolicy::class,
+        optional: true
     )]
     public ?array $lifeInsurancePolicies;
 
@@ -33,7 +32,7 @@ final class Insurance implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LifeInsurancePolicy>|null $lifeInsurancePolicies
+     * @param list<LifeInsurancePolicy> $lifeInsurancePolicies
      */
     public static function with(?array $lifeInsurancePolicies = null): self
     {

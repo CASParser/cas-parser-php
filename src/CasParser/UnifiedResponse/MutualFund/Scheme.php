@@ -11,7 +11,6 @@ use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Type;
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 final class Scheme implements BaseModel
 {
@@ -55,11 +54,11 @@ final class Scheme implements BaseModel
      *
      * @var list<string>|null $nominees
      */
-    #[Api(type: new ListOf('string'), optional: true)]
+    #[Api(list: 'string', optional: true)]
     public ?array $nominees;
 
     /** @var list<Transaction>|null $transactions */
-    #[Api(type: new ListOf(Transaction::class), optional: true)]
+    #[Api(list: Transaction::class, optional: true)]
     public ?array $transactions;
 
     /**
@@ -93,9 +92,9 @@ final class Scheme implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $nominees
-     * @param list<Transaction>|null $transactions
-     * @param Type::*|null $type
+     * @param list<string> $nominees
+     * @param list<Transaction> $transactions
+     * @param Type::* $type
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,
