@@ -8,6 +8,8 @@ use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
 use CasParser\RequestOptions;
 use CasParser\Responses\CasGenerator\CasGeneratorGenerateCasResponse;
 
+use const CasParser\Core\OMIT as omit;
+
 interface CasGeneratorContract
 {
     /**
@@ -23,8 +25,8 @@ interface CasGeneratorContract
         $fromDate,
         $password,
         $toDate,
-        $casAuthority = null,
-        $panNo = null,
+        $casAuthority = omit,
+        $panNo = omit,
         ?RequestOptions $requestOptions = null,
     ): CasGeneratorGenerateCasResponse;
 }
