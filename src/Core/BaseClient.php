@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CasParser\Core;
 
-use CasParser\Errors\APIStatusError;
+use CasParser\Core\Errors\APIStatusError;
 use CasParser\RequestOptions;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;

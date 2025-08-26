@@ -12,7 +12,6 @@ use CasParser\CasParser\UnifiedResponse;
 use CasParser\Client;
 use CasParser\Contracts\CasParserContract;
 use CasParser\Core\Conversion;
-use CasParser\Core\Util;
 use CasParser\RequestOptions;
 
 use const CasParser\Core\OMIT as omit;
@@ -35,12 +34,9 @@ final class CasParserService implements CasParserContract
         $pdfURL = omit,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
-        $args = Util::array_filter_omit(
-            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL]
-        );
         [$parsed, $options] = CasParserCamsKfintechParams::parseRequest(
-            $args,
-            $requestOptions
+            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
+            $requestOptions,
         );
         $resp = $this->client->request(
             method: 'post',
@@ -67,12 +63,9 @@ final class CasParserService implements CasParserContract
         $pdfURL = omit,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
-        $args = Util::array_filter_omit(
-            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL]
-        );
         [$parsed, $options] = CasParserCdslParams::parseRequest(
-            $args,
-            $requestOptions
+            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
+            $requestOptions,
         );
         $resp = $this->client->request(
             method: 'post',
@@ -99,12 +92,9 @@ final class CasParserService implements CasParserContract
         $pdfURL = omit,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
-        $args = Util::array_filter_omit(
-            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL]
-        );
         [$parsed, $options] = CasParserNsdlParams::parseRequest(
-            $args,
-            $requestOptions
+            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
+            $requestOptions,
         );
         $resp = $this->client->request(
             method: 'post',
@@ -131,12 +121,9 @@ final class CasParserService implements CasParserContract
         $pdfURL = omit,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
-        $args = Util::array_filter_omit(
-            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL]
-        );
         [$parsed, $options] = CasParserSmartParseParams::parseRequest(
-            $args,
-            $requestOptions
+            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
+            $requestOptions,
         );
         $resp = $this->client->request(
             method: 'post',

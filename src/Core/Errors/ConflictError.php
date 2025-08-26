@@ -1,6 +1,6 @@
 <?php
 
-namespace CasParser\Errors;
+namespace CasParser\Core\Errors;
 
 class ConflictError extends APIStatusError
 {

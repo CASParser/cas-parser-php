@@ -9,7 +9,6 @@ use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
 use CasParser\Client;
 use CasParser\Contracts\CasGeneratorContract;
 use CasParser\Core\Conversion;
-use CasParser\Core\Util;
 use CasParser\RequestOptions;
 use CasParser\Responses\CasGenerator\CasGeneratorGenerateCasResponse;
 
@@ -39,7 +38,7 @@ final class CasGeneratorService implements CasGeneratorContract
         $panNo = omit,
         ?RequestOptions $requestOptions = null,
     ): CasGeneratorGenerateCasResponse {
-        $args = Util::array_filter_omit(
+        [$parsed, $options] = CasGeneratorGenerateCasParams::parseRequest(
             [
                 'email' => $email,
                 'fromDate' => $fromDate,
@@ -48,10 +47,7 @@ final class CasGeneratorService implements CasGeneratorContract
                 'casAuthority' => $casAuthority,
                 'panNo' => $panNo,
             ],
-        );
-        [$parsed, $options] = CasGeneratorGenerateCasParams::parseRequest(
-            $args,
-            $requestOptions
+            $requestOptions,
         );
         $resp = $this->client->request(
             method: 'post',
