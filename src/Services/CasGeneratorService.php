@@ -13,6 +13,8 @@ use CasParser\Core\Util;
 use CasParser\RequestOptions;
 use CasParser\Responses\CasGenerator\CasGeneratorGenerateCasResponse;
 
+use const CasParser\Core\OMIT as omit;
+
 final class CasGeneratorService implements CasGeneratorContract
 {
     public function __construct(private Client $client) {}
@@ -33,19 +35,20 @@ final class CasGeneratorService implements CasGeneratorContract
         $fromDate,
         $password,
         $toDate,
-        $casAuthority = null,
-        $panNo = null,
+        $casAuthority = omit,
+        $panNo = omit,
         ?RequestOptions $requestOptions = null,
     ): CasGeneratorGenerateCasResponse {
-        $args = [
-            'email' => $email,
-            'fromDate' => $fromDate,
-            'password' => $password,
-            'toDate' => $toDate,
-            'casAuthority' => $casAuthority,
-            'panNo' => $panNo,
-        ];
-        $args = Util::array_filter_null($args, ['casAuthority', 'panNo']);
+        $args = Util::array_filter_omit(
+            [
+                'email' => $email,
+                'fromDate' => $fromDate,
+                'password' => $password,
+                'toDate' => $toDate,
+                'casAuthority' => $casAuthority,
+                'panNo' => $panNo,
+            ],
+        );
         [$parsed, $options] = CasGeneratorGenerateCasParams::parseRequest(
             $args,
             $requestOptions
