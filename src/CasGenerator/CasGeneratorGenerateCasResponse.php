@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CasParser\Responses\CasGenerator;
+namespace CasParser\CasGenerator;
 
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;

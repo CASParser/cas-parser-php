@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace CasParser\Contracts;
+namespace CasParser\Core\ServiceContracts;
 
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
+use CasParser\CasGenerator\CasGeneratorGenerateCasResponse;
 use CasParser\RequestOptions;
-use CasParser\Responses\CasGenerator\CasGeneratorGenerateCasResponse;
 
 use const CasParser\Core\OMIT as omit;
 

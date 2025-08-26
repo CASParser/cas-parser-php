@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace CasParser;
 
 use CasParser\Core\BaseClient;
-use CasParser\Services\CasGeneratorService;
-use CasParser\Services\CasParserService;
+use CasParser\Core\Services\CasGeneratorService;
+use CasParser\Core\Services\CasParserService;
 
 class Client extends BaseClient
 {
