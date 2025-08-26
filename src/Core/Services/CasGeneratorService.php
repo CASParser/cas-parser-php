@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace CasParser\Services;
+namespace CasParser\Core\Services;
 
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams;
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
+use CasParser\CasGenerator\CasGeneratorGenerateCasResponse;
 use CasParser\Client;
-use CasParser\Contracts\CasGeneratorContract;
 use CasParser\Core\Conversion;
+use CasParser\Core\ServiceContracts\CasGeneratorContract;
 use CasParser\RequestOptions;
-use CasParser\Responses\CasGenerator\CasGeneratorGenerateCasResponse;
 
 use const CasParser\Core\OMIT as omit;
 

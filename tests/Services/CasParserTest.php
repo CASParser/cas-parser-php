@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Resources;
+namespace Tests\Services;
 
 use CasParser\Client;
 use PHPUnit\Framework\Attributes\CoversNothing;
