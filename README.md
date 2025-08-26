@@ -67,7 +67,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 ```php
 <?php
 
-use CasParser\Errors\APIConnectionError;
+use CasParser\Core\Errors\APIConnectionError;
 
 try {
   $unifiedResponse = $client->casParser->smartParse();

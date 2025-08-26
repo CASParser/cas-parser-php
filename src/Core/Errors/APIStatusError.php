@@ -1,6 +1,6 @@
 <?php
 
-namespace CasParser\Errors;
+namespace CasParser\Core\Errors;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
