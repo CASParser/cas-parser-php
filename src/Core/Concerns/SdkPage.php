@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace CasParser\Core\Pagination;
+namespace CasParser\Core\Concerns;
 
 use CasParser\Client;
-use CasParser\Core\Contracts\BasePage;
 use CasParser\Core\Conversion\Contracts\Converter;
 use CasParser\Core\Conversion\Contracts\ConverterSource;
 use CasParser\Core\Errors\APIStatusError;
@@ -16,19 +15,20 @@ use CasParser\RequestOptions;
  *
  * @template Item
  *
- * @implements BasePage<Item>
- *
  * @phpstan-import-type normalized_request from \CasParser\Core\BaseClient
  */
-abstract class AbstractPage implements BasePage
+trait SdkPage
 {
-    public function __construct(
-        protected Converter|ConverterSource|string $convert,
-        protected Client $client,
-        protected array $request,
-        protected RequestOptions $options,
-        protected mixed $data,
-    ) {}
+    private Converter|ConverterSource|string $convert;
+
+    private Client $client;
+
+    /**
+     * normalized_request $request.
+     */
+    private array $request;
+
+    private RequestOptions $options;
 
     /**
      * @return list<Item>

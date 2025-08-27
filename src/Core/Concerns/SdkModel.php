@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CasParser\Core\Concerns;
 
 use CasParser\Core\Contracts\BaseModel;
+use CasParser\Core\Contracts\BasePage;
 use CasParser\Core\Conversion;
 use CasParser\Core\Conversion\CoerceState;
 use CasParser\Core\Conversion\Contracts\Converter;
@@ -244,7 +245,7 @@ trait SdkModel
      */
     private static function serialize(mixed $value): mixed
     {
-        if ($value instanceof BaseModel) {
+        if ($value instanceof BaseModel || $value instanceof BasePage) {
             return $value->toArray();
         }
 
