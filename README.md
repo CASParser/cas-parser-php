@@ -50,6 +50,7 @@ use CasParser\Client;
 $client = new Client(apiKey: getenv("CAS_PARSER_API_KEY") ?: "My API Key");
 
 $unifiedResponse = $client->casParser->smartParse();
+
 var_dump($unifiedResponse->demat_accounts);
 ```
 
@@ -116,6 +117,7 @@ use CasParser\RequestOptions;
 $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
+
 $result = $client->casParser->smartParse(new RequestOptions(maxRetries: 5));
 ```
 
