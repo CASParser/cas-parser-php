@@ -1,8 +1,8 @@
 <?php
 
-namespace CasParser\Core\Errors;
+namespace CasParser\Core\Exceptions;
 
-class APIConnectionError extends APIError
+class APIConnectionException extends APIException
 {
     /** @var string */
     protected const DESC = 'CasParser API Connection Error';

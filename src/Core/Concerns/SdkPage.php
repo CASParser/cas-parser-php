@@ -7,7 +7,7 @@ namespace CasParser\Core\Concerns;
 use CasParser\Client;
 use CasParser\Core\Conversion\Contracts\Converter;
 use CasParser\Core\Conversion\Contracts\ConverterSource;
-use CasParser\Core\Errors\APIStatusError;
+use CasParser\Core\Exceptions\APIStatusException;
 use CasParser\RequestOptions;
 
 /**
@@ -52,7 +52,7 @@ trait SdkPage
      *
      * @return static of static<Item>
      *
-     * @throws APIStatusError
+     * @throws APIStatusException
      */
     public function getNextPage(): static
     {
