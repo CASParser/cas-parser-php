@@ -10,7 +10,6 @@ use CasParser\CasParser\CasParserNsdlParams;
 use CasParser\CasParser\CasParserSmartParseParams;
 use CasParser\CasParser\UnifiedResponse;
 use CasParser\Client;
-use CasParser\Core\Conversion;
 use CasParser\Core\ServiceContracts\CasParserContract;
 use CasParser\RequestOptions;
 
@@ -38,15 +37,15 @@ final class CasParserService implements CasParserContract
             ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
             $requestOptions,
         );
-        $resp = $this->client->request(
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
             method: 'post',
             path: 'v4/cams_kfintech/parse',
             body: (object) $parsed,
             options: $options,
+            convert: UnifiedResponse::class,
         );
-
-        // @phpstan-ignore-next-line;
-        return Conversion::coerce(UnifiedResponse::class, value: $resp);
     }
 
     /**
@@ -67,15 +66,15 @@ final class CasParserService implements CasParserContract
             ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
             $requestOptions,
         );
-        $resp = $this->client->request(
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
             method: 'post',
             path: 'v4/cdsl/parse',
             body: (object) $parsed,
             options: $options,
+            convert: UnifiedResponse::class,
         );
-
-        // @phpstan-ignore-next-line;
-        return Conversion::coerce(UnifiedResponse::class, value: $resp);
     }
 
     /**
@@ -96,15 +95,15 @@ final class CasParserService implements CasParserContract
             ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
             $requestOptions,
         );
-        $resp = $this->client->request(
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
             method: 'post',
             path: 'v4/nsdl/parse',
             body: (object) $parsed,
             options: $options,
+            convert: UnifiedResponse::class,
         );
-
-        // @phpstan-ignore-next-line;
-        return Conversion::coerce(UnifiedResponse::class, value: $resp);
     }
 
     /**
@@ -125,14 +124,14 @@ final class CasParserService implements CasParserContract
             ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
             $requestOptions,
         );
-        $resp = $this->client->request(
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
             method: 'post',
             path: 'v4/smart/parse',
             body: (object) $parsed,
             options: $options,
+            convert: UnifiedResponse::class,
         );
-
-        // @phpstan-ignore-next-line;
-        return Conversion::coerce(UnifiedResponse::class, value: $resp);
     }
 }

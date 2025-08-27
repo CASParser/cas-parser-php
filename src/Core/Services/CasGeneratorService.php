@@ -8,7 +8,6 @@ use CasParser\CasGenerator\CasGeneratorGenerateCasParams;
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
 use CasParser\CasGenerator\CasGeneratorGenerateCasResponse;
 use CasParser\Client;
-use CasParser\Core\Conversion;
 use CasParser\Core\ServiceContracts\CasGeneratorContract;
 use CasParser\RequestOptions;
 
@@ -49,17 +48,14 @@ final class CasGeneratorService implements CasGeneratorContract
             ],
             $requestOptions,
         );
-        $resp = $this->client->request(
+
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
             method: 'post',
             path: 'v4/generate',
             body: (object) $parsed,
             options: $options,
-        );
-
-        // @phpstan-ignore-next-line;
-        return Conversion::coerce(
-            CasGeneratorGenerateCasResponse::class,
-            value: $resp
+            convert: CasGeneratorGenerateCasResponse::class,
         );
     }
 }
