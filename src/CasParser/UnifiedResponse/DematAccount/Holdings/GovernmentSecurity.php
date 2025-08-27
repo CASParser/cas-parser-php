@@ -8,8 +8,18 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type government_security = array{
+ *   additionalInfo?: mixed,
+ *   isin?: string|null,
+ *   name?: string|null,
+ *   units?: float|null,
+ *   value?: float|null,
+ * }
+ */
 final class GovernmentSecurity implements BaseModel
 {
+    /** @use SdkModel<government_security> */
     use SdkModel;
 
     /**

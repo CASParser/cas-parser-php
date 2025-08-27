@@ -14,8 +14,19 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type unified_response = array{
+ *   dematAccounts?: list<DematAccount>|null,
+ *   insurance?: Insurance|null,
+ *   investor?: Investor|null,
+ *   meta?: Meta|null,
+ *   mutualFunds?: list<MutualFund>|null,
+ *   summary?: Summary|null,
+ * }
+ */
 final class UnifiedResponse implements BaseModel
 {
+    /** @use SdkModel<unified_response> */
     use SdkModel;
 
     /** @var list<DematAccount>|null $dematAccounts */

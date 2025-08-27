@@ -12,8 +12,24 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type scheme_alias = array{
+ *   additionalInfo?: AdditionalInfo|null,
+ *   cost?: float|null,
+ *   gain?: Gain|null,
+ *   isin?: string|null,
+ *   name?: string|null,
+ *   nav?: float|null,
+ *   nominees?: list<string>|null,
+ *   transactions?: list<Transaction>|null,
+ *   type?: Type::*|null,
+ *   units?: float|null,
+ *   value?: float|null,
+ * }
+ */
 final class Scheme implements BaseModel
 {
+    /** @use SdkModel<scheme_alias> */
     use SdkModel;
 
     /**

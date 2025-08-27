@@ -8,8 +8,21 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type transaction_alias = array{
+ *   amount?: float|null,
+ *   balance?: float|null,
+ *   date?: \DateTimeInterface|null,
+ *   description?: string|null,
+ *   dividendRate?: float|null,
+ *   nav?: float|null,
+ *   type?: string|null,
+ *   units?: float|null,
+ * }
+ */
 final class Transaction implements BaseModel
 {
+    /** @use SdkModel<transaction_alias> */
     use SdkModel;
 
     /**

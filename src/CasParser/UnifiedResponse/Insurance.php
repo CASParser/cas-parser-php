@@ -9,8 +9,14 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type insurance_alias = array{
+ *   lifeInsurancePolicies?: list<LifeInsurancePolicy>|null
+ * }
+ */
 final class Insurance implements BaseModel
 {
+    /** @use SdkModel<insurance_alias> */
     use SdkModel;
 
     /** @var list<LifeInsurancePolicy>|null $lifeInsurancePolicies */

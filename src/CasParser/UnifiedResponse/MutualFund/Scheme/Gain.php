@@ -8,8 +8,12 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type gain_alias = array{absolute?: float|null, percentage?: float|null}
+ */
 final class Gain implements BaseModel
 {
+    /** @use SdkModel<gain_alias> */
     use SdkModel;
 
     /**

@@ -8,8 +8,18 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type demat_mutual_fund = array{
+ *   additionalInfo?: mixed,
+ *   isin?: string|null,
+ *   name?: string|null,
+ *   units?: float|null,
+ *   value?: float|null,
+ * }
+ */
 final class DematMutualFund implements BaseModel
 {
+    /** @use SdkModel<demat_mutual_fund> */
     use SdkModel;
 
     /**

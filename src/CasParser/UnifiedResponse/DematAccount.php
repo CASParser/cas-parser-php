@@ -11,8 +11,21 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type demat_account = array{
+ *   additionalInfo?: AdditionalInfo|null,
+ *   boID?: string|null,
+ *   clientID?: string|null,
+ *   dematType?: DematType::*|null,
+ *   dpID?: string|null,
+ *   dpName?: string|null,
+ *   holdings?: Holdings|null,
+ *   value?: float|null,
+ * }
+ */
 final class DematAccount implements BaseModel
 {
+    /** @use SdkModel<demat_account> */
     use SdkModel;
 
     /**
