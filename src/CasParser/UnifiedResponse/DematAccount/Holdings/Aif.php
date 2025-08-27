@@ -8,8 +8,18 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type aif_alias = array{
+ *   additionalInfo?: mixed,
+ *   isin?: string|null,
+ *   name?: string|null,
+ *   units?: float|null,
+ *   value?: float|null,
+ * }
+ */
 final class Aif implements BaseModel
 {
+    /** @use SdkModel<aif_alias> */
     use SdkModel;
 
     /**

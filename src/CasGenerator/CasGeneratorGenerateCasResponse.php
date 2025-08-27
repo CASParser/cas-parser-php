@@ -8,8 +8,14 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type cas_generator_generate_cas_response = array{
+ *   msg?: string|null, status?: string|null
+ * }
+ */
 final class CasGeneratorGenerateCasResponse implements BaseModel
 {
+    /** @use SdkModel<cas_generator_generate_cas_response> */
     use SdkModel;
 
     #[Api(optional: true)]

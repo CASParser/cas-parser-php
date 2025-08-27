@@ -8,8 +8,18 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type equity_alias = array{
+ *   additionalInfo?: mixed,
+ *   isin?: string|null,
+ *   name?: string|null,
+ *   units?: float|null,
+ *   value?: float|null,
+ * }
+ */
 final class Equity implements BaseModel
 {
+    /** @use SdkModel<equity_alias> */
     use SdkModel;
 
     /**

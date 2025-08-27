@@ -8,8 +8,20 @@ use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
+/**
+ * @phpstan-type investor_alias = array{
+ *   address?: string|null,
+ *   casID?: string|null,
+ *   email?: string|null,
+ *   mobile?: string|null,
+ *   name?: string|null,
+ *   pan?: string|null,
+ *   pincode?: string|null,
+ * }
+ */
 final class Investor implements BaseModel
 {
+    /** @use SdkModel<investor_alias> */
     use SdkModel;
 
     /**
