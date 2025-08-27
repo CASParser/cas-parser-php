@@ -1,8 +1,8 @@
 <?php
 
-namespace CasParser\Core\Errors;
+namespace CasParser\Core\Exceptions;
 
-class CasParserError extends \Exception
+class CasParserException extends \Exception
 {
     /** @var string */
     protected const DESC = 'CasParser Error';

@@ -8,7 +8,7 @@ use CasParser\Core\Contracts\BasePage;
 use CasParser\Core\Contracts\BaseStream;
 use CasParser\Core\Conversion\Contracts\Converter;
 use CasParser\Core\Conversion\Contracts\ConverterSource;
-use CasParser\Core\Errors\APIStatusError;
+use CasParser\Core\Exceptions\APIStatusException;
 use CasParser\RequestOptions;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
@@ -203,7 +203,7 @@ class BaseClient
         }
 
         if ($code >= 400 && $code < 500) {
-            throw APIStatusError::from(request: $req, response: $rsp);
+            throw APIStatusException::from(request: $req, response: $rsp);
         }
 
         if ($code >= 500 && $retryCount < $opts->maxRetries) {

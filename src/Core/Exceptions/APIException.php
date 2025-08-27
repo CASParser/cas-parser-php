@@ -1,11 +1,11 @@
 <?php
 
-namespace CasParser\Core\Errors;
+namespace CasParser\Core\Exceptions;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class APIError extends CasParserError
+class APIException extends CasParserException
 {
     public ?int $status = null;
 
