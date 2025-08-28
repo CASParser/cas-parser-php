@@ -24,7 +24,6 @@
     "sort-packages": true
   },
   "description": "Cas Parser PHP SDK",
-  "license": "APACHE-2.0",
   "name": "org-placeholder/cas-parser",
   "require": {
     "php": "^8.1",
