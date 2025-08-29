@@ -13,6 +13,8 @@ use CasParser\Core\Contracts\BaseModel;
  * This endpoint specifically parses CDSL CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
  * Use this endpoint when you know the PDF is from CDSL.
  *
+ * @see CasParser\CasParser->cdsl
+ *
  * @phpstan-type cas_parser_cdsl_params = array{
  *   password?: string, pdfFile?: string, pdfURL?: string
  * }

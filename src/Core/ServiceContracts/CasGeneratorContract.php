@@ -13,6 +13,8 @@ use const CasParser\Core\OMIT as omit;
 interface CasGeneratorContract
 {
     /**
+     * @api
+     *
      * @param string $email Email address to receive the CAS document
      * @param string $fromDate Start date for the CAS period (format YYYY-MM-DD)
      * @param string $password Password to protect the generated CAS PDF
