@@ -20,6 +20,8 @@ final class CasParserService implements CasParserContract
     public function __construct(private Client $client) {}
 
     /**
+     * @api
+     *
      * This endpoint specifically parses CAMS/KFintech CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
      * Use this endpoint when you know the PDF is from CAMS or KFintech.
      *
@@ -49,6 +51,8 @@ final class CasParserService implements CasParserContract
     }
 
     /**
+     * @api
+     *
      * This endpoint specifically parses CDSL CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
      * Use this endpoint when you know the PDF is from CDSL.
      *
@@ -78,6 +82,8 @@ final class CasParserService implements CasParserContract
     }
 
     /**
+     * @api
+     *
      * This endpoint specifically parses NSDL CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
      * Use this endpoint when you know the PDF is from NSDL.
      *
@@ -107,6 +113,8 @@ final class CasParserService implements CasParserContract
     }
 
     /**
+     * @api
+     *
      * This endpoint parses CAS (Consolidated Account Statement) PDF files from NSDL, CDSL, or CAMS/KFintech and returns data in a unified format.
      * It auto-detects the CAS type and transforms the data into a consistent structure regardless of the source.
      *

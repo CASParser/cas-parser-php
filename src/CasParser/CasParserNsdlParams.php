@@ -13,6 +13,8 @@ use CasParser\Core\Contracts\BaseModel;
  * This endpoint specifically parses NSDL CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
  * Use this endpoint when you know the PDF is from NSDL.
  *
+ * @see CasParser\CasParser->nsdl
+ *
  * @phpstan-type cas_parser_nsdl_params = array{
  *   password?: string, pdfFile?: string, pdfURL?: string
  * }

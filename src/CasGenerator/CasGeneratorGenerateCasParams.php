@@ -14,6 +14,8 @@ use CasParser\Core\Contracts\BaseModel;
  * This endpoint generates CAS (Consolidated Account Statement) documents by submitting a mailback request to the specified CAS authority.
  * Currently only supports KFintech, with plans to support CAMS, CDSL, and NSDL in the future.
  *
+ * @see CasParser\CasGenerator->generateCas
+ *
  * @phpstan-type cas_generator_generate_cas_params = array{
  *   email: string,
  *   fromDate: string,

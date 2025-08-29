@@ -12,6 +12,8 @@ use const CasParser\Core\OMIT as omit;
 interface CasParserContract
 {
     /**
+     * @api
+     *
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
@@ -24,6 +26,8 @@ interface CasParserContract
     ): UnifiedResponse;
 
     /**
+     * @api
+     *
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
@@ -36,6 +40,8 @@ interface CasParserContract
     ): UnifiedResponse;
 
     /**
+     * @api
+     *
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
@@ -48,6 +54,8 @@ interface CasParserContract
     ): UnifiedResponse;
 
     /**
+     * @api
+     *
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file

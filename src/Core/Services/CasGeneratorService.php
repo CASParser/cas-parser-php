@@ -18,6 +18,8 @@ final class CasGeneratorService implements CasGeneratorContract
     public function __construct(private Client $client) {}
 
     /**
+     * @api
+     *
      * This endpoint generates CAS (Consolidated Account Statement) documents by submitting a mailback request to the specified CAS authority.
      * Currently only supports KFintech, with plans to support CAMS, CDSL, and NSDL in the future.
      *
