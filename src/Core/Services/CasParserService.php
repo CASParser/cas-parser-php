@@ -17,6 +17,9 @@ use const CasParser\Core\OMIT as omit;
 
 final class CasParserService implements CasParserContract
 {
+    /**
+     * @internal
+     */
     public function __construct(private Client $client) {}
 
     /**
