@@ -32,7 +32,7 @@ class Client extends BaseClient
             'CAS_PARSER_BASE_URL'
         ) ?: 'https://portfolio-parser.api.casparser.in';
 
-        $options = new RequestOptions(
+        $options = RequestOptions::with(
             uriFactory: Psr17FactoryDiscovery::findUriFactory(),
             streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
             requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
