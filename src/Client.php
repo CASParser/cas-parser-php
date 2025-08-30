@@ -7,6 +7,8 @@ namespace CasParser;
 use CasParser\Core\BaseClient;
 use CasParser\Core\Services\CasGeneratorService;
 use CasParser\Core\Services\CasParserService;
+use Http\Discovery\Psr17FactoryDiscovery;
+use Http\Discovery\Psr18ClientDiscovery;
 
 class Client extends BaseClient
 {
@@ -30,12 +32,19 @@ class Client extends BaseClient
             'CAS_PARSER_BASE_URL'
         ) ?: 'https://portfolio-parser.api.casparser.in';
 
+        $options = new RequestOptions(
+            uriFactory: Psr17FactoryDiscovery::findUriFactory(),
+            streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
+            requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
+            transporter: Psr18ClientDiscovery::find(),
+        );
+
         parent::__construct(
             headers: [
                 'Content-Type' => 'application/json', 'Accept' => 'application/json',
             ],
             baseUrl: $base,
-            options: new RequestOptions,
+            options: $options,
         );
 
         $this->casParser = new CasParserService($this);
