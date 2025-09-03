@@ -4,13 +4,49 @@ declare(strict_types=1);
 
 namespace CasParser\Core\Contracts;
 
+use CasParser\Client;
+use CasParser\Core\Conversion\Contracts\Converter;
+use CasParser\Core\Conversion\Contracts\ConverterSource;
+use CasParser\RequestOptions;
+
 /**
  * @internal
+ *
+ * @phpstan-import-type normalized_request from \CasParser\Core\BaseClient
+ *
+ * @template Item
+ *
+ * @extends \IteratorAggregate<int, static>
  */
-interface BasePage extends \Stringable
+interface BasePage extends \IteratorAggregate
 {
     /**
-     * @return \Traversable<mixed>
+     * @internal
+     *
+     * @param normalized_request $request
      */
-    public function pagingEachItem(): \Traversable;
+    public function __construct(
+        Converter|ConverterSource|string $convert,
+        Client $client,
+        array $request,
+        RequestOptions $options,
+        mixed $data,
+    );
+
+    public function hasNextPage(): bool;
+
+    /**
+     * @return list<Item>
+     */
+    public function getItems(): array;
+
+    /**
+     * @return static<Item>
+     */
+    public function getNextPage(): static;
+
+    /**
+     * @return \Generator<Item>
+     */
+    public function pagingEachItem(): \Generator;
 }

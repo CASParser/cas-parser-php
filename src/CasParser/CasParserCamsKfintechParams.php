@@ -5,22 +5,25 @@ declare(strict_types=1);
 namespace CasParser\CasParser;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
-use CasParser\Core\Concerns\Params;
+use CasParser\Core\Concerns\SdkModel;
+use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * This endpoint specifically parses CAMS/KFintech CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
  * Use this endpoint when you know the PDF is from CAMS or KFintech.
  *
- * @phpstan-type cams_kfintech_params = array{
+ * @see CasParser\CasParser->camsKfintech
+ *
+ * @phpstan-type cas_parser_cams_kfintech_params = array{
  *   password?: string, pdfFile?: string, pdfURL?: string
  * }
  */
 final class CasParserCamsKfintechParams implements BaseModel
 {
-    use Model;
-    use Params;
+    /** @use SdkModel<cas_parser_cams_kfintech_params> */
+    use SdkModel;
+    use SdkParams;
 
     /**
      * Password for the PDF file (if required).
@@ -42,8 +45,7 @@ final class CasParserCamsKfintechParams implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

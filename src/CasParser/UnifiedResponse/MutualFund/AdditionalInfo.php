@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\MutualFund;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * Additional folio information.
  *
- * @phpstan-type additional_info_alias = array{
- *   kyc?: string, pan?: string, pankyc?: string
+ * @phpstan-type additional_info = array{
+ *   kyc?: string|null, pan?: string|null, pankyc?: string|null
  * }
  */
 final class AdditionalInfo implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<additional_info> */
+    use SdkModel;
 
     /**
      * KYC status of the folio.
@@ -39,8 +40,7 @@ final class AdditionalInfo implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

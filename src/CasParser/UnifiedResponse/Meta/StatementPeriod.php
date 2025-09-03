@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\Meta;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type statement_period_alias = array{
- *   from?: \DateTimeInterface, to?: \DateTimeInterface
+ * @phpstan-type statement_period = array{
+ *   from?: \DateTimeInterface|null, to?: \DateTimeInterface|null
  * }
  */
 final class StatementPeriod implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<statement_period> */
+    use SdkModel;
 
     /**
      * Start date of the statement period.
@@ -31,8 +32,7 @@ final class StatementPeriod implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

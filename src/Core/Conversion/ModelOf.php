@@ -88,11 +88,11 @@ final class ModelOf implements Converter
             $acc[$name] = $item;
         }
 
-        return $this->from($acc);
+        return $this->from($acc); // @phpstan-ignore-line
     }
 
     /**
-     * @param array<mixed> $data
+     * @param array<string, mixed> $data
      */
     public function from(array $data): BaseModel
     {

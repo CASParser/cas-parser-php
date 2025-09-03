@@ -9,28 +9,28 @@ use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Gain;
 use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Transaction;
 use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Type;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 /**
  * @phpstan-type scheme_alias = array{
- *   additionalInfo?: AdditionalInfo,
- *   cost?: float,
- *   gain?: Gain,
- *   isin?: string,
- *   name?: string,
- *   nav?: float,
- *   nominees?: list<string>,
- *   transactions?: list<Transaction>,
- *   type?: Type::*,
- *   units?: float,
- *   value?: float,
+ *   additionalInfo?: AdditionalInfo|null,
+ *   cost?: float|null,
+ *   gain?: Gain|null,
+ *   isin?: string|null,
+ *   name?: string|null,
+ *   nav?: float|null,
+ *   nominees?: list<string>|null,
+ *   transactions?: list<Transaction>|null,
+ *   type?: Type::*|null,
+ *   units?: float|null,
+ *   value?: float|null,
  * }
  */
 final class Scheme implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<scheme_alias> */
+    use SdkModel;
 
     /**
      * Additional information specific to the scheme.
@@ -68,19 +68,19 @@ final class Scheme implements BaseModel
     /**
      * List of nominees.
      *
-     * @var null|list<string> $nominees
+     * @var list<string>|null $nominees
      */
-    #[Api(type: new ListOf('string'), optional: true)]
+    #[Api(list: 'string', optional: true)]
     public ?array $nominees;
 
-    /** @var null|list<Transaction> $transactions */
-    #[Api(type: new ListOf(Transaction::class), optional: true)]
+    /** @var list<Transaction>|null $transactions */
+    #[Api(list: Transaction::class, optional: true)]
     public ?array $transactions;
 
     /**
      * Type of mutual fund scheme.
      *
-     * @var null|Type::* $type
+     * @var Type::*|null $type
      */
     #[Api(enum: Type::class, optional: true)]
     public ?string $type;
@@ -99,8 +99,7 @@ final class Scheme implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**
@@ -108,9 +107,9 @@ final class Scheme implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<string> $nominees
-     * @param null|list<Transaction> $transactions
-     * @param null|Type::* $type
+     * @param list<string> $nominees
+     * @param list<Transaction> $transactions
+     * @param Type::* $type
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,

@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\Summary\Accounts;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type mutual_funds_alias = array{count?: int, totalValue?: float}
+ * @phpstan-type mutual_funds = array{count?: int|null, totalValue?: float|null}
  */
 final class MutualFunds implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<mutual_funds> */
+    use SdkModel;
 
     /**
      * Number of mutual fund folios.
@@ -29,8 +30,7 @@ final class MutualFunds implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

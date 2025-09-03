@@ -5,23 +5,24 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * Additional information specific to the scheme.
  *
- * @phpstan-type additional_info_alias = array{
- *   advisor?: string,
- *   amfi?: string,
- *   closeUnits?: float,
- *   openUnits?: float,
- *   rtaCode?: string,
+ * @phpstan-type additional_info = array{
+ *   advisor?: string|null,
+ *   amfi?: string|null,
+ *   closeUnits?: float|null,
+ *   openUnits?: float|null,
+ *   rtaCode?: string|null,
  * }
  */
 final class AdditionalInfo implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<additional_info> */
+    use SdkModel;
 
     /**
      * Financial advisor name (CAMS/KFintech).
@@ -55,8 +56,7 @@ final class AdditionalInfo implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

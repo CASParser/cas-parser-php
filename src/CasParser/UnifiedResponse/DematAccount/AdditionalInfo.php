@@ -5,27 +5,27 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\DematAccount;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 /**
  * Additional information specific to the demat account type.
  *
- * @phpstan-type additional_info_alias = array{
- *   boStatus?: string,
- *   boSubStatus?: string,
- *   boType?: string,
- *   bsda?: string,
- *   email?: string,
- *   linkedPans?: list<string>,
- *   nominee?: string,
- *   status?: string,
+ * @phpstan-type additional_info = array{
+ *   boStatus?: string|null,
+ *   boSubStatus?: string|null,
+ *   boType?: string|null,
+ *   bsda?: string|null,
+ *   email?: string|null,
+ *   linkedPans?: list<string>|null,
+ *   nominee?: string|null,
+ *   status?: string|null,
  * }
  */
 final class AdditionalInfo implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<additional_info> */
+    use SdkModel;
 
     /**
      * Beneficiary Owner status (CDSL).
@@ -60,9 +60,9 @@ final class AdditionalInfo implements BaseModel
     /**
      * List of linked PAN numbers (NSDL).
      *
-     * @var null|list<string> $linkedPans
+     * @var list<string>|null $linkedPans
      */
-    #[Api('linked_pans', type: new ListOf('string'), optional: true)]
+    #[Api('linked_pans', list: 'string', optional: true)]
     public ?array $linkedPans;
 
     /**
@@ -79,8 +79,7 @@ final class AdditionalInfo implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**
@@ -88,7 +87,7 @@ final class AdditionalInfo implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<string> $linkedPans
+     * @param list<string> $linkedPans
      */
     public static function with(
         ?string $boStatus = null,

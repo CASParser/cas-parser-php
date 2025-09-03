@@ -5,25 +5,26 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\Insurance;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type life_insurance_policy_alias = array{
+ * @phpstan-type life_insurance_policy = array{
  *   additionalInfo?: mixed,
- *   lifeAssured?: string,
- *   policyName?: string,
- *   policyNumber?: string,
- *   premiumAmount?: float,
- *   premiumFrequency?: string,
- *   provider?: string,
- *   status?: string,
- *   sumAssured?: float,
+ *   lifeAssured?: string|null,
+ *   policyName?: string|null,
+ *   policyNumber?: string|null,
+ *   premiumAmount?: float|null,
+ *   premiumFrequency?: string|null,
+ *   provider?: string|null,
+ *   status?: string|null,
+ *   sumAssured?: float|null,
  * }
  */
 final class LifeInsurancePolicy implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<life_insurance_policy> */
+    use SdkModel;
 
     /**
      * Additional information specific to the policy.
@@ -81,8 +82,7 @@ final class LifeInsurancePolicy implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

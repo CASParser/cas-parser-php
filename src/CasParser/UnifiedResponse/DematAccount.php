@@ -8,24 +8,25 @@ use CasParser\CasParser\UnifiedResponse\DematAccount\AdditionalInfo;
 use CasParser\CasParser\UnifiedResponse\DematAccount\DematType;
 use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type demat_account_alias = array{
- *   additionalInfo?: AdditionalInfo,
- *   boID?: string,
- *   clientID?: string,
- *   dematType?: DematType::*,
- *   dpID?: string,
- *   dpName?: string,
- *   holdings?: Holdings,
- *   value?: float,
+ * @phpstan-type demat_account = array{
+ *   additionalInfo?: AdditionalInfo|null,
+ *   boID?: string|null,
+ *   clientID?: string|null,
+ *   dematType?: DematType::*|null,
+ *   dpID?: string|null,
+ *   dpName?: string|null,
+ *   holdings?: Holdings|null,
+ *   value?: float|null,
  * }
  */
 final class DematAccount implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<demat_account> */
+    use SdkModel;
 
     /**
      * Additional information specific to the demat account type.
@@ -48,7 +49,7 @@ final class DematAccount implements BaseModel
     /**
      * Type of demat account.
      *
-     * @var null|DematType::* $dematType
+     * @var DematType::*|null $dematType
      */
     #[Api('demat_type', enum: DematType::class, optional: true)]
     public ?string $dematType;
@@ -76,8 +77,7 @@ final class DematAccount implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**
@@ -85,7 +85,7 @@ final class DematAccount implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|DematType::* $dematType
+     * @param DematType::* $dematType
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,

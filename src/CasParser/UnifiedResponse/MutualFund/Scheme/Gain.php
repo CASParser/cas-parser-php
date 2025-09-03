@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type gain_alias = array{absolute?: float, percentage?: float}
+ * @phpstan-type gain_alias = array{absolute?: float|null, percentage?: float|null}
  */
 final class Gain implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<gain_alias> */
+    use SdkModel;
 
     /**
      * Absolute gain or loss.
@@ -29,8 +30,7 @@ final class Gain implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

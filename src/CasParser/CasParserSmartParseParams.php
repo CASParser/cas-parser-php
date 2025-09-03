@@ -5,22 +5,25 @@ declare(strict_types=1);
 namespace CasParser\CasParser;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
-use CasParser\Core\Concerns\Params;
+use CasParser\Core\Concerns\SdkModel;
+use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * This endpoint parses CAS (Consolidated Account Statement) PDF files from NSDL, CDSL, or CAMS/KFintech and returns data in a unified format.
  * It auto-detects the CAS type and transforms the data into a consistent structure regardless of the source.
  *
- * @phpstan-type smart_parse_params = array{
+ * @see CasParser\CasParser->smartParse
+ *
+ * @phpstan-type cas_parser_smart_parse_params = array{
  *   password?: string, pdfFile?: string, pdfURL?: string
  * }
  */
 final class CasParserSmartParseParams implements BaseModel
 {
-    use Model;
-    use Params;
+    /** @use SdkModel<cas_parser_smart_parse_params> */
+    use SdkModel;
+    use SdkParams;
 
     /**
      * Password for the PDF file (if required).
@@ -42,8 +45,7 @@ final class CasParserSmartParseParams implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\Meta;
 
-use CasParser\Core\Concerns\Enum;
+use CasParser\Core\Concerns\SdkEnum;
 use CasParser\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Type of CAS detected and processed.
- *
- * @phpstan-type cas_type_alias = CasType::*
  */
 final class CasType implements ConverterSource
 {
-    use Enum;
+    use SdkEnum;
 
     public const NSDL = 'NSDL';
 

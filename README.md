@@ -39,63 +39,65 @@ To use this package, install via Composer by adding the following to your applic
 
 ## Usage
 
+This library uses named parameters to specify optional arguments.
+Parameters with a default value must be set by name.
+
 ```php
 <?php
 
 use CasParser\Client;
-use CasParser\CasParser\CasParserSmartParseParams;
 
 $client = new Client(apiKey: getenv("CAS_PARSER_API_KEY") ?: "My API Key");
 
-$params = CasParserSmartParseParams::with(
-  password: "ABCDF", pdfURL: "https://your-cas-pdf-url-here.com"
-);
-$unifiedResponse = $client->casParser->smartParse($params);
+$unifiedResponse = $client->casParser->smartParse();
 
 var_dump($unifiedResponse->demat_accounts);
 ```
 
+### Value Objects
+
+It is recommended to use the static `with` constructor `Dog::with(name: "Joey")`
+and named parameters to initialize value objects.
+
+However, builders are also provided `(new Dog)->withName("Joey")`.
+
 ### Handling errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `CasParser\Errors\APIError` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `CasParser\Core\Exceptions\APIException` will be thrown:
 
 ```php
 <?php
 
-use CasParser\CasParser\CasParserSmartParseParams;
-use CasParser\Errors\APIConnectionError;
+use CasParser\Core\Exceptions\APIConnectionException;
 
-$params = CasParserSmartParseParams::with(
-  password: "ABCDF", pdfURL: "https://you-cas-pdf-url-here.com"
-);
 try {
-  $CasParser = $client->casParser->smartParse($params);
-} catch (APIConnectionError $e) {
-    echo "The server could not be reached", PHP_EOL;
-    var_dump($e->getPrevious());
+  $unifiedResponse = $client->casParser->smartParse();
+} catch (APIConnectionException $e) {
+  echo "The server could not be reached", PHP_EOL;
+  var_dump($e->getPrevious());
 } catch (RateLimitError $_) {
-    echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
+  echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
 } catch (APIStatusError $e) {
-    echo "Another non-200-range status code was received", PHP_EOL;
-    var_dump($e->status);
+  echo "Another non-200-range status code was received", PHP_EOL;
+  echo $e->getMessage();
 }
 ```
 
 Error codes are as follows:
 
-| Cause            | Error Type                 |
-| ---------------- | -------------------------- |
-| HTTP 400         | `BadRequestError`          |
-| HTTP 401         | `AuthenticationError`      |
-| HTTP 403         | `PermissionDeniedError`    |
-| HTTP 404         | `NotFoundError`            |
-| HTTP 409         | `ConflictError`            |
-| HTTP 422         | `UnprocessableEntityError` |
-| HTTP 429         | `RateLimitError`           |
-| HTTP >= 500      | `InternalServerError`      |
-| Other HTTP error | `APIStatusError`           |
-| Timeout          | `APITimeoutError`          |
-| Network error    | `APIConnectionError`       |
+| Cause            | Error Type                     |
+| ---------------- | ------------------------------ |
+| HTTP 400         | `BadRequestException`          |
+| HTTP 401         | `AuthenticationException`      |
+| HTTP 403         | `PermissionDeniedException`    |
+| HTTP 404         | `NotFoundException`            |
+| HTTP 409         | `ConflictException`            |
+| HTTP 422         | `UnprocessableEntityException` |
+| HTTP 429         | `RateLimitException`           |
+| HTTP >= 500      | `InternalServerException`      |
+| Other HTTP error | `APIStatusException`           |
+| Timeout          | `APITimeoutException`          |
+| Network error    | `APIConnectionException`       |
 
 ### Retries
 
@@ -103,24 +105,22 @@ Certain errors will be automatically retried 2 times by default, with a short ex
 
 Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, >=500 Internal errors, and timeouts will all be retried by default.
 
-You can use the `max_retries` option to configure or disable this:
+You can use the `maxRetries` option to configure or disable this:
 
 ```php
 <?php
 
 use CasParser\Client;
 use CasParser\RequestOptions;
-use CasParser\CasParser\CasParserSmartParseParams;
 
 // Configure the default for all requests:
 $client = new Client(maxRetries: 0);
-$params = CasParserSmartParseParams::with(
-  password: "ABCDF", pdfURL: "https://you-cas-pdf-url-here.com"
-);
 
-// Or, configure per-request:$result = $client
-  ->casParser
-  ->smartParse($params, new RequestOptions(maxRetries: 5));
+// Or, configure per-request:
+
+$result = $client->casParser->smartParse(
+  requestOptions: RequestOptions::with(maxRetries: 5)
+);
 ```
 
 ## Advanced concepts
@@ -131,22 +131,15 @@ $params = CasParserSmartParseParams::with(
 
 You can send undocumented parameters to any endpoint, and read undocumented response properties, like so:
 
-Note: the `extra_` parameters of the same name overrides the documented parameters.
+Note: the `extra*` parameters of the same name overrides the documented parameters.
 
 ```php
 <?php
 
 use CasParser\RequestOptions;
-use CasParser\CasParser\CasParserSmartParseParams;
 
-$params = CasParserSmartParseParams::with(
-  password: "ABCDF", pdfURL: "https://you-cas-pdf-url-here.com"
-);
-$unifiedResponse = $client
-  ->casParser
-  ->smartParse(
-  $params,
-  new RequestOptions(
+$unifiedResponse = $client->casParser->smartParse(
+  requestOptions: RequestOptions::with(
     extraQueryParams: ["my_query_parameter" => "value"],
     extraBodyParams: ["my_body_parameter" => "value"],
     extraHeaders: ["my-header" => "value"],

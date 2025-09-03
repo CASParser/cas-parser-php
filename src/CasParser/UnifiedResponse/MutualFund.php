@@ -7,23 +7,23 @@ namespace CasParser\CasParser\UnifiedResponse;
 use CasParser\CasParser\UnifiedResponse\MutualFund\AdditionalInfo;
 use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 /**
- * @phpstan-type mutual_fund_alias = array{
- *   additionalInfo?: AdditionalInfo,
- *   amc?: string,
- *   folioNumber?: string,
- *   registrar?: string,
- *   schemes?: list<Scheme>,
- *   value?: float,
+ * @phpstan-type mutual_fund = array{
+ *   additionalInfo?: AdditionalInfo|null,
+ *   amc?: string|null,
+ *   folioNumber?: string|null,
+ *   registrar?: string|null,
+ *   schemes?: list<Scheme>|null,
+ *   value?: float|null,
  * }
  */
 final class MutualFund implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<mutual_fund> */
+    use SdkModel;
 
     /**
      * Additional folio information.
@@ -49,8 +49,8 @@ final class MutualFund implements BaseModel
     #[Api(optional: true)]
     public ?string $registrar;
 
-    /** @var null|list<Scheme> $schemes */
-    #[Api(type: new ListOf(Scheme::class), optional: true)]
+    /** @var list<Scheme>|null $schemes */
+    #[Api(list: Scheme::class, optional: true)]
     public ?array $schemes;
 
     /**
@@ -61,8 +61,7 @@ final class MutualFund implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**
@@ -70,7 +69,7 @@ final class MutualFund implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<Scheme> $schemes
+     * @param list<Scheme> $schemes
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,

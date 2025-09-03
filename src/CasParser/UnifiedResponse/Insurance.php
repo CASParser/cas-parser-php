@@ -6,31 +6,30 @@ namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\CasParser\UnifiedResponse\Insurance\LifeInsurancePolicy;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 /**
  * @phpstan-type insurance_alias = array{
- *   lifeInsurancePolicies?: list<LifeInsurancePolicy>
+ *   lifeInsurancePolicies?: list<LifeInsurancePolicy>|null
  * }
  */
 final class Insurance implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<insurance_alias> */
+    use SdkModel;
 
-    /** @var null|list<LifeInsurancePolicy> $lifeInsurancePolicies */
+    /** @var list<LifeInsurancePolicy>|null $lifeInsurancePolicies */
     #[Api(
         'life_insurance_policies',
-        type: new ListOf(LifeInsurancePolicy::class),
-        optional: true,
+        list: LifeInsurancePolicy::class,
+        optional: true
     )]
     public ?array $lifeInsurancePolicies;
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**
@@ -38,7 +37,7 @@ final class Insurance implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<LifeInsurancePolicy> $lifeInsurancePolicies
+     * @param list<LifeInsurancePolicy> $lifeInsurancePolicies
      */
     public static function with(?array $lifeInsurancePolicies = null): self
     {

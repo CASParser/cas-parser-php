@@ -8,17 +8,18 @@ use CasParser\CasParser\UnifiedResponse\Summary\Accounts\Demat;
 use CasParser\CasParser\UnifiedResponse\Summary\Accounts\Insurance;
 use CasParser\CasParser\UnifiedResponse\Summary\Accounts\MutualFunds;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type accounts_alias = array{
- *   demat?: Demat, insurance?: Insurance, mutualFunds?: MutualFunds
+ *   demat?: Demat|null, insurance?: Insurance|null, mutualFunds?: MutualFunds|null
  * }
  */
 final class Accounts implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<accounts_alias> */
+    use SdkModel;
 
     #[Api(optional: true)]
     public ?Demat $demat;
@@ -31,8 +32,7 @@ final class Accounts implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

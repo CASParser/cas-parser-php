@@ -10,59 +10,50 @@ use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\DematMutualFund;
 use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\Equity;
 use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\GovernmentSecurity;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 /**
  * @phpstan-type holdings_alias = array{
- *   aifs?: list<Aif>,
- *   corporateBonds?: list<CorporateBond>,
- *   dematMutualFunds?: list<DematMutualFund>,
- *   equities?: list<Equity>,
- *   governmentSecurities?: list<GovernmentSecurity>,
+ *   aifs?: list<Aif>|null,
+ *   corporateBonds?: list<CorporateBond>|null,
+ *   dematMutualFunds?: list<DematMutualFund>|null,
+ *   equities?: list<Equity>|null,
+ *   governmentSecurities?: list<GovernmentSecurity>|null,
  * }
  */
 final class Holdings implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<holdings_alias> */
+    use SdkModel;
 
-    /** @var null|list<Aif> $aifs */
-    #[Api(type: new ListOf(Aif::class), optional: true)]
+    /** @var list<Aif>|null $aifs */
+    #[Api(list: Aif::class, optional: true)]
     public ?array $aifs;
 
-    /** @var null|list<CorporateBond> $corporateBonds */
-    #[Api(
-        'corporate_bonds',
-        type: new ListOf(CorporateBond::class),
-        optional: true
-    )]
+    /** @var list<CorporateBond>|null $corporateBonds */
+    #[Api('corporate_bonds', list: CorporateBond::class, optional: true)]
     public ?array $corporateBonds;
 
-    /** @var null|list<DematMutualFund> $dematMutualFunds */
-    #[Api(
-        'demat_mutual_funds',
-        type: new ListOf(DematMutualFund::class),
-        optional: true,
-    )]
+    /** @var list<DematMutualFund>|null $dematMutualFunds */
+    #[Api('demat_mutual_funds', list: DematMutualFund::class, optional: true)]
     public ?array $dematMutualFunds;
 
-    /** @var null|list<Equity> $equities */
-    #[Api(type: new ListOf(Equity::class), optional: true)]
+    /** @var list<Equity>|null $equities */
+    #[Api(list: Equity::class, optional: true)]
     public ?array $equities;
 
-    /** @var null|list<GovernmentSecurity> $governmentSecurities */
+    /** @var list<GovernmentSecurity>|null $governmentSecurities */
     #[Api(
         'government_securities',
-        type: new ListOf(GovernmentSecurity::class),
-        optional: true,
+        list: GovernmentSecurity::class,
+        optional: true
     )]
     public ?array $governmentSecurities;
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**
@@ -70,11 +61,11 @@ final class Holdings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<Aif> $aifs
-     * @param null|list<CorporateBond> $corporateBonds
-     * @param null|list<DematMutualFund> $dematMutualFunds
-     * @param null|list<Equity> $equities
-     * @param null|list<GovernmentSecurity> $governmentSecurities
+     * @param list<Aif> $aifs
+     * @param list<CorporateBond> $corporateBonds
+     * @param list<DematMutualFund> $dematMutualFunds
+     * @param list<Equity> $equities
+     * @param list<GovernmentSecurity> $governmentSecurities
      */
     public static function with(
         ?array $aifs = null,

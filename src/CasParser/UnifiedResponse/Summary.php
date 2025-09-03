@@ -6,15 +6,18 @@ namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\CasParser\UnifiedResponse\Summary\Accounts;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type summary_alias = array{accounts?: Accounts, totalValue?: float}
+ * @phpstan-type summary_alias = array{
+ *   accounts?: Accounts|null, totalValue?: float|null
+ * }
  */
 final class Summary implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<summary_alias> */
+    use SdkModel;
 
     #[Api(optional: true)]
     public ?Accounts $accounts;
@@ -27,8 +30,7 @@ final class Summary implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

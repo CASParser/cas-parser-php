@@ -5,21 +5,22 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\DematAccount\Holdings;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type corporate_bond_alias = array{
+ * @phpstan-type corporate_bond = array{
  *   additionalInfo?: mixed,
- *   isin?: string,
- *   name?: string,
- *   units?: float,
- *   value?: float,
+ *   isin?: string|null,
+ *   name?: string|null,
+ *   units?: float|null,
+ *   value?: float|null,
  * }
  */
 final class CorporateBond implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<corporate_bond> */
+    use SdkModel;
 
     /**
      * Additional information specific to the corporate bond.
@@ -53,8 +54,7 @@ final class CorporateBond implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

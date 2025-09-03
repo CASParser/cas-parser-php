@@ -9,6 +9,9 @@ use CasParser\Core\Conversion;
 use CasParser\Core\Conversion\Contracts\Converter;
 use CasParser\Core\Conversion\Contracts\ConverterSource;
 
+/**
+ * @internal
+ */
 final class UnionOf implements Converter
 {
     /**
@@ -77,7 +80,7 @@ final class UnionOf implements Converter
 
     private function resolveVariant(
         mixed $value,
-    ): null|Converter|ConverterSource|string {
+    ): Converter|ConverterSource|string|null {
         if ($value instanceof BaseModel) {
             return $value::class;
         }

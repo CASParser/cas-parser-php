@@ -7,24 +7,25 @@ namespace CasParser\CasParser\UnifiedResponse;
 use CasParser\CasParser\UnifiedResponse\Meta\CasType;
 use CasParser\CasParser\UnifiedResponse\Meta\StatementPeriod;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type meta_alias = array{
- *   casType?: CasType::*,
- *   generatedAt?: \DateTimeInterface,
- *   statementPeriod?: StatementPeriod,
+ *   casType?: CasType::*|null,
+ *   generatedAt?: \DateTimeInterface|null,
+ *   statementPeriod?: StatementPeriod|null,
  * }
  */
 final class Meta implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<meta_alias> */
+    use SdkModel;
 
     /**
      * Type of CAS detected and processed.
      *
-     * @var null|CasType::* $casType
+     * @var CasType::*|null $casType
      */
     #[Api('cas_type', enum: CasType::class, optional: true)]
     public ?string $casType;
@@ -40,8 +41,7 @@ final class Meta implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**
@@ -49,7 +49,7 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|CasType::* $casType
+     * @param CasType::* $casType
      */
     public static function with(
         ?string $casType = null,

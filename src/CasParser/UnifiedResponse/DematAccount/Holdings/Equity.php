@@ -5,21 +5,22 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\DematAccount\Holdings;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type equity_alias = array{
  *   additionalInfo?: mixed,
- *   isin?: string,
- *   name?: string,
- *   units?: float,
- *   value?: float,
+ *   isin?: string|null,
+ *   name?: string|null,
+ *   units?: float|null,
+ *   value?: float|null,
  * }
  */
 final class Equity implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<equity_alias> */
+    use SdkModel;
 
     /**
      * Additional information specific to the equity.
@@ -53,8 +54,7 @@ final class Equity implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

@@ -5,24 +5,25 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type transaction_alias = array{
- *   amount?: float,
- *   balance?: float,
- *   date?: \DateTimeInterface,
- *   description?: string,
- *   dividendRate?: float,
- *   nav?: float,
- *   type?: string,
- *   units?: float,
+ *   amount?: float|null,
+ *   balance?: float|null,
+ *   date?: \DateTimeInterface|null,
+ *   description?: string|null,
+ *   dividendRate?: float|null,
+ *   nav?: float|null,
+ *   type?: string|null,
+ *   units?: float|null,
  * }
  */
 final class Transaction implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<transaction_alias> */
+    use SdkModel;
 
     /**
      * Transaction amount.
@@ -74,8 +75,7 @@ final class Transaction implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

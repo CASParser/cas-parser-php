@@ -5,23 +5,24 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type investor_alias = array{
- *   address?: string,
- *   casID?: string,
- *   email?: string,
- *   mobile?: string,
- *   name?: string,
- *   pan?: string,
- *   pincode?: string,
+ *   address?: string|null,
+ *   casID?: string|null,
+ *   email?: string|null,
+ *   mobile?: string|null,
+ *   name?: string|null,
+ *   pan?: string|null,
+ *   pincode?: string|null,
  * }
  */
 final class Investor implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<investor_alias> */
+    use SdkModel;
 
     /**
      * Address of the investor.
@@ -67,8 +68,7 @@ final class Investor implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

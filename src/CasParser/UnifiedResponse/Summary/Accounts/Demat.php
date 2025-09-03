@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\Summary\Accounts;
 
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type demat_alias = array{count?: int, totalValue?: float}
+ * @phpstan-type demat_alias = array{count?: int|null, totalValue?: float|null}
  */
 final class Demat implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<demat_alias> */
+    use SdkModel;
 
     /**
      * Number of demat accounts.
@@ -29,8 +30,7 @@ final class Demat implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**

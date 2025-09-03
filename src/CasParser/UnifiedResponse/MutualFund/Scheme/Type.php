@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 
-use CasParser\Core\Concerns\Enum;
+use CasParser\Core\Concerns\SdkEnum;
 use CasParser\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Type of mutual fund scheme.
- *
- * @phpstan-type type_alias = Type::*
  */
 final class Type implements ConverterSource
 {
-    use Enum;
+    use SdkEnum;
 
     public const EQUITY = 'Equity';
 

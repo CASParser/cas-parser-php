@@ -6,15 +6,17 @@ namespace CasParser\CasGenerator;
 
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
-use CasParser\Core\Concerns\Params;
+use CasParser\Core\Concerns\SdkModel;
+use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * This endpoint generates CAS (Consolidated Account Statement) documents by submitting a mailback request to the specified CAS authority.
  * Currently only supports KFintech, with plans to support CAMS, CDSL, and NSDL in the future.
  *
- * @phpstan-type generate_cas_params = array{
+ * @see CasParser\CasGenerator->generateCas
+ *
+ * @phpstan-type cas_generator_generate_cas_params = array{
  *   email: string,
  *   fromDate: string,
  *   password: string,
@@ -25,8 +27,9 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class CasGeneratorGenerateCasParams implements BaseModel
 {
-    use Model;
-    use Params;
+    /** @use SdkModel<cas_generator_generate_cas_params> */
+    use SdkModel;
+    use SdkParams;
 
     /**
      * Email address to receive the CAS document.
@@ -55,7 +58,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     /**
      * CAS authority to generate the document from (currently only kfintech is supported).
      *
-     * @var null|CasAuthority::* $casAuthority
+     * @var CasAuthority::*|null $casAuthority
      */
     #[Api('cas_authority', enum: CasAuthority::class, optional: true)]
     public ?string $casAuthority;
@@ -88,8 +91,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      */
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**
@@ -97,7 +99,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|CasAuthority::* $casAuthority
+     * @param CasAuthority::* $casAuthority
      */
     public static function with(
         string $email,

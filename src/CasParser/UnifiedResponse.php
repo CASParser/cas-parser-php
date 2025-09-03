@@ -11,30 +11,26 @@ use CasParser\CasParser\UnifiedResponse\Meta;
 use CasParser\CasParser\UnifiedResponse\MutualFund;
 use CasParser\CasParser\UnifiedResponse\Summary;
 use CasParser\Core\Attributes\Api;
-use CasParser\Core\Concerns\Model;
+use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\ListOf;
 
 /**
- * @phpstan-type unified_response_alias = array{
- *   dematAccounts?: list<DematAccount>,
- *   insurance?: Insurance,
- *   investor?: Investor,
- *   meta?: Meta,
- *   mutualFunds?: list<MutualFund>,
- *   summary?: Summary,
+ * @phpstan-type unified_response = array{
+ *   dematAccounts?: list<DematAccount>|null,
+ *   insurance?: Insurance|null,
+ *   investor?: Investor|null,
+ *   meta?: Meta|null,
+ *   mutualFunds?: list<MutualFund>|null,
+ *   summary?: Summary|null,
  * }
  */
 final class UnifiedResponse implements BaseModel
 {
-    use Model;
+    /** @use SdkModel<unified_response> */
+    use SdkModel;
 
-    /** @var null|list<DematAccount> $dematAccounts */
-    #[Api(
-        'demat_accounts',
-        type: new ListOf(DematAccount::class),
-        optional: true
-    )]
+    /** @var list<DematAccount>|null $dematAccounts */
+    #[Api('demat_accounts', list: DematAccount::class, optional: true)]
     public ?array $dematAccounts;
 
     #[Api(optional: true)]
@@ -46,8 +42,8 @@ final class UnifiedResponse implements BaseModel
     #[Api(optional: true)]
     public ?Meta $meta;
 
-    /** @var null|list<MutualFund> $mutualFunds */
-    #[Api('mutual_funds', type: new ListOf(MutualFund::class), optional: true)]
+    /** @var list<MutualFund>|null $mutualFunds */
+    #[Api('mutual_funds', list: MutualFund::class, optional: true)]
     public ?array $mutualFunds;
 
     #[Api(optional: true)]
@@ -55,8 +51,7 @@ final class UnifiedResponse implements BaseModel
 
     public function __construct()
     {
-        self::introspect();
-        $this->unsetOptionalProperties();
+        $this->initialize();
     }
 
     /**
@@ -64,8 +59,8 @@ final class UnifiedResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param null|list<DematAccount> $dematAccounts
-     * @param null|list<MutualFund> $mutualFunds
+     * @param list<DematAccount> $dematAccounts
+     * @param list<MutualFund> $mutualFunds
      */
     public static function with(
         ?array $dematAccounts = null,
