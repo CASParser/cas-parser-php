@@ -10,8 +10,19 @@ use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * An object containing the method's parameters.
+ * Example usage:
+ * ```
+ * $params = (new CasParserSmartParseParams); // set properties as needed
+ * $client->casParser->smartParse(...$params->toArray());
+ * ```
  * This endpoint parses CAS (Consolidated Account Statement) PDF files from NSDL, CDSL, or CAMS/KFintech and returns data in a unified format.
  * It auto-detects the CAS type and transforms the data into a consistent structure regardless of the source.
+ *
+ * @method toArray()
+ *   Returns the parameters as an associative array suitable for passing to the client method.
+ *
+ *   `$client->casParser->smartParse(...$params->toArray());`
  *
  * @see CasParser\CasParser->smartParse
  *
