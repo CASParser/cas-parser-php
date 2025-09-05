@@ -40,7 +40,7 @@ final class CasGeneratorTest extends TestCase
             toDate: '2023-12-31',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore-line
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
 
     #[Test]
@@ -57,6 +57,6 @@ final class CasGeneratorTest extends TestCase
             toDate: '2023-12-31',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore-line
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
 }
