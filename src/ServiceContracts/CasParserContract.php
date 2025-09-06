@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CasParser\Core\ServiceContracts;
+namespace CasParser\ServiceContracts;
 
 use CasParser\CasParser\UnifiedResponse;
 use CasParser\RequestOptions;

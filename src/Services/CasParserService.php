@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CasParser\Core\Services;
+namespace CasParser\Services;
 
 use CasParser\CasParser\CasParserCamsKfintechParams;
 use CasParser\CasParser\CasParserCdslParams;
@@ -10,8 +10,8 @@ use CasParser\CasParser\CasParserNsdlParams;
 use CasParser\CasParser\CasParserSmartParseParams;
 use CasParser\CasParser\UnifiedResponse;
 use CasParser\Client;
-use CasParser\Core\ServiceContracts\CasParserContract;
 use CasParser\RequestOptions;
+use CasParser\ServiceContracts\CasParserContract;
 
 use const CasParser\Core\OMIT as omit;
 
