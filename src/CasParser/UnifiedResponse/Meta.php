@@ -12,7 +12,7 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type meta_alias = array{
- *   casType?: CasType::*|null,
+ *   casType?: value-of<CasType>|null,
  *   generatedAt?: \DateTimeInterface|null,
  *   statementPeriod?: StatementPeriod|null,
  * }
@@ -25,7 +25,7 @@ final class Meta implements BaseModel
     /**
      * Type of CAS detected and processed.
      *
-     * @var CasType::*|null $casType
+     * @var value-of<CasType>|null $casType
      */
     #[Api('cas_type', enum: CasType::class, optional: true)]
     public ?string $casType;
@@ -49,16 +49,16 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CasType::* $casType
+     * @param CasType|value-of<CasType> $casType
      */
     public static function with(
-        ?string $casType = null,
+        CasType|string|null $casType = null,
         ?\DateTimeInterface $generatedAt = null,
         ?StatementPeriod $statementPeriod = null,
     ): self {
         $obj = new self;
 
-        null !== $casType && $obj->casType = $casType;
+        null !== $casType && $obj->casType = $casType instanceof CasType ? $casType->value : $casType;
         null !== $generatedAt && $obj->generatedAt = $generatedAt;
         null !== $statementPeriod && $obj->statementPeriod = $statementPeriod;
 
@@ -68,12 +68,12 @@ final class Meta implements BaseModel
     /**
      * Type of CAS detected and processed.
      *
-     * @param CasType::* $casType
+     * @param CasType|value-of<CasType> $casType
      */
-    public function withCasType(string $casType): self
+    public function withCasType(CasType|string $casType): self
     {
         $obj = clone $this;
-        $obj->casType = $casType;
+        $obj->casType = $casType instanceof CasType ? $casType->value : $casType;
 
         return $obj;
     }

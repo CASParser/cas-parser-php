@@ -4,21 +4,16 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 
-use CasParser\Core\Concerns\SdkEnum;
-use CasParser\Core\Conversion\Contracts\ConverterSource;
-
 /**
  * Type of mutual fund scheme.
  */
-final class Type implements ConverterSource
+enum Type: string
 {
-    use SdkEnum;
+    case EQUITY = 'Equity';
 
-    public const EQUITY = 'Equity';
+    case DEBT = 'Debt';
 
-    public const DEBT = 'Debt';
+    case HYBRID = 'Hybrid';
 
-    public const HYBRID = 'Hybrid';
-
-    public const OTHER = 'Other';
+    case OTHER = 'Other';
 }

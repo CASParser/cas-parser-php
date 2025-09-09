@@ -30,7 +30,7 @@ final class CasGeneratorService implements CasGeneratorContract
      * @param string $fromDate Start date for the CAS period (format YYYY-MM-DD)
      * @param string $password Password to protect the generated CAS PDF
      * @param string $toDate End date for the CAS period (format YYYY-MM-DD)
-     * @param CasAuthority::* $casAuthority CAS authority to generate the document from (currently only kfintech is supported)
+     * @param CasAuthority|value-of<CasAuthority> $casAuthority CAS authority to generate the document from (currently only kfintech is supported)
      * @param string $panNo PAN number (optional for some CAS authorities)
      */
     public function generateCas(
