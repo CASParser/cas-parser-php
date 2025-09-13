@@ -10,6 +10,7 @@ use CasParser\CasParser\CasParserNsdlParams;
 use CasParser\CasParser\CasParserSmartParseParams;
 use CasParser\CasParser\UnifiedResponse;
 use CasParser\Client;
+use CasParser\Core\Exceptions\APIException;
 use CasParser\Core\Implementation\HasRawResponse;
 use CasParser\RequestOptions;
 use CasParser\ServiceContracts\CasParserContract;
@@ -34,6 +35,8 @@ final class CasParserService implements CasParserContract
      * @param string $pdfURL URL to the CAS PDF file
      *
      * @return UnifiedResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function camsKfintech(
         $password = omit,
@@ -41,9 +44,29 @@ final class CasParserService implements CasParserContract
         $pdfURL = omit,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
+        $params = [
+            'password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL,
+        ];
+
+        return $this->camsKfintechRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UnifiedResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function camsKfintechRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UnifiedResponse {
         [$parsed, $options] = CasParserCamsKfintechParams::parseRequest(
-            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -67,6 +90,8 @@ final class CasParserService implements CasParserContract
      * @param string $pdfURL URL to the CAS PDF file
      *
      * @return UnifiedResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function cdsl(
         $password = omit,
@@ -74,9 +99,29 @@ final class CasParserService implements CasParserContract
         $pdfURL = omit,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
+        $params = [
+            'password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL,
+        ];
+
+        return $this->cdslRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UnifiedResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function cdslRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UnifiedResponse {
         [$parsed, $options] = CasParserCdslParams::parseRequest(
-            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -100,6 +145,8 @@ final class CasParserService implements CasParserContract
      * @param string $pdfURL URL to the CAS PDF file
      *
      * @return UnifiedResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function nsdl(
         $password = omit,
@@ -107,9 +154,29 @@ final class CasParserService implements CasParserContract
         $pdfURL = omit,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
+        $params = [
+            'password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL,
+        ];
+
+        return $this->nsdlRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UnifiedResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function nsdlRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UnifiedResponse {
         [$parsed, $options] = CasParserNsdlParams::parseRequest(
-            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;
@@ -133,6 +200,8 @@ final class CasParserService implements CasParserContract
      * @param string $pdfURL URL to the CAS PDF file
      *
      * @return UnifiedResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function smartParse(
         $password = omit,
@@ -140,9 +209,29 @@ final class CasParserService implements CasParserContract
         $pdfURL = omit,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse {
+        $params = [
+            'password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL,
+        ];
+
+        return $this->smartParseRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return UnifiedResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function smartParseRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): UnifiedResponse {
         [$parsed, $options] = CasParserSmartParseParams::parseRequest(
-            ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

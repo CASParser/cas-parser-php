@@ -8,6 +8,7 @@ use CasParser\CasGenerator\CasGeneratorGenerateCasParams;
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
 use CasParser\CasGenerator\CasGeneratorGenerateCasResponse;
 use CasParser\Client;
+use CasParser\Core\Exceptions\APIException;
 use CasParser\Core\Implementation\HasRawResponse;
 use CasParser\RequestOptions;
 use CasParser\ServiceContracts\CasGeneratorContract;
@@ -35,6 +36,8 @@ final class CasGeneratorService implements CasGeneratorContract
      * @param string $panNo PAN number (optional for some CAS authorities)
      *
      * @return CasGeneratorGenerateCasResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function generateCas(
         $email,
@@ -45,16 +48,34 @@ final class CasGeneratorService implements CasGeneratorContract
         $panNo = omit,
         ?RequestOptions $requestOptions = null,
     ): CasGeneratorGenerateCasResponse {
+        $params = [
+            'email' => $email,
+            'fromDate' => $fromDate,
+            'password' => $password,
+            'toDate' => $toDate,
+            'casAuthority' => $casAuthority,
+            'panNo' => $panNo,
+        ];
+
+        return $this->generateCasRaw($params, $requestOptions);
+    }
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CasGeneratorGenerateCasResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function generateCasRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CasGeneratorGenerateCasResponse {
         [$parsed, $options] = CasGeneratorGenerateCasParams::parseRequest(
-            [
-                'email' => $email,
-                'fromDate' => $fromDate,
-                'password' => $password,
-                'toDate' => $toDate,
-                'casAuthority' => $casAuthority,
-                'panNo' => $panNo,
-            ],
-            $requestOptions,
+            $params,
+            $requestOptions
         );
 
         // @phpstan-ignore-next-line;

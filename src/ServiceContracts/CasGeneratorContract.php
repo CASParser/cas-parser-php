@@ -6,6 +6,7 @@ namespace CasParser\ServiceContracts;
 
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
 use CasParser\CasGenerator\CasGeneratorGenerateCasResponse;
+use CasParser\Core\Exceptions\APIException;
 use CasParser\Core\Implementation\HasRawResponse;
 use CasParser\RequestOptions;
 
@@ -24,6 +25,8 @@ interface CasGeneratorContract
      * @param string $panNo PAN number (optional for some CAS authorities)
      *
      * @return CasGeneratorGenerateCasResponse<HasRawResponse>
+     *
+     * @throws APIException
      */
     public function generateCas(
         $email,
@@ -33,5 +36,19 @@ interface CasGeneratorContract
         $casAuthority = omit,
         $panNo = omit,
         ?RequestOptions $requestOptions = null,
+    ): CasGeneratorGenerateCasResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CasGeneratorGenerateCasResponse<HasRawResponse>
+     *
+     * @throws APIException
+     */
+    public function generateCasRaw(
+        array $params,
+        ?RequestOptions $requestOptions = null
     ): CasGeneratorGenerateCasResponse;
 }
