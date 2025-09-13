@@ -16,13 +16,17 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type unified_response = array{
- *   dematAccounts?: list<DematAccount>|null,
- *   insurance?: Insurance|null,
- *   investor?: Investor|null,
- *   meta?: Meta|null,
- *   mutualFunds?: list<MutualFund>|null,
- *   summary?: Summary|null,
+ *   dematAccounts?: list<DematAccount>,
+ *   insurance?: Insurance,
+ *   investor?: Investor,
+ *   meta?: Meta,
+ *   mutualFunds?: list<MutualFund>,
+ *   summary?: Summary,
  * }
+ * When used in a response, this type parameter can define a $rawResponse property.
+ * @template TRawResponse of object = object{}
+ *
+ * @mixin TRawResponse
  */
 final class UnifiedResponse implements BaseModel
 {

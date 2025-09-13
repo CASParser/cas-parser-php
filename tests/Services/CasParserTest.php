@@ -35,7 +35,7 @@ final class CasParserTest extends TestCase
 
         $result = $this->client->casParser->camsKfintech();
 
-        $this->assertTrue(true); // @phpstan-ignore-line
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
 
     #[Test]
@@ -47,7 +47,7 @@ final class CasParserTest extends TestCase
 
         $result = $this->client->casParser->cdsl();
 
-        $this->assertTrue(true); // @phpstan-ignore-line
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
 
     #[Test]
@@ -59,7 +59,7 @@ final class CasParserTest extends TestCase
 
         $result = $this->client->casParser->nsdl();
 
-        $this->assertTrue(true); // @phpstan-ignore-line
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
 
     #[Test]
@@ -71,6 +71,6 @@ final class CasParserTest extends TestCase
 
         $result = $this->client->casParser->smartParse();
 
-        $this->assertTrue(true); // @phpstan-ignore-line
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
 }

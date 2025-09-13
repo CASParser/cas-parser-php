@@ -11,7 +11,7 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type insurance_alias = array{
- *   lifeInsurancePolicies?: list<LifeInsurancePolicy>|null
+ *   lifeInsurancePolicies?: list<LifeInsurancePolicy>
  * }
  */
 final class Insurance implements BaseModel

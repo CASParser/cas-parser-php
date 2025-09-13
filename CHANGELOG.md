@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.2.0 (2025-09-13)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/CASParser/cas-parser-php/compare/v0.1.0...v0.2.0)
+
+### ⚠ BREAKING CHANGES
+
+* expose services and service contracts
+
+### Features
+
+* **client:** add raw methods ([cec98f9](https://github.com/CASParser/cas-parser-php/commit/cec98f994a8f4b1dc12905a2dcd269cebbcc000d))
+* **client:** support raw responses ([db0fac3](https://github.com/CASParser/cas-parser-php/commit/db0fac37cc5a9f56fb8f095f4c895f91a206bfa5))
+* **client:** use real enums ([9b7428f](https://github.com/CASParser/cas-parser-php/commit/9b7428ffe0e2a19b1b7ad6c87e90ee14eddce749))
+* expose services and service contracts ([36e3c1d](https://github.com/CASParser/cas-parser-php/commit/36e3c1d53c72f8b86e8ccf565fd3399bb3847834))
+
+
+### Chores
+
+* cleanup streaming ([d8d2163](https://github.com/CASParser/cas-parser-php/commit/d8d2163afa66e726f571c31276eaca485c4dda84))
+* document parameter object usage ([8e520a0](https://github.com/CASParser/cas-parser-php/commit/8e520a0452175fc10becdd28fc9bf5b37cecf434))
+* fix lints in UnionOf ([4fcc712](https://github.com/CASParser/cas-parser-php/commit/4fcc712c36036429b1f410f3c3ae88f3a8ad3147))
+* make more targeted phpstan ignores ([35208e4](https://github.com/CASParser/cas-parser-php/commit/35208e4d7fced2de5826111980cfd51bebd1ad74))
+
 ## 0.1.0 (2025-09-03)
 
 Full Changelog: [v0.0.2...v0.1.0](https://github.com/CASParser/cas-parser-php/compare/v0.0.2...v0.1.0)

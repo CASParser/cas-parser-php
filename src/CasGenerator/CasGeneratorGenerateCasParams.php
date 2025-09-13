@@ -11,8 +11,19 @@ use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * An object containing the method's parameters.
+ * Example usage:
+ * ```
+ * $params = (new CasGeneratorGenerateCasParams); // set properties as needed
+ * $client->casGenerator->generateCas(...$params->toArray());
+ * ```
  * This endpoint generates CAS (Consolidated Account Statement) documents by submitting a mailback request to the specified CAS authority.
  * Currently only supports KFintech, with plans to support CAMS, CDSL, and NSDL in the future.
+ *
+ * @method toArray()
+ *   Returns the parameters as an associative array suitable for passing to the client method.
+ *
+ *   `$client->casGenerator->generateCas(...$params->toArray());`
  *
  * @see CasParser\CasGenerator->generateCas
  *
@@ -21,7 +32,7 @@ use CasParser\Core\Contracts\BaseModel;
  *   fromDate: string,
  *   password: string,
  *   toDate: string,
- *   casAuthority?: CasAuthority::*,
+ *   casAuthority?: CasAuthority|value-of<CasAuthority>,
  *   panNo?: string,
  * }
  */
@@ -58,7 +69,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     /**
      * CAS authority to generate the document from (currently only kfintech is supported).
      *
-     * @var CasAuthority::*|null $casAuthority
+     * @var value-of<CasAuthority>|null $casAuthority
      */
     #[Api('cas_authority', enum: CasAuthority::class, optional: true)]
     public ?string $casAuthority;
@@ -99,14 +110,14 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CasAuthority::* $casAuthority
+     * @param CasAuthority|value-of<CasAuthority> $casAuthority
      */
     public static function with(
         string $email,
         string $fromDate,
         string $password,
         string $toDate,
-        ?string $casAuthority = null,
+        CasAuthority|string|null $casAuthority = null,
         ?string $panNo = null,
     ): self {
         $obj = new self;
@@ -116,7 +127,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
         $obj->password = $password;
         $obj->toDate = $toDate;
 
-        null !== $casAuthority && $obj->casAuthority = $casAuthority;
+        null !== $casAuthority && $obj->casAuthority = $casAuthority instanceof CasAuthority ? $casAuthority->value : $casAuthority;
         null !== $panNo && $obj->panNo = $panNo;
 
         return $obj;
@@ -169,12 +180,12 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     /**
      * CAS authority to generate the document from (currently only kfintech is supported).
      *
-     * @param CasAuthority::* $casAuthority
+     * @param CasAuthority|value-of<CasAuthority> $casAuthority
      */
-    public function withCasAuthority(string $casAuthority): self
+    public function withCasAuthority(CasAuthority|string $casAuthority): self
     {
         $obj = clone $this;
-        $obj->casAuthority = $casAuthority;
+        $obj->casAuthority = $casAuthority instanceof CasAuthority ? $casAuthority->value : $casAuthority;
 
         return $obj;
     }

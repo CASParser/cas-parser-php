@@ -11,10 +11,10 @@ use CasParser\Core\Contracts\BaseModel;
 /**
  * @phpstan-type corporate_bond = array{
  *   additionalInfo?: mixed,
- *   isin?: string|null,
- *   name?: string|null,
- *   units?: float|null,
- *   value?: float|null,
+ *   isin?: string,
+ *   name?: string,
+ *   units?: float,
+ *   value?: float,
  * }
  */
 final class CorporateBond implements BaseModel

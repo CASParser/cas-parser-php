@@ -10,14 +10,14 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type transaction_alias = array{
- *   amount?: float|null,
- *   balance?: float|null,
- *   date?: \DateTimeInterface|null,
- *   description?: string|null,
- *   dividendRate?: float|null,
- *   nav?: float|null,
- *   type?: string|null,
- *   units?: float|null,
+ *   amount?: float,
+ *   balance?: float,
+ *   date?: \DateTimeInterface,
+ *   description?: string,
+ *   dividendRate?: float,
+ *   nav?: float,
+ *   type?: string,
+ *   units?: float,
  * }
  */
 final class Transaction implements BaseModel

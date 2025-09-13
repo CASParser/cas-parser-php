@@ -14,17 +14,17 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type scheme_alias = array{
- *   additionalInfo?: AdditionalInfo|null,
- *   cost?: float|null,
- *   gain?: Gain|null,
- *   isin?: string|null,
- *   name?: string|null,
- *   nav?: float|null,
- *   nominees?: list<string>|null,
- *   transactions?: list<Transaction>|null,
- *   type?: Type::*|null,
- *   units?: float|null,
- *   value?: float|null,
+ *   additionalInfo?: AdditionalInfo,
+ *   cost?: float,
+ *   gain?: Gain,
+ *   isin?: string,
+ *   name?: string,
+ *   nav?: float,
+ *   nominees?: list<string>,
+ *   transactions?: list<Transaction>,
+ *   type?: value-of<Type>,
+ *   units?: float,
+ *   value?: float,
  * }
  */
 final class Scheme implements BaseModel
@@ -80,7 +80,7 @@ final class Scheme implements BaseModel
     /**
      * Type of mutual fund scheme.
      *
-     * @var Type::*|null $type
+     * @var value-of<Type>|null $type
      */
     #[Api(enum: Type::class, optional: true)]
     public ?string $type;
@@ -109,7 +109,7 @@ final class Scheme implements BaseModel
      *
      * @param list<string> $nominees
      * @param list<Transaction> $transactions
-     * @param Type::* $type
+     * @param Type|value-of<Type> $type
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,
@@ -120,7 +120,7 @@ final class Scheme implements BaseModel
         ?float $nav = null,
         ?array $nominees = null,
         ?array $transactions = null,
-        ?string $type = null,
+        Type|string|null $type = null,
         ?float $units = null,
         ?float $value = null,
     ): self {
@@ -134,7 +134,7 @@ final class Scheme implements BaseModel
         null !== $nav && $obj->nav = $nav;
         null !== $nominees && $obj->nominees = $nominees;
         null !== $transactions && $obj->transactions = $transactions;
-        null !== $type && $obj->type = $type;
+        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
         null !== $units && $obj->units = $units;
         null !== $value && $obj->value = $value;
 
@@ -231,12 +231,12 @@ final class Scheme implements BaseModel
     /**
      * Type of mutual fund scheme.
      *
-     * @param Type::* $type
+     * @param Type|value-of<Type> $type
      */
-    public function withType(string $type): self
+    public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj->type = $type instanceof Type ? $type->value : $type;
 
         return $obj;
     }

@@ -11,14 +11,14 @@ use CasParser\Core\Contracts\BaseModel;
 /**
  * @phpstan-type life_insurance_policy = array{
  *   additionalInfo?: mixed,
- *   lifeAssured?: string|null,
- *   policyName?: string|null,
- *   policyNumber?: string|null,
- *   premiumAmount?: float|null,
- *   premiumFrequency?: string|null,
- *   provider?: string|null,
- *   status?: string|null,
- *   sumAssured?: float|null,
+ *   lifeAssured?: string,
+ *   policyName?: string,
+ *   policyNumber?: string,
+ *   premiumAmount?: float,
+ *   premiumFrequency?: string,
+ *   provider?: string,
+ *   status?: string,
+ *   sumAssured?: float,
  * }
  */
 final class LifeInsurancePolicy implements BaseModel

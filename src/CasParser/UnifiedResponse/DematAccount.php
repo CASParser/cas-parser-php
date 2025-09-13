@@ -13,14 +13,14 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type demat_account = array{
- *   additionalInfo?: AdditionalInfo|null,
- *   boID?: string|null,
- *   clientID?: string|null,
- *   dematType?: DematType::*|null,
- *   dpID?: string|null,
- *   dpName?: string|null,
- *   holdings?: Holdings|null,
- *   value?: float|null,
+ *   additionalInfo?: AdditionalInfo,
+ *   boID?: string,
+ *   clientID?: string,
+ *   dematType?: value-of<DematType>,
+ *   dpID?: string,
+ *   dpName?: string,
+ *   holdings?: Holdings,
+ *   value?: float,
  * }
  */
 final class DematAccount implements BaseModel
@@ -49,7 +49,7 @@ final class DematAccount implements BaseModel
     /**
      * Type of demat account.
      *
-     * @var DematType::*|null $dematType
+     * @var value-of<DematType>|null $dematType
      */
     #[Api('demat_type', enum: DematType::class, optional: true)]
     public ?string $dematType;
@@ -85,13 +85,13 @@ final class DematAccount implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DematType::* $dematType
+     * @param DematType|value-of<DematType> $dematType
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,
         ?string $boID = null,
         ?string $clientID = null,
-        ?string $dematType = null,
+        DematType|string|null $dematType = null,
         ?string $dpID = null,
         ?string $dpName = null,
         ?Holdings $holdings = null,
@@ -102,7 +102,7 @@ final class DematAccount implements BaseModel
         null !== $additionalInfo && $obj->additionalInfo = $additionalInfo;
         null !== $boID && $obj->boID = $boID;
         null !== $clientID && $obj->clientID = $clientID;
-        null !== $dematType && $obj->dematType = $dematType;
+        null !== $dematType && $obj->dematType = $dematType instanceof DematType ? $dematType->value : $dematType;
         null !== $dpID && $obj->dpID = $dpID;
         null !== $dpName && $obj->dpName = $dpName;
         null !== $holdings && $obj->holdings = $holdings;
@@ -147,12 +147,12 @@ final class DematAccount implements BaseModel
     /**
      * Type of demat account.
      *
-     * @param DematType::* $dematType
+     * @param DematType|value-of<DematType> $dematType
      */
-    public function withDematType(string $dematType): self
+    public function withDematType(DematType|string $dematType): self
     {
         $obj = clone $this;
-        $obj->dematType = $dematType;
+        $obj->dematType = $dematType instanceof DematType ? $dematType->value : $dematType;
 
         return $obj;
     }

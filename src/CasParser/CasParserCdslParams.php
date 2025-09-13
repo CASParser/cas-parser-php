@@ -10,8 +10,19 @@ use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * An object containing the method's parameters.
+ * Example usage:
+ * ```
+ * $params = (new CasParserCdslParams); // set properties as needed
+ * $client->casParser->cdsl(...$params->toArray());
+ * ```
  * This endpoint specifically parses CDSL CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
  * Use this endpoint when you know the PDF is from CDSL.
+ *
+ * @method toArray()
+ *   Returns the parameters as an associative array suitable for passing to the client method.
+ *
+ *   `$client->casParser->cdsl(...$params->toArray());`
  *
  * @see CasParser\CasParser->cdsl
  *
