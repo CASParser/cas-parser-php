@@ -13,7 +13,7 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type accounts_alias = array{
- *   demat?: Demat|null, insurance?: Insurance|null, mutualFunds?: MutualFunds|null
+ *   demat?: Demat, insurance?: Insurance, mutualFunds?: MutualFunds
  * }
  */
 final class Accounts implements BaseModel

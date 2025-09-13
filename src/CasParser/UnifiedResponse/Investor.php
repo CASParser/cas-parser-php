@@ -10,13 +10,13 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type investor_alias = array{
- *   address?: string|null,
- *   casID?: string|null,
- *   email?: string|null,
- *   mobile?: string|null,
- *   name?: string|null,
- *   pan?: string|null,
- *   pincode?: string|null,
+ *   address?: string,
+ *   casID?: string,
+ *   email?: string,
+ *   mobile?: string,
+ *   name?: string,
+ *   pan?: string,
+ *   pincode?: string,
  * }
  */
 final class Investor implements BaseModel

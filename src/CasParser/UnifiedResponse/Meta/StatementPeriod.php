@@ -10,7 +10,7 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type statement_period = array{
- *   from?: \DateTimeInterface|null, to?: \DateTimeInterface|null
+ *   from?: \DateTimeInterface, to?: \DateTimeInterface
  * }
  */
 final class StatementPeriod implements BaseModel

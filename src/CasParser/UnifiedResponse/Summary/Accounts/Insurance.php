@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type insurance_alias = array{count?: int|null, totalValue?: float|null}
+ * @phpstan-type insurance_alias = array{count?: int, totalValue?: float}
  */
 final class Insurance implements BaseModel
 {

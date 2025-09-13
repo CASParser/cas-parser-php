@@ -12,14 +12,14 @@ use CasParser\Core\Contracts\BaseModel;
  * Additional information specific to the demat account type.
  *
  * @phpstan-type additional_info = array{
- *   boStatus?: string|null,
- *   boSubStatus?: string|null,
- *   boType?: string|null,
- *   bsda?: string|null,
- *   email?: string|null,
- *   linkedPans?: list<string>|null,
- *   nominee?: string|null,
- *   status?: string|null,
+ *   boStatus?: string,
+ *   boSubStatus?: string,
+ *   boType?: string,
+ *   bsda?: string,
+ *   email?: string,
+ *   linkedPans?: list<string>,
+ *   nominee?: string,
+ *   status?: string,
  * }
  */
 final class AdditionalInfo implements BaseModel

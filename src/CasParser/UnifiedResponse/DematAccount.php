@@ -13,14 +13,14 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type demat_account = array{
- *   additionalInfo?: AdditionalInfo|null,
- *   boID?: string|null,
- *   clientID?: string|null,
- *   dematType?: value-of<DematType>|null,
- *   dpID?: string|null,
- *   dpName?: string|null,
- *   holdings?: Holdings|null,
- *   value?: float|null,
+ *   additionalInfo?: AdditionalInfo,
+ *   boID?: string,
+ *   clientID?: string,
+ *   dematType?: value-of<DematType>,
+ *   dpID?: string,
+ *   dpName?: string,
+ *   holdings?: Holdings,
+ *   value?: float,
  * }
  */
 final class DematAccount implements BaseModel
