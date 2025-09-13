@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type mutual_funds = array{count?: int|null, totalValue?: float|null}
+ * @phpstan-type mutual_funds = array{count?: int, totalValue?: float}
  */
 final class MutualFunds implements BaseModel
 {

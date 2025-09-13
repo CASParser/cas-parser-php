@@ -12,9 +12,9 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type meta_alias = array{
- *   casType?: value-of<CasType>|null,
- *   generatedAt?: \DateTimeInterface|null,
- *   statementPeriod?: StatementPeriod|null,
+ *   casType?: value-of<CasType>,
+ *   generatedAt?: \DateTimeInterface,
+ *   statementPeriod?: StatementPeriod,
  * }
  */
 final class Meta implements BaseModel

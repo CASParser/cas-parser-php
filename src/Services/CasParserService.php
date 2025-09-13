@@ -10,6 +10,7 @@ use CasParser\CasParser\CasParserNsdlParams;
 use CasParser\CasParser\CasParserSmartParseParams;
 use CasParser\CasParser\UnifiedResponse;
 use CasParser\Client;
+use CasParser\Core\Implementation\HasRawResponse;
 use CasParser\RequestOptions;
 use CasParser\ServiceContracts\CasParserContract;
 
@@ -31,6 +32,8 @@ final class CasParserService implements CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     *
+     * @return UnifiedResponse<HasRawResponse>
      */
     public function camsKfintech(
         $password = omit,
@@ -62,6 +65,8 @@ final class CasParserService implements CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     *
+     * @return UnifiedResponse<HasRawResponse>
      */
     public function cdsl(
         $password = omit,
@@ -93,6 +98,8 @@ final class CasParserService implements CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     *
+     * @return UnifiedResponse<HasRawResponse>
      */
     public function nsdl(
         $password = omit,
@@ -124,6 +131,8 @@ final class CasParserService implements CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     *
+     * @return UnifiedResponse<HasRawResponse>
      */
     public function smartParse(
         $password = omit,

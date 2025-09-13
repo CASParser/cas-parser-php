@@ -14,17 +14,17 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type scheme_alias = array{
- *   additionalInfo?: AdditionalInfo|null,
- *   cost?: float|null,
- *   gain?: Gain|null,
- *   isin?: string|null,
- *   name?: string|null,
- *   nav?: float|null,
- *   nominees?: list<string>|null,
- *   transactions?: list<Transaction>|null,
- *   type?: value-of<Type>|null,
- *   units?: float|null,
- *   value?: float|null,
+ *   additionalInfo?: AdditionalInfo,
+ *   cost?: float,
+ *   gain?: Gain,
+ *   isin?: string,
+ *   name?: string,
+ *   nav?: float,
+ *   nominees?: list<string>,
+ *   transactions?: list<Transaction>,
+ *   type?: value-of<Type>,
+ *   units?: float,
+ *   value?: float,
  * }
  */
 final class Scheme implements BaseModel

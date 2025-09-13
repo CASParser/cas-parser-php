@@ -15,11 +15,11 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type holdings_alias = array{
- *   aifs?: list<Aif>|null,
- *   corporateBonds?: list<CorporateBond>|null,
- *   dematMutualFunds?: list<DematMutualFund>|null,
- *   equities?: list<Equity>|null,
- *   governmentSecurities?: list<GovernmentSecurity>|null,
+ *   aifs?: list<Aif>,
+ *   corporateBonds?: list<CorporateBond>,
+ *   dematMutualFunds?: list<DematMutualFund>,
+ *   equities?: list<Equity>,
+ *   governmentSecurities?: list<GovernmentSecurity>,
  * }
  */
 final class Holdings implements BaseModel

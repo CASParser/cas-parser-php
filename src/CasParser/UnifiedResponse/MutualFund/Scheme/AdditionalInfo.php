@@ -12,11 +12,11 @@ use CasParser\Core\Contracts\BaseModel;
  * Additional information specific to the scheme.
  *
  * @phpstan-type additional_info = array{
- *   advisor?: string|null,
- *   amfi?: string|null,
- *   closeUnits?: float|null,
- *   openUnits?: float|null,
- *   rtaCode?: string|null,
+ *   advisor?: string,
+ *   amfi?: string,
+ *   closeUnits?: float,
+ *   openUnits?: float,
+ *   rtaCode?: string,
  * }
  */
 final class AdditionalInfo implements BaseModel
