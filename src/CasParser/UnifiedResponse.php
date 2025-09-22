@@ -9,6 +9,7 @@ use CasParser\CasParser\UnifiedResponse\Insurance;
 use CasParser\CasParser\UnifiedResponse\Investor;
 use CasParser\CasParser\UnifiedResponse\Meta;
 use CasParser\CasParser\UnifiedResponse\MutualFund;
+use CasParser\CasParser\UnifiedResponse\Np;
 use CasParser\CasParser\UnifiedResponse\Summary;
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
@@ -21,6 +22,7 @@ use CasParser\Core\Contracts\BaseModel;
  *   investor?: Investor,
  *   meta?: Meta,
  *   mutualFunds?: list<MutualFund>,
+ *   nps?: list<Np>,
  *   summary?: Summary,
  * }
  * When used in a response, this type parameter can define a $rawResponse property.
@@ -50,6 +52,14 @@ final class UnifiedResponse implements BaseModel
     #[Api('mutual_funds', list: MutualFund::class, optional: true)]
     public ?array $mutualFunds;
 
+    /**
+     * List of NPS accounts.
+     *
+     * @var list<Np>|null $nps
+     */
+    #[Api(list: Np::class, optional: true)]
+    public ?array $nps;
+
     #[Api(optional: true)]
     public ?Summary $summary;
 
@@ -65,6 +75,7 @@ final class UnifiedResponse implements BaseModel
      *
      * @param list<DematAccount> $dematAccounts
      * @param list<MutualFund> $mutualFunds
+     * @param list<Np> $nps
      */
     public static function with(
         ?array $dematAccounts = null,
@@ -72,6 +83,7 @@ final class UnifiedResponse implements BaseModel
         ?Investor $investor = null,
         ?Meta $meta = null,
         ?array $mutualFunds = null,
+        ?array $nps = null,
         ?Summary $summary = null,
     ): self {
         $obj = new self;
@@ -81,6 +93,7 @@ final class UnifiedResponse implements BaseModel
         null !== $investor && $obj->investor = $investor;
         null !== $meta && $obj->meta = $meta;
         null !== $mutualFunds && $obj->mutualFunds = $mutualFunds;
+        null !== $nps && $obj->nps = $nps;
         null !== $summary && $obj->summary = $summary;
 
         return $obj;
@@ -128,6 +141,19 @@ final class UnifiedResponse implements BaseModel
     {
         $obj = clone $this;
         $obj->mutualFunds = $mutualFunds;
+
+        return $obj;
+    }
+
+    /**
+     * List of NPS accounts.
+     *
+     * @param list<Np> $nps
+     */
+    public function withNps(array $nps): self
+    {
+        $obj = clone $this;
+        $obj->nps = $nps;
 
         return $obj;
     }
