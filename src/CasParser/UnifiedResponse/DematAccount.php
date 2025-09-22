@@ -7,6 +7,7 @@ namespace CasParser\CasParser\UnifiedResponse;
 use CasParser\CasParser\UnifiedResponse\DematAccount\AdditionalInfo;
 use CasParser\CasParser\UnifiedResponse\DematAccount\DematType;
 use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings;
+use CasParser\CasParser\UnifiedResponse\DematAccount\LinkedHolder;
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
@@ -20,6 +21,7 @@ use CasParser\Core\Contracts\BaseModel;
  *   dpID?: string,
  *   dpName?: string,
  *   holdings?: Holdings,
+ *   linkedHolders?: list<LinkedHolder>,
  *   value?: float,
  * }
  */
@@ -70,6 +72,14 @@ final class DematAccount implements BaseModel
     public ?Holdings $holdings;
 
     /**
+     * List of account holders linked to this demat account.
+     *
+     * @var list<LinkedHolder>|null $linkedHolders
+     */
+    #[Api('linked_holders', list: LinkedHolder::class, optional: true)]
+    public ?array $linkedHolders;
+
+    /**
      * Total value of the demat account.
      */
     #[Api(optional: true)]
@@ -86,6 +96,7 @@ final class DematAccount implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param DematType|value-of<DematType> $dematType
+     * @param list<LinkedHolder> $linkedHolders
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,
@@ -95,6 +106,7 @@ final class DematAccount implements BaseModel
         ?string $dpID = null,
         ?string $dpName = null,
         ?Holdings $holdings = null,
+        ?array $linkedHolders = null,
         ?float $value = null,
     ): self {
         $obj = new self;
@@ -106,6 +118,7 @@ final class DematAccount implements BaseModel
         null !== $dpID && $obj->dpID = $dpID;
         null !== $dpName && $obj->dpName = $dpName;
         null !== $holdings && $obj->holdings = $holdings;
+        null !== $linkedHolders && $obj->linkedHolders = $linkedHolders;
         null !== $value && $obj->value = $value;
 
         return $obj;
@@ -183,6 +196,19 @@ final class DematAccount implements BaseModel
     {
         $obj = clone $this;
         $obj->holdings = $holdings;
+
+        return $obj;
+    }
+
+    /**
+     * List of account holders linked to this demat account.
+     *
+     * @param list<LinkedHolder> $linkedHolders
+     */
+    public function withLinkedHolders(array $linkedHolders): self
+    {
+        $obj = clone $this;
+        $obj->linkedHolders = $linkedHolders;
 
         return $obj;
     }

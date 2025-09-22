@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\CasParser\UnifiedResponse\MutualFund\AdditionalInfo;
+use CasParser\CasParser\UnifiedResponse\MutualFund\LinkedHolder;
 use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
@@ -15,6 +16,7 @@ use CasParser\Core\Contracts\BaseModel;
  *   additionalInfo?: AdditionalInfo,
  *   amc?: string,
  *   folioNumber?: string,
+ *   linkedHolders?: list<LinkedHolder>,
  *   registrar?: string,
  *   schemes?: list<Scheme>,
  *   value?: float,
@@ -44,6 +46,14 @@ final class MutualFund implements BaseModel
     public ?string $folioNumber;
 
     /**
+     * List of account holders linked to this mutual fund folio.
+     *
+     * @var list<LinkedHolder>|null $linkedHolders
+     */
+    #[Api('linked_holders', list: LinkedHolder::class, optional: true)]
+    public ?array $linkedHolders;
+
+    /**
      * Registrar and Transfer Agent name.
      */
     #[Api(optional: true)]
@@ -69,12 +79,14 @@ final class MutualFund implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param list<LinkedHolder> $linkedHolders
      * @param list<Scheme> $schemes
      */
     public static function with(
         ?AdditionalInfo $additionalInfo = null,
         ?string $amc = null,
         ?string $folioNumber = null,
+        ?array $linkedHolders = null,
         ?string $registrar = null,
         ?array $schemes = null,
         ?float $value = null,
@@ -84,6 +96,7 @@ final class MutualFund implements BaseModel
         null !== $additionalInfo && $obj->additionalInfo = $additionalInfo;
         null !== $amc && $obj->amc = $amc;
         null !== $folioNumber && $obj->folioNumber = $folioNumber;
+        null !== $linkedHolders && $obj->linkedHolders = $linkedHolders;
         null !== $registrar && $obj->registrar = $registrar;
         null !== $schemes && $obj->schemes = $schemes;
         null !== $value && $obj->value = $value;
@@ -120,6 +133,19 @@ final class MutualFund implements BaseModel
     {
         $obj = clone $this;
         $obj->folioNumber = $folioNumber;
+
+        return $obj;
+    }
+
+    /**
+     * List of account holders linked to this mutual fund folio.
+     *
+     * @param list<LinkedHolder> $linkedHolders
+     */
+    public function withLinkedHolders(array $linkedHolders): self
+    {
+        $obj = clone $this;
+        $obj->linkedHolders = $linkedHolders;
 
         return $obj;
     }
