@@ -117,7 +117,6 @@ use CasParser\RequestOptions;
 $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
-
 $result = $client->casParser->smartParse(
   requestOptions: RequestOptions::with(maxRetries: 5)
 );
