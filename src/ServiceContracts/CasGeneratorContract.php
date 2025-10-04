@@ -7,7 +7,6 @@ namespace CasParser\ServiceContracts;
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
 use CasParser\CasGenerator\CasGeneratorGenerateCasResponse;
 use CasParser\Core\Exceptions\APIException;
-use CasParser\Core\Implementation\HasRawResponse;
 use CasParser\RequestOptions;
 
 use const CasParser\Core\OMIT as omit;
@@ -23,8 +22,6 @@ interface CasGeneratorContract
      * @param string $toDate End date for the CAS period (format YYYY-MM-DD)
      * @param CasAuthority|value-of<CasAuthority> $casAuthority CAS authority to generate the document from (currently only kfintech is supported)
      * @param string $panNo PAN number (optional for some CAS authorities)
-     *
-     * @return CasGeneratorGenerateCasResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -42,8 +39,6 @@ interface CasGeneratorContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return CasGeneratorGenerateCasResponse<HasRawResponse>
      *
      * @throws APIException
      */

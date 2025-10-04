@@ -28,7 +28,7 @@ class Client extends BaseClient
     {
         $this->apiKey = (string) ($apiKey ?? getenv('CAS_PARSER_API_KEY'));
 
-        $base = $baseUrl ?? getenv(
+        $baseUrl ??= getenv(
             'CAS_PARSER_BASE_URL'
         ) ?: 'https://portfolio-parser.api.casparser.in';
 
@@ -43,7 +43,7 @@ class Client extends BaseClient
             headers: [
                 'Content-Type' => 'application/json', 'Accept' => 'application/json',
             ],
-            baseUrl: $base,
+            baseUrl: $baseUrl,
             options: $options,
         );
 

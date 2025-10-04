@@ -7,8 +7,13 @@ namespace CasParser\Core;
 use CasParser\Core\Conversion\CoerceState;
 use CasParser\Core\Conversion\Contracts\Converter;
 use CasParser\Core\Conversion\Contracts\ConverterSource;
+use CasParser\Core\Conversion\Contracts\ResponseConverter;
 use CasParser\Core\Conversion\DumpState;
+use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @internal
+ */
 final class Conversion
 {
     public static function dump_unknown(mixed $value, DumpState $state): mixed
@@ -36,6 +41,15 @@ final class Conversion
         }
 
         return $value;
+    }
+
+    public static function coerceResponse(Converter|ConverterSource|string $target, ResponseInterface $response): mixed
+    {
+        if (is_a($target, ResponseConverter::class, allow_string: true)) {
+            return $target::fromResponse($response);
+        }
+
+        return self::coerce($target, Util::decodeContent($response));
     }
 
     public static function coerce(Converter|ConverterSource|string $target, mixed $value, CoerceState $state = new CoerceState): mixed

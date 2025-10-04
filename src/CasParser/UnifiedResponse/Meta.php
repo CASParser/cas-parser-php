@@ -58,7 +58,7 @@ final class Meta implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $casType && $obj->casType = $casType instanceof CasType ? $casType->value : $casType;
+        null !== $casType && $obj['casType'] = $casType;
         null !== $generatedAt && $obj->generatedAt = $generatedAt;
         null !== $statementPeriod && $obj->statementPeriod = $statementPeriod;
 
@@ -73,7 +73,7 @@ final class Meta implements BaseModel
     public function withCasType(CasType|string $casType): self
     {
         $obj = clone $this;
-        $obj->casType = $casType instanceof CasType ? $casType->value : $casType;
+        $obj['casType'] = $casType;
 
         return $obj;
     }

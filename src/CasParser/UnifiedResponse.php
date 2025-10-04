@@ -13,7 +13,9 @@ use CasParser\CasParser\UnifiedResponse\Np;
 use CasParser\CasParser\UnifiedResponse\Summary;
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
+use CasParser\Core\Concerns\SdkResponse;
 use CasParser\Core\Contracts\BaseModel;
+use CasParser\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type unified_response = array{
@@ -25,15 +27,13 @@ use CasParser\Core\Contracts\BaseModel;
  *   nps?: list<Np>,
  *   summary?: Summary,
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class UnifiedResponse implements BaseModel
+final class UnifiedResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<unified_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     /** @var list<DematAccount>|null $dematAccounts */
     #[Api('demat_accounts', list: DematAccount::class, optional: true)]
