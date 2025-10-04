@@ -6,21 +6,21 @@ namespace CasParser\CasGenerator;
 
 use CasParser\Core\Attributes\Api;
 use CasParser\Core\Concerns\SdkModel;
+use CasParser\Core\Concerns\SdkResponse;
 use CasParser\Core\Contracts\BaseModel;
+use CasParser\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type cas_generator_generate_cas_response = array{
  *   msg?: string, status?: string
  * }
- * When used in a response, this type parameter can define a $rawResponse property.
- * @template TRawResponse of object = object{}
- *
- * @mixin TRawResponse
  */
-final class CasGeneratorGenerateCasResponse implements BaseModel
+final class CasGeneratorGenerateCasResponse implements BaseModel, ResponseConverter
 {
     /** @use SdkModel<cas_generator_generate_cas_response> */
     use SdkModel;
+
+    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $msg;

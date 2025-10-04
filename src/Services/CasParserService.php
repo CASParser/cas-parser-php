@@ -11,7 +11,6 @@ use CasParser\CasParser\CasParserSmartParseParams;
 use CasParser\CasParser\UnifiedResponse;
 use CasParser\Client;
 use CasParser\Core\Exceptions\APIException;
-use CasParser\Core\Implementation\HasRawResponse;
 use CasParser\RequestOptions;
 use CasParser\ServiceContracts\CasParserContract;
 
@@ -34,8 +33,6 @@ final class CasParserService implements CasParserContract
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
      *
-     * @return UnifiedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function camsKfintech(
@@ -55,8 +52,6 @@ final class CasParserService implements CasParserContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UnifiedResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -89,8 +84,6 @@ final class CasParserService implements CasParserContract
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
      *
-     * @return UnifiedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function cdsl(
@@ -110,8 +103,6 @@ final class CasParserService implements CasParserContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UnifiedResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -144,8 +135,6 @@ final class CasParserService implements CasParserContract
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
      *
-     * @return UnifiedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function nsdl(
@@ -165,8 +154,6 @@ final class CasParserService implements CasParserContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UnifiedResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -199,8 +186,6 @@ final class CasParserService implements CasParserContract
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
      *
-     * @return UnifiedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function smartParse(
@@ -220,8 +205,6 @@ final class CasParserService implements CasParserContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UnifiedResponse<HasRawResponse>
      *
      * @throws APIException
      */

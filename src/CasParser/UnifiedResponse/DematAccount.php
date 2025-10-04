@@ -114,7 +114,7 @@ final class DematAccount implements BaseModel
         null !== $additionalInfo && $obj->additionalInfo = $additionalInfo;
         null !== $boID && $obj->boID = $boID;
         null !== $clientID && $obj->clientID = $clientID;
-        null !== $dematType && $obj->dematType = $dematType instanceof DematType ? $dematType->value : $dematType;
+        null !== $dematType && $obj['dematType'] = $dematType;
         null !== $dpID && $obj->dpID = $dpID;
         null !== $dpName && $obj->dpName = $dpName;
         null !== $holdings && $obj->holdings = $holdings;
@@ -165,7 +165,7 @@ final class DematAccount implements BaseModel
     public function withDematType(DematType|string $dematType): self
     {
         $obj = clone $this;
-        $obj->dematType = $dematType instanceof DematType ? $dematType->value : $dematType;
+        $obj['dematType'] = $dematType;
 
         return $obj;
     }

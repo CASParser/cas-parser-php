@@ -6,7 +6,6 @@ namespace CasParser\ServiceContracts;
 
 use CasParser\CasParser\UnifiedResponse;
 use CasParser\Core\Exceptions\APIException;
-use CasParser\Core\Implementation\HasRawResponse;
 use CasParser\RequestOptions;
 
 use const CasParser\Core\OMIT as omit;
@@ -19,8 +18,6 @@ interface CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
-     *
-     * @return UnifiedResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -36,8 +33,6 @@ interface CasParserContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UnifiedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function camsKfintechRaw(
@@ -51,8 +46,6 @@ interface CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
-     *
-     * @return UnifiedResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -68,8 +61,6 @@ interface CasParserContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UnifiedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function cdslRaw(
@@ -83,8 +74,6 @@ interface CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
-     *
-     * @return UnifiedResponse<HasRawResponse>
      *
      * @throws APIException
      */
@@ -100,8 +89,6 @@ interface CasParserContract
      *
      * @param array<string, mixed> $params
      *
-     * @return UnifiedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function nsdlRaw(
@@ -116,8 +103,6 @@ interface CasParserContract
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
      *
-     * @return UnifiedResponse<HasRawResponse>
-     *
      * @throws APIException
      */
     public function smartParse(
@@ -131,8 +116,6 @@ interface CasParserContract
      * @api
      *
      * @param array<string, mixed> $params
-     *
-     * @return UnifiedResponse<HasRawResponse>
      *
      * @throws APIException
      */

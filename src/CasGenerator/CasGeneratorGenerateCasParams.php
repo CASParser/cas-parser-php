@@ -127,7 +127,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
         $obj->password = $password;
         $obj->toDate = $toDate;
 
-        null !== $casAuthority && $obj->casAuthority = $casAuthority instanceof CasAuthority ? $casAuthority->value : $casAuthority;
+        null !== $casAuthority && $obj['casAuthority'] = $casAuthority;
         null !== $panNo && $obj->panNo = $panNo;
 
         return $obj;
@@ -185,7 +185,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     public function withCasAuthority(CasAuthority|string $casAuthority): self
     {
         $obj = clone $this;
-        $obj->casAuthority = $casAuthority instanceof CasAuthority ? $casAuthority->value : $casAuthority;
+        $obj['casAuthority'] = $casAuthority;
 
         return $obj;
     }

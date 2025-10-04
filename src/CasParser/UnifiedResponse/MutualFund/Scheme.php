@@ -134,7 +134,7 @@ final class Scheme implements BaseModel
         null !== $nav && $obj->nav = $nav;
         null !== $nominees && $obj->nominees = $nominees;
         null !== $transactions && $obj->transactions = $transactions;
-        null !== $type && $obj->type = $type instanceof Type ? $type->value : $type;
+        null !== $type && $obj['type'] = $type;
         null !== $units && $obj->units = $units;
         null !== $value && $obj->value = $value;
 
@@ -236,7 +236,7 @@ final class Scheme implements BaseModel
     public function withType(Type|string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type instanceof Type ? $type->value : $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
