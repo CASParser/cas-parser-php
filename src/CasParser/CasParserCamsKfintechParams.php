@@ -10,19 +10,8 @@ use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CasParserCamsKfintechParams); // set properties as needed
- * $client->casParser->camsKfintech(...$params->toArray());
- * ```
  * This endpoint specifically parses CAMS/KFintech CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
  * Use this endpoint when you know the PDF is from CAMS or KFintech.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->casParser->camsKfintech(...$params->toArray());`
  *
  * @see CasParser\CasParser->camsKfintech
  *
