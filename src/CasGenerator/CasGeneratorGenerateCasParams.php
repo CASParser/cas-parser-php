@@ -11,19 +11,8 @@ use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * An object containing the method's parameters.
- * Example usage:
- * ```
- * $params = (new CasGeneratorGenerateCasParams); // set properties as needed
- * $client->casGenerator->generateCas(...$params->toArray());
- * ```
  * This endpoint generates CAS (Consolidated Account Statement) documents by submitting a mailback request to the specified CAS authority.
  * Currently only supports KFintech, with plans to support CAMS, CDSL, and NSDL in the future.
- *
- * @method toArray()
- *   Returns the parameters as an associative array suitable for passing to the client method.
- *
- *   `$client->casGenerator->generateCas(...$params->toArray());`
  *
  * @see CasParser\CasGenerator->generateCas
  *
