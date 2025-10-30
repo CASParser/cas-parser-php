@@ -13,7 +13,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type demat_account = array{
+ * @phpstan-type DematAccountShape = array{
  *   additionalInfo?: AdditionalInfo,
  *   boID?: string,
  *   clientID?: string,
@@ -27,7 +27,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class DematAccount implements BaseModel
 {
-    /** @use SdkModel<demat_account> */
+    /** @use SdkModel<DematAccountShape> */
     use SdkModel;
 
     /**

@@ -11,7 +11,7 @@ use CasParser\Core\Contracts\BaseModel;
 /**
  * Additional information specific to the scheme.
  *
- * @phpstan-type additional_info = array{
+ * @phpstan-type AdditionalInfoShape = array{
  *   advisor?: string,
  *   amfi?: string,
  *   closeUnits?: float,
@@ -21,7 +21,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class AdditionalInfo implements BaseModel
 {
-    /** @use SdkModel<additional_info> */
+    /** @use SdkModel<AdditionalInfoShape> */
     use SdkModel;
 
     /**

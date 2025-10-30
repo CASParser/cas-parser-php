@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type government_security = array{
+ * @phpstan-type GovernmentSecurityShape = array{
  *   additionalInfo?: mixed,
  *   isin?: string,
  *   name?: string,
@@ -19,7 +19,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class GovernmentSecurity implements BaseModel
 {
-    /** @use SdkModel<government_security> */
+    /** @use SdkModel<GovernmentSecurityShape> */
     use SdkModel;
 
     /**

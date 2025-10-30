@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type aif_alias = array{
+ * @phpstan-type AifShape = array{
  *   additionalInfo?: mixed,
  *   isin?: string,
  *   name?: string,
@@ -19,7 +19,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class Aif implements BaseModel
 {
-    /** @use SdkModel<aif_alias> */
+    /** @use SdkModel<AifShape> */
     use SdkModel;
 
     /**

@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type equity_alias = array{
+ * @phpstan-type EquityShape = array{
  *   additionalInfo?: mixed,
  *   isin?: string,
  *   name?: string,
@@ -19,7 +19,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class Equity implements BaseModel
 {
-    /** @use SdkModel<equity_alias> */
+    /** @use SdkModel<EquityShape> */
     use SdkModel;
 
     /**

@@ -9,11 +9,11 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type nps_alias = array{count?: int, totalValue?: float}
+ * @phpstan-type NpsShape = array{count?: int, totalValue?: float}
  */
 final class Nps implements BaseModel
 {
-    /** @use SdkModel<nps_alias> */
+    /** @use SdkModel<NpsShape> */
     use SdkModel;
 
     /**

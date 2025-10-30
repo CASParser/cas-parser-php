@@ -10,7 +10,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type fund_alias = array{
+ * @phpstan-type FundShape = array{
  *   additionalInfo?: AdditionalInfo,
  *   cost?: float,
  *   name?: string,
@@ -21,7 +21,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class Fund implements BaseModel
 {
-    /** @use SdkModel<fund_alias> */
+    /** @use SdkModel<FundShape> */
     use SdkModel;
 
     /**

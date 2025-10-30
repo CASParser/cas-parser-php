@@ -12,7 +12,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type mutual_fund = array{
+ * @phpstan-type MutualFundShape = array{
  *   additionalInfo?: AdditionalInfo,
  *   amc?: string,
  *   folioNumber?: string,
@@ -24,7 +24,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class MutualFund implements BaseModel
 {
-    /** @use SdkModel<mutual_fund> */
+    /** @use SdkModel<MutualFundShape> */
     use SdkModel;
 
     /**

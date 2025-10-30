@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type demat_mutual_fund = array{
+ * @phpstan-type DematMutualFundShape = array{
  *   additionalInfo?: mixed,
  *   isin?: string,
  *   name?: string,
@@ -19,7 +19,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class DematMutualFund implements BaseModel
 {
-    /** @use SdkModel<demat_mutual_fund> */
+    /** @use SdkModel<DematMutualFundShape> */
     use SdkModel;
 
     /**

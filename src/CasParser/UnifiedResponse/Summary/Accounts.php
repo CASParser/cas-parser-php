@@ -13,13 +13,13 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type accounts_alias = array{
+ * @phpstan-type AccountsShape = array{
  *   demat?: Demat, insurance?: Insurance, mutualFunds?: MutualFunds, nps?: Nps
  * }
  */
 final class Accounts implements BaseModel
 {
-    /** @use SdkModel<accounts_alias> */
+    /** @use SdkModel<AccountsShape> */
     use SdkModel;
 
     #[Api(optional: true)]

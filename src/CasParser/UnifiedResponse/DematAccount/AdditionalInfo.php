@@ -11,7 +11,7 @@ use CasParser\Core\Contracts\BaseModel;
 /**
  * Additional information specific to the demat account type.
  *
- * @phpstan-type additional_info = array{
+ * @phpstan-type AdditionalInfoShape = array{
  *   boStatus?: string,
  *   boSubStatus?: string,
  *   boType?: string,
@@ -24,7 +24,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class AdditionalInfo implements BaseModel
 {
-    /** @use SdkModel<additional_info> */
+    /** @use SdkModel<AdditionalInfoShape> */
     use SdkModel;
 
     /**

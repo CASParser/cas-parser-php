@@ -9,13 +9,13 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type statement_period = array{
+ * @phpstan-type StatementPeriodShape = array{
  *   from?: \DateTimeInterface, to?: \DateTimeInterface
  * }
  */
 final class StatementPeriod implements BaseModel
 {
-    /** @use SdkModel<statement_period> */
+    /** @use SdkModel<StatementPeriodShape> */
     use SdkModel;
 
     /**

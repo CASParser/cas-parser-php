@@ -11,11 +11,11 @@ use CasParser\Core\Contracts\BaseModel;
 /**
  * Additional information specific to the NPS fund.
  *
- * @phpstan-type additional_info = array{manager?: string, tier?: float|null}
+ * @phpstan-type AdditionalInfoShape = array{manager?: string, tier?: float|null}
  */
 final class AdditionalInfo implements BaseModel
 {
-    /** @use SdkModel<additional_info> */
+    /** @use SdkModel<AdditionalInfoShape> */
     use SdkModel;
 
     /**

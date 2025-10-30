@@ -11,7 +11,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type np_alias = array{
+ * @phpstan-type NpShape = array{
  *   additionalInfo?: mixed,
  *   cra?: string,
  *   funds?: list<Fund>,
@@ -22,7 +22,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class Np implements BaseModel
 {
-    /** @use SdkModel<np_alias> */
+    /** @use SdkModel<NpShape> */
     use SdkModel;
 
     /**

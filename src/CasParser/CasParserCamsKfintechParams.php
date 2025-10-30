@@ -15,13 +15,13 @@ use CasParser\Core\Contracts\BaseModel;
  *
  * @see CasParser\CasParser->camsKfintech
  *
- * @phpstan-type cas_parser_cams_kfintech_params = array{
+ * @phpstan-type CasParserCamsKfintechParamsShape = array{
  *   password?: string, pdfFile?: string, pdfURL?: string
  * }
  */
 final class CasParserCamsKfintechParams implements BaseModel
 {
-    /** @use SdkModel<cas_parser_cams_kfintech_params> */
+    /** @use SdkModel<CasParserCamsKfintechParamsShape> */
     use SdkModel;
     use SdkParams;
 

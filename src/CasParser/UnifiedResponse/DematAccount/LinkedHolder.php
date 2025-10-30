@@ -9,11 +9,11 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type linked_holder = array{name?: string, pan?: string}
+ * @phpstan-type LinkedHolderShape = array{name?: string, pan?: string}
  */
 final class LinkedHolder implements BaseModel
 {
-    /** @use SdkModel<linked_holder> */
+    /** @use SdkModel<LinkedHolderShape> */
     use SdkModel;
 
     /**
