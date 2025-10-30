@@ -16,7 +16,7 @@ use CasParser\Core\Contracts\BaseModel;
  *
  * @see CasParser\CasGenerator->generateCas
  *
- * @phpstan-type cas_generator_generate_cas_params = array{
+ * @phpstan-type CasGeneratorGenerateCasParamsShape = array{
  *   email: string,
  *   fromDate: string,
  *   password: string,
@@ -27,7 +27,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class CasGeneratorGenerateCasParams implements BaseModel
 {
-    /** @use SdkModel<cas_generator_generate_cas_params> */
+    /** @use SdkModel<CasGeneratorGenerateCasParamsShape> */
     use SdkModel;
     use SdkParams;
 

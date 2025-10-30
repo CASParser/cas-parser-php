@@ -15,13 +15,13 @@ use CasParser\Core\Contracts\BaseModel;
  *
  * @see CasParser\CasParser->cdsl
  *
- * @phpstan-type cas_parser_cdsl_params = array{
+ * @phpstan-type CasParserCdslParamsShape = array{
  *   password?: string, pdfFile?: string, pdfURL?: string
  * }
  */
 final class CasParserCdslParams implements BaseModel
 {
-    /** @use SdkModel<cas_parser_cdsl_params> */
+    /** @use SdkModel<CasParserCdslParamsShape> */
     use SdkModel;
     use SdkParams;
 

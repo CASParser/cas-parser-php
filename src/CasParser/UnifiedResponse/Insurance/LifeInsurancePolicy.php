@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type life_insurance_policy = array{
+ * @phpstan-type LifeInsurancePolicyShape = array{
  *   additionalInfo?: mixed,
  *   lifeAssured?: string,
  *   policyName?: string,
@@ -23,7 +23,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class LifeInsurancePolicy implements BaseModel
 {
-    /** @use SdkModel<life_insurance_policy> */
+    /** @use SdkModel<LifeInsurancePolicyShape> */
     use SdkModel;
 
     /**

@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type transaction_alias = array{
+ * @phpstan-type TransactionShape = array{
  *   amount?: float,
  *   balance?: float,
  *   date?: \DateTimeInterface,
@@ -22,7 +22,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class Transaction implements BaseModel
 {
-    /** @use SdkModel<transaction_alias> */
+    /** @use SdkModel<TransactionShape> */
     use SdkModel;
 
     /**

@@ -15,13 +15,13 @@ use CasParser\Core\Contracts\BaseModel;
  *
  * @see CasParser\CasParser->smartParse
  *
- * @phpstan-type cas_parser_smart_parse_params = array{
+ * @phpstan-type CasParserSmartParseParamsShape = array{
  *   password?: string, pdfFile?: string, pdfURL?: string
  * }
  */
 final class CasParserSmartParseParams implements BaseModel
 {
-    /** @use SdkModel<cas_parser_smart_parse_params> */
+    /** @use SdkModel<CasParserSmartParseParamsShape> */
     use SdkModel;
     use SdkParams;
 

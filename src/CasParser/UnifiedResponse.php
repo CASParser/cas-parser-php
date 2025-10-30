@@ -18,7 +18,7 @@ use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type unified_response = array{
+ * @phpstan-type UnifiedResponseShape = array{
  *   dematAccounts?: list<DematAccount>,
  *   insurance?: Insurance,
  *   investor?: Investor,
@@ -30,7 +30,7 @@ use CasParser\Core\Conversion\Contracts\ResponseConverter;
  */
 final class UnifiedResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<unified_response> */
+    /** @use SdkModel<UnifiedResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type corporate_bond = array{
+ * @phpstan-type CorporateBondShape = array{
  *   additionalInfo?: mixed,
  *   isin?: string,
  *   name?: string,
@@ -19,7 +19,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class CorporateBond implements BaseModel
 {
-    /** @use SdkModel<corporate_bond> */
+    /** @use SdkModel<CorporateBondShape> */
     use SdkModel;
 
     /**

@@ -13,7 +13,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type scheme_alias = array{
+ * @phpstan-type SchemeShape = array{
  *   additionalInfo?: AdditionalInfo,
  *   cost?: float,
  *   gain?: Gain,
@@ -29,7 +29,7 @@ use CasParser\Core\Contracts\BaseModel;
  */
 final class Scheme implements BaseModel
 {
-    /** @use SdkModel<scheme_alias> */
+    /** @use SdkModel<SchemeShape> */
     use SdkModel;
 
     /**
