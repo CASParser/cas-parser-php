@@ -14,7 +14,10 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AccountsShape = array{
- *   demat?: Demat, insurance?: Insurance, mutualFunds?: MutualFunds, nps?: Nps
+ *   demat?: Demat|null,
+ *   insurance?: Insurance|null,
+ *   mutual_funds?: MutualFunds|null,
+ *   nps?: Nps|null,
  * }
  */
 final class Accounts implements BaseModel
@@ -28,8 +31,8 @@ final class Accounts implements BaseModel
     #[Api(optional: true)]
     public ?Insurance $insurance;
 
-    #[Api('mutual_funds', optional: true)]
-    public ?MutualFunds $mutualFunds;
+    #[Api(optional: true)]
+    public ?MutualFunds $mutual_funds;
 
     #[Api(optional: true)]
     public ?Nps $nps;
@@ -47,14 +50,14 @@ final class Accounts implements BaseModel
     public static function with(
         ?Demat $demat = null,
         ?Insurance $insurance = null,
-        ?MutualFunds $mutualFunds = null,
+        ?MutualFunds $mutual_funds = null,
         ?Nps $nps = null,
     ): self {
         $obj = new self;
 
         null !== $demat && $obj->demat = $demat;
         null !== $insurance && $obj->insurance = $insurance;
-        null !== $mutualFunds && $obj->mutualFunds = $mutualFunds;
+        null !== $mutual_funds && $obj->mutual_funds = $mutual_funds;
         null !== $nps && $obj->nps = $nps;
 
         return $obj;
@@ -79,7 +82,7 @@ final class Accounts implements BaseModel
     public function withMutualFunds(MutualFunds $mutualFunds): self
     {
         $obj = clone $this;
-        $obj->mutualFunds = $mutualFunds;
+        $obj->mutual_funds = $mutualFunds;
 
         return $obj;
     }

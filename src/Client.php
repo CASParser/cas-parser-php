@@ -61,7 +61,7 @@ class Client extends BaseClient
         $this->casGenerator = new CasGeneratorService($this);
     }
 
-    /** @return array<string, string> */
+    /** @return array<string,string> */
     protected function authHeaders(): array
     {
         return $this->apiKey ? ['x-api-key' => $this->apiKey] : [];

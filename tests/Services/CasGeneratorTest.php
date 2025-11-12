@@ -33,12 +33,12 @@ final class CasGeneratorTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casGenerator->generateCas(
-            email: 'user@example.com',
-            fromDate: '2023-01-01',
-            password: 'Abcdefghi12$',
-            toDate: '2023-12-31',
-        );
+        $result = $this->client->casGenerator->generateCas([
+            'email' => 'user@example.com',
+            'from_date' => '2023-01-01',
+            'password' => 'Abcdefghi12$',
+            'to_date' => '2023-12-31',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -50,12 +50,12 @@ final class CasGeneratorTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casGenerator->generateCas(
-            email: 'user@example.com',
-            fromDate: '2023-01-01',
-            password: 'Abcdefghi12$',
-            toDate: '2023-12-31',
-        );
+        $result = $this->client->casGenerator->generateCas([
+            'email' => 'user@example.com',
+            'from_date' => '2023-01-01',
+            'password' => 'Abcdefghi12$',
+            'to_date' => '2023-12-31',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

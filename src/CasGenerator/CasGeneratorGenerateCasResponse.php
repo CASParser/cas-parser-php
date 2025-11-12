@@ -12,7 +12,7 @@ use CasParser\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CasGeneratorGenerateCasResponseShape = array{
- *   msg?: string, status?: string
+ *   msg?: string|null, status?: string|null
  * }
  */
 final class CasGeneratorGenerateCasResponse implements BaseModel, ResponseConverter

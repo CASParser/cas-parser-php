@@ -12,11 +12,11 @@ use CasParser\Core\Contracts\BaseModel;
  * Additional information specific to the scheme.
  *
  * @phpstan-type AdditionalInfoShape = array{
- *   advisor?: string,
- *   amfi?: string,
- *   closeUnits?: float,
- *   openUnits?: float,
- *   rtaCode?: string,
+ *   advisor?: string|null,
+ *   amfi?: string|null,
+ *   close_units?: float|null,
+ *   open_units?: float|null,
+ *   rta_code?: string|null,
  * }
  */
 final class AdditionalInfo implements BaseModel
@@ -39,20 +39,20 @@ final class AdditionalInfo implements BaseModel
     /**
      * Closing balance units (CAMS/KFintech).
      */
-    #[Api('close_units', optional: true)]
-    public ?float $closeUnits;
+    #[Api(optional: true)]
+    public ?float $close_units;
 
     /**
      * Opening balance units (CAMS/KFintech).
      */
-    #[Api('open_units', optional: true)]
-    public ?float $openUnits;
+    #[Api(optional: true)]
+    public ?float $open_units;
 
     /**
      * RTA code for the scheme (CAMS/KFintech).
      */
-    #[Api('rta_code', optional: true)]
-    public ?string $rtaCode;
+    #[Api(optional: true)]
+    public ?string $rta_code;
 
     public function __construct()
     {
@@ -67,17 +67,17 @@ final class AdditionalInfo implements BaseModel
     public static function with(
         ?string $advisor = null,
         ?string $amfi = null,
-        ?float $closeUnits = null,
-        ?float $openUnits = null,
-        ?string $rtaCode = null,
+        ?float $close_units = null,
+        ?float $open_units = null,
+        ?string $rta_code = null,
     ): self {
         $obj = new self;
 
         null !== $advisor && $obj->advisor = $advisor;
         null !== $amfi && $obj->amfi = $amfi;
-        null !== $closeUnits && $obj->closeUnits = $closeUnits;
-        null !== $openUnits && $obj->openUnits = $openUnits;
-        null !== $rtaCode && $obj->rtaCode = $rtaCode;
+        null !== $close_units && $obj->close_units = $close_units;
+        null !== $open_units && $obj->open_units = $open_units;
+        null !== $rta_code && $obj->rta_code = $rta_code;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class AdditionalInfo implements BaseModel
     public function withCloseUnits(float $closeUnits): self
     {
         $obj = clone $this;
-        $obj->closeUnits = $closeUnits;
+        $obj->close_units = $closeUnits;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class AdditionalInfo implements BaseModel
     public function withOpenUnits(float $openUnits): self
     {
         $obj = clone $this;
-        $obj->openUnits = $openUnits;
+        $obj->open_units = $openUnits;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class AdditionalInfo implements BaseModel
     public function withRtaCode(string $rtaCode): self
     {
         $obj = clone $this;
-        $obj->rtaCode = $rtaCode;
+        $obj->rta_code = $rtaCode;
 
         return $obj;
     }

@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type NpsShape = array{count?: int, totalValue?: float}
+ * @phpstan-type NpsShape = array{count?: int|null, total_value?: float|null}
  */
 final class Nps implements BaseModel
 {
@@ -25,8 +25,8 @@ final class Nps implements BaseModel
     /**
      * Total value of NPS accounts.
      */
-    #[Api('total_value', optional: true)]
-    public ?float $totalValue;
+    #[Api(optional: true)]
+    public ?float $total_value;
 
     public function __construct()
     {
@@ -40,12 +40,12 @@ final class Nps implements BaseModel
      */
     public static function with(
         ?int $count = null,
-        ?float $totalValue = null
+        ?float $total_value = null
     ): self {
         $obj = new self;
 
         null !== $count && $obj->count = $count;
-        null !== $totalValue && $obj->totalValue = $totalValue;
+        null !== $total_value && $obj->total_value = $total_value;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Nps implements BaseModel
     public function withTotalValue(float $totalValue): self
     {
         $obj = clone $this;
-        $obj->totalValue = $totalValue;
+        $obj->total_value = $totalValue;
 
         return $obj;
     }

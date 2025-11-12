@@ -18,11 +18,11 @@ use CasParser\Core\Contracts\BaseModel;
  *
  * @phpstan-type CasGeneratorGenerateCasParamsShape = array{
  *   email: string,
- *   fromDate: string,
+ *   from_date: string,
  *   password: string,
- *   toDate: string,
- *   casAuthority?: CasAuthority|value-of<CasAuthority>,
- *   panNo?: string,
+ *   to_date: string,
+ *   cas_authority?: CasAuthority|value-of<CasAuthority>,
+ *   pan_no?: string,
  * }
  */
 final class CasGeneratorGenerateCasParams implements BaseModel
@@ -40,8 +40,8 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     /**
      * Start date for the CAS period (format YYYY-MM-DD).
      */
-    #[Api('from_date')]
-    public string $fromDate;
+    #[Api]
+    public string $from_date;
 
     /**
      * Password to protect the generated CAS PDF.
@@ -52,22 +52,22 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     /**
      * End date for the CAS period (format YYYY-MM-DD).
      */
-    #[Api('to_date')]
-    public string $toDate;
+    #[Api]
+    public string $to_date;
 
     /**
      * CAS authority to generate the document from (currently only kfintech is supported).
      *
-     * @var value-of<CasAuthority>|null $casAuthority
+     * @var value-of<CasAuthority>|null $cas_authority
      */
-    #[Api('cas_authority', enum: CasAuthority::class, optional: true)]
-    public ?string $casAuthority;
+    #[Api(enum: CasAuthority::class, optional: true)]
+    public ?string $cas_authority;
 
     /**
      * PAN number (optional for some CAS authorities).
      */
-    #[Api('pan_no', optional: true)]
-    public ?string $panNo;
+    #[Api(optional: true)]
+    public ?string $pan_no;
 
     /**
      * `new CasGeneratorGenerateCasParams()` is missing required properties by the API.
@@ -75,7 +75,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      * To enforce required parameters use
      * ```
      * CasGeneratorGenerateCasParams::with(
-     *   email: ..., fromDate: ..., password: ..., toDate: ...
+     *   email: ..., from_date: ..., password: ..., to_date: ...
      * )
      * ```
      *
@@ -99,25 +99,25 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CasAuthority|value-of<CasAuthority> $casAuthority
+     * @param CasAuthority|value-of<CasAuthority> $cas_authority
      */
     public static function with(
         string $email,
-        string $fromDate,
+        string $from_date,
         string $password,
-        string $toDate,
-        CasAuthority|string|null $casAuthority = null,
-        ?string $panNo = null,
+        string $to_date,
+        CasAuthority|string|null $cas_authority = null,
+        ?string $pan_no = null,
     ): self {
         $obj = new self;
 
         $obj->email = $email;
-        $obj->fromDate = $fromDate;
+        $obj->from_date = $from_date;
         $obj->password = $password;
-        $obj->toDate = $toDate;
+        $obj->to_date = $to_date;
 
-        null !== $casAuthority && $obj['casAuthority'] = $casAuthority;
-        null !== $panNo && $obj->panNo = $panNo;
+        null !== $cas_authority && $obj['cas_authority'] = $cas_authority;
+        null !== $pan_no && $obj->pan_no = $pan_no;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     public function withFromDate(string $fromDate): self
     {
         $obj = clone $this;
-        $obj->fromDate = $fromDate;
+        $obj->from_date = $fromDate;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     public function withToDate(string $toDate): self
     {
         $obj = clone $this;
-        $obj->toDate = $toDate;
+        $obj->to_date = $toDate;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     public function withCasAuthority(CasAuthority|string $casAuthority): self
     {
         $obj = clone $this;
-        $obj['casAuthority'] = $casAuthority;
+        $obj['cas_authority'] = $casAuthority;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     public function withPanNo(string $panNo): self
     {
         $obj = clone $this;
-        $obj->panNo = $panNo;
+        $obj->pan_no = $panNo;
 
         return $obj;
     }

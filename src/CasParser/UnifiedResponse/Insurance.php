@@ -11,7 +11,7 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type InsuranceShape = array{
- *   lifeInsurancePolicies?: list<LifeInsurancePolicy>
+ *   life_insurance_policies?: list<LifeInsurancePolicy>|null
  * }
  */
 final class Insurance implements BaseModel
@@ -19,13 +19,9 @@ final class Insurance implements BaseModel
     /** @use SdkModel<InsuranceShape> */
     use SdkModel;
 
-    /** @var list<LifeInsurancePolicy>|null $lifeInsurancePolicies */
-    #[Api(
-        'life_insurance_policies',
-        list: LifeInsurancePolicy::class,
-        optional: true
-    )]
-    public ?array $lifeInsurancePolicies;
+    /** @var list<LifeInsurancePolicy>|null $life_insurance_policies */
+    #[Api(list: LifeInsurancePolicy::class, optional: true)]
+    public ?array $life_insurance_policies;
 
     public function __construct()
     {
@@ -37,13 +33,13 @@ final class Insurance implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LifeInsurancePolicy> $lifeInsurancePolicies
+     * @param list<LifeInsurancePolicy> $life_insurance_policies
      */
-    public static function with(?array $lifeInsurancePolicies = null): self
+    public static function with(?array $life_insurance_policies = null): self
     {
         $obj = new self;
 
-        null !== $lifeInsurancePolicies && $obj->lifeInsurancePolicies = $lifeInsurancePolicies;
+        null !== $life_insurance_policies && $obj->life_insurance_policies = $life_insurance_policies;
 
         return $obj;
     }
@@ -55,7 +51,7 @@ final class Insurance implements BaseModel
         array $lifeInsurancePolicies
     ): self {
         $obj = clone $this;
-        $obj->lifeInsurancePolicies = $lifeInsurancePolicies;
+        $obj->life_insurance_policies = $lifeInsurancePolicies;
 
         return $obj;
     }

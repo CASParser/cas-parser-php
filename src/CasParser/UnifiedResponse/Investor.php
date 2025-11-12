@@ -10,13 +10,13 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type InvestorShape = array{
- *   address?: string,
- *   casID?: string,
- *   email?: string,
- *   mobile?: string,
- *   name?: string,
- *   pan?: string,
- *   pincode?: string,
+ *   address?: string|null,
+ *   cas_id?: string|null,
+ *   email?: string|null,
+ *   mobile?: string|null,
+ *   name?: string|null,
+ *   pan?: string|null,
+ *   pincode?: string|null,
  * }
  */
 final class Investor implements BaseModel
@@ -33,8 +33,8 @@ final class Investor implements BaseModel
     /**
      * CAS ID of the investor (only for NSDL and CDSL).
      */
-    #[Api('cas_id', optional: true)]
-    public ?string $casID;
+    #[Api(optional: true)]
+    public ?string $cas_id;
 
     /**
      * Email address of the investor.
@@ -78,7 +78,7 @@ final class Investor implements BaseModel
      */
     public static function with(
         ?string $address = null,
-        ?string $casID = null,
+        ?string $cas_id = null,
         ?string $email = null,
         ?string $mobile = null,
         ?string $name = null,
@@ -88,7 +88,7 @@ final class Investor implements BaseModel
         $obj = new self;
 
         null !== $address && $obj->address = $address;
-        null !== $casID && $obj->casID = $casID;
+        null !== $cas_id && $obj->cas_id = $cas_id;
         null !== $email && $obj->email = $email;
         null !== $mobile && $obj->mobile = $mobile;
         null !== $name && $obj->name = $name;
@@ -115,7 +115,7 @@ final class Investor implements BaseModel
     public function withCasID(string $casID): self
     {
         $obj = clone $this;
-        $obj->casID = $casID;
+        $obj->cas_id = $casID;
 
         return $obj;
     }

@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type GainShape = array{absolute?: float, percentage?: float}
+ * @phpstan-type GainShape = array{absolute?: float|null, percentage?: float|null}
  */
 final class Gain implements BaseModel
 {

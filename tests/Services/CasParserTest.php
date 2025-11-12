@@ -33,7 +33,7 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casParser->camsKfintech();
+        $result = $this->client->casParser->camsKfintech([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -45,7 +45,7 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casParser->cdsl();
+        $result = $this->client->casParser->cdsl([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -57,7 +57,7 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casParser->nsdl();
+        $result = $this->client->casParser->nsdl([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -69,7 +69,7 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casParser->smartParse();
+        $result = $this->client->casParser->smartParse([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

@@ -11,12 +11,12 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type FundShape = array{
- *   additionalInfo?: AdditionalInfo,
- *   cost?: float,
- *   name?: string,
- *   nav?: float,
- *   units?: float,
- *   value?: float,
+ *   additional_info?: AdditionalInfo|null,
+ *   cost?: float|null,
+ *   name?: string|null,
+ *   nav?: float|null,
+ *   units?: float|null,
+ *   value?: float|null,
  * }
  */
 final class Fund implements BaseModel
@@ -27,8 +27,8 @@ final class Fund implements BaseModel
     /**
      * Additional information specific to the NPS fund.
      */
-    #[Api('additional_info', optional: true)]
-    public ?AdditionalInfo $additionalInfo;
+    #[Api(optional: true)]
+    public ?AdditionalInfo $additional_info;
 
     /**
      * Cost of investment.
@@ -71,7 +71,7 @@ final class Fund implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?AdditionalInfo $additionalInfo = null,
+        ?AdditionalInfo $additional_info = null,
         ?float $cost = null,
         ?string $name = null,
         ?float $nav = null,
@@ -80,7 +80,7 @@ final class Fund implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $additionalInfo && $obj->additionalInfo = $additionalInfo;
+        null !== $additional_info && $obj->additional_info = $additional_info;
         null !== $cost && $obj->cost = $cost;
         null !== $name && $obj->name = $name;
         null !== $nav && $obj->nav = $nav;
@@ -96,7 +96,7 @@ final class Fund implements BaseModel
     public function withAdditionalInfo(AdditionalInfo $additionalInfo): self
     {
         $obj = clone $this;
-        $obj->additionalInfo = $additionalInfo;
+        $obj->additional_info = $additionalInfo;
 
         return $obj;
     }
