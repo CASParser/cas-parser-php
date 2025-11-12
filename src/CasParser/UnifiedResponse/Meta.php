@@ -12,9 +12,9 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MetaShape = array{
- *   casType?: value-of<CasType>,
- *   generatedAt?: \DateTimeInterface,
- *   statementPeriod?: StatementPeriod,
+ *   cas_type?: value-of<CasType>|null,
+ *   generated_at?: \DateTimeInterface|null,
+ *   statement_period?: StatementPeriod|null,
  * }
  */
 final class Meta implements BaseModel
@@ -25,19 +25,19 @@ final class Meta implements BaseModel
     /**
      * Type of CAS detected and processed.
      *
-     * @var value-of<CasType>|null $casType
+     * @var value-of<CasType>|null $cas_type
      */
-    #[Api('cas_type', enum: CasType::class, optional: true)]
-    public ?string $casType;
+    #[Api(enum: CasType::class, optional: true)]
+    public ?string $cas_type;
 
     /**
      * Timestamp when the response was generated.
      */
-    #[Api('generated_at', optional: true)]
-    public ?\DateTimeInterface $generatedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $generated_at;
 
-    #[Api('statement_period', optional: true)]
-    public ?StatementPeriod $statementPeriod;
+    #[Api(optional: true)]
+    public ?StatementPeriod $statement_period;
 
     public function __construct()
     {
@@ -49,18 +49,18 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CasType|value-of<CasType> $casType
+     * @param CasType|value-of<CasType> $cas_type
      */
     public static function with(
-        CasType|string|null $casType = null,
-        ?\DateTimeInterface $generatedAt = null,
-        ?StatementPeriod $statementPeriod = null,
+        CasType|string|null $cas_type = null,
+        ?\DateTimeInterface $generated_at = null,
+        ?StatementPeriod $statement_period = null,
     ): self {
         $obj = new self;
 
-        null !== $casType && $obj['casType'] = $casType;
-        null !== $generatedAt && $obj->generatedAt = $generatedAt;
-        null !== $statementPeriod && $obj->statementPeriod = $statementPeriod;
+        null !== $cas_type && $obj['cas_type'] = $cas_type;
+        null !== $generated_at && $obj->generated_at = $generated_at;
+        null !== $statement_period && $obj->statement_period = $statement_period;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class Meta implements BaseModel
     public function withCasType(CasType|string $casType): self
     {
         $obj = clone $this;
-        $obj['casType'] = $casType;
+        $obj['cas_type'] = $casType;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class Meta implements BaseModel
     public function withGeneratedAt(\DateTimeInterface $generatedAt): self
     {
         $obj = clone $this;
-        $obj->generatedAt = $generatedAt;
+        $obj->generated_at = $generatedAt;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Meta implements BaseModel
     public function withStatementPeriod(StatementPeriod $statementPeriod): self
     {
         $obj = clone $this;
-        $obj->statementPeriod = $statementPeriod;
+        $obj->statement_period = $statementPeriod;
 
         return $obj;
     }

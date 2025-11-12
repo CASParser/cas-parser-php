@@ -15,11 +15,11 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type HoldingsShape = array{
- *   aifs?: list<Aif>,
- *   corporateBonds?: list<CorporateBond>,
- *   dematMutualFunds?: list<DematMutualFund>,
- *   equities?: list<Equity>,
- *   governmentSecurities?: list<GovernmentSecurity>,
+ *   aifs?: list<Aif>|null,
+ *   corporate_bonds?: list<CorporateBond>|null,
+ *   demat_mutual_funds?: list<DematMutualFund>|null,
+ *   equities?: list<Equity>|null,
+ *   government_securities?: list<GovernmentSecurity>|null,
  * }
  */
 final class Holdings implements BaseModel
@@ -31,25 +31,21 @@ final class Holdings implements BaseModel
     #[Api(list: Aif::class, optional: true)]
     public ?array $aifs;
 
-    /** @var list<CorporateBond>|null $corporateBonds */
-    #[Api('corporate_bonds', list: CorporateBond::class, optional: true)]
-    public ?array $corporateBonds;
+    /** @var list<CorporateBond>|null $corporate_bonds */
+    #[Api(list: CorporateBond::class, optional: true)]
+    public ?array $corporate_bonds;
 
-    /** @var list<DematMutualFund>|null $dematMutualFunds */
-    #[Api('demat_mutual_funds', list: DematMutualFund::class, optional: true)]
-    public ?array $dematMutualFunds;
+    /** @var list<DematMutualFund>|null $demat_mutual_funds */
+    #[Api(list: DematMutualFund::class, optional: true)]
+    public ?array $demat_mutual_funds;
 
     /** @var list<Equity>|null $equities */
     #[Api(list: Equity::class, optional: true)]
     public ?array $equities;
 
-    /** @var list<GovernmentSecurity>|null $governmentSecurities */
-    #[Api(
-        'government_securities',
-        list: GovernmentSecurity::class,
-        optional: true
-    )]
-    public ?array $governmentSecurities;
+    /** @var list<GovernmentSecurity>|null $government_securities */
+    #[Api(list: GovernmentSecurity::class, optional: true)]
+    public ?array $government_securities;
 
     public function __construct()
     {
@@ -62,25 +58,25 @@ final class Holdings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Aif> $aifs
-     * @param list<CorporateBond> $corporateBonds
-     * @param list<DematMutualFund> $dematMutualFunds
+     * @param list<CorporateBond> $corporate_bonds
+     * @param list<DematMutualFund> $demat_mutual_funds
      * @param list<Equity> $equities
-     * @param list<GovernmentSecurity> $governmentSecurities
+     * @param list<GovernmentSecurity> $government_securities
      */
     public static function with(
         ?array $aifs = null,
-        ?array $corporateBonds = null,
-        ?array $dematMutualFunds = null,
+        ?array $corporate_bonds = null,
+        ?array $demat_mutual_funds = null,
         ?array $equities = null,
-        ?array $governmentSecurities = null,
+        ?array $government_securities = null,
     ): self {
         $obj = new self;
 
         null !== $aifs && $obj->aifs = $aifs;
-        null !== $corporateBonds && $obj->corporateBonds = $corporateBonds;
-        null !== $dematMutualFunds && $obj->dematMutualFunds = $dematMutualFunds;
+        null !== $corporate_bonds && $obj->corporate_bonds = $corporate_bonds;
+        null !== $demat_mutual_funds && $obj->demat_mutual_funds = $demat_mutual_funds;
         null !== $equities && $obj->equities = $equities;
-        null !== $governmentSecurities && $obj->governmentSecurities = $governmentSecurities;
+        null !== $government_securities && $obj->government_securities = $government_securities;
 
         return $obj;
     }
@@ -102,7 +98,7 @@ final class Holdings implements BaseModel
     public function withCorporateBonds(array $corporateBonds): self
     {
         $obj = clone $this;
-        $obj->corporateBonds = $corporateBonds;
+        $obj->corporate_bonds = $corporateBonds;
 
         return $obj;
     }
@@ -113,7 +109,7 @@ final class Holdings implements BaseModel
     public function withDematMutualFunds(array $dematMutualFunds): self
     {
         $obj = clone $this;
-        $obj->dematMutualFunds = $dematMutualFunds;
+        $obj->demat_mutual_funds = $dematMutualFunds;
 
         return $obj;
     }
@@ -135,7 +131,7 @@ final class Holdings implements BaseModel
     public function withGovernmentSecurities(array $governmentSecurities): self
     {
         $obj = clone $this;
-        $obj->governmentSecurities = $governmentSecurities;
+        $obj->government_securities = $governmentSecurities;
 
         return $obj;
     }

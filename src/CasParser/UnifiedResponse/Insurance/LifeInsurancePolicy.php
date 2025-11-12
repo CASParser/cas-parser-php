@@ -10,15 +10,15 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type LifeInsurancePolicyShape = array{
- *   additionalInfo?: mixed,
- *   lifeAssured?: string,
- *   policyName?: string,
- *   policyNumber?: string,
- *   premiumAmount?: float,
- *   premiumFrequency?: string,
- *   provider?: string,
- *   status?: string,
- *   sumAssured?: float,
+ *   additional_info?: mixed,
+ *   life_assured?: string|null,
+ *   policy_name?: string|null,
+ *   policy_number?: string|null,
+ *   premium_amount?: float|null,
+ *   premium_frequency?: string|null,
+ *   provider?: string|null,
+ *   status?: string|null,
+ *   sum_assured?: float|null,
  * }
  */
 final class LifeInsurancePolicy implements BaseModel
@@ -29,38 +29,38 @@ final class LifeInsurancePolicy implements BaseModel
     /**
      * Additional information specific to the policy.
      */
-    #[Api('additional_info', optional: true)]
-    public mixed $additionalInfo;
+    #[Api(optional: true)]
+    public mixed $additional_info;
 
     /**
      * Name of the life assured.
      */
-    #[Api('life_assured', optional: true)]
-    public ?string $lifeAssured;
+    #[Api(optional: true)]
+    public ?string $life_assured;
 
     /**
      * Name of the insurance policy.
      */
-    #[Api('policy_name', optional: true)]
-    public ?string $policyName;
+    #[Api(optional: true)]
+    public ?string $policy_name;
 
     /**
      * Insurance policy number.
      */
-    #[Api('policy_number', optional: true)]
-    public ?string $policyNumber;
+    #[Api(optional: true)]
+    public ?string $policy_number;
 
     /**
      * Premium amount.
      */
-    #[Api('premium_amount', optional: true)]
-    public ?float $premiumAmount;
+    #[Api(optional: true)]
+    public ?float $premium_amount;
 
     /**
      * Frequency of premium payment (e.g., Annual, Monthly).
      */
-    #[Api('premium_frequency', optional: true)]
-    public ?string $premiumFrequency;
+    #[Api(optional: true)]
+    public ?string $premium_frequency;
 
     /**
      * Insurance company name.
@@ -77,8 +77,8 @@ final class LifeInsurancePolicy implements BaseModel
     /**
      * Sum assured amount.
      */
-    #[Api('sum_assured', optional: true)]
-    public ?float $sumAssured;
+    #[Api(optional: true)]
+    public ?float $sum_assured;
 
     public function __construct()
     {
@@ -91,27 +91,27 @@ final class LifeInsurancePolicy implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        mixed $additionalInfo = null,
-        ?string $lifeAssured = null,
-        ?string $policyName = null,
-        ?string $policyNumber = null,
-        ?float $premiumAmount = null,
-        ?string $premiumFrequency = null,
+        mixed $additional_info = null,
+        ?string $life_assured = null,
+        ?string $policy_name = null,
+        ?string $policy_number = null,
+        ?float $premium_amount = null,
+        ?string $premium_frequency = null,
         ?string $provider = null,
         ?string $status = null,
-        ?float $sumAssured = null,
+        ?float $sum_assured = null,
     ): self {
         $obj = new self;
 
-        null !== $additionalInfo && $obj->additionalInfo = $additionalInfo;
-        null !== $lifeAssured && $obj->lifeAssured = $lifeAssured;
-        null !== $policyName && $obj->policyName = $policyName;
-        null !== $policyNumber && $obj->policyNumber = $policyNumber;
-        null !== $premiumAmount && $obj->premiumAmount = $premiumAmount;
-        null !== $premiumFrequency && $obj->premiumFrequency = $premiumFrequency;
+        null !== $additional_info && $obj->additional_info = $additional_info;
+        null !== $life_assured && $obj->life_assured = $life_assured;
+        null !== $policy_name && $obj->policy_name = $policy_name;
+        null !== $policy_number && $obj->policy_number = $policy_number;
+        null !== $premium_amount && $obj->premium_amount = $premium_amount;
+        null !== $premium_frequency && $obj->premium_frequency = $premium_frequency;
         null !== $provider && $obj->provider = $provider;
         null !== $status && $obj->status = $status;
-        null !== $sumAssured && $obj->sumAssured = $sumAssured;
+        null !== $sum_assured && $obj->sum_assured = $sum_assured;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class LifeInsurancePolicy implements BaseModel
     public function withAdditionalInfo(mixed $additionalInfo): self
     {
         $obj = clone $this;
-        $obj->additionalInfo = $additionalInfo;
+        $obj->additional_info = $additionalInfo;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class LifeInsurancePolicy implements BaseModel
     public function withLifeAssured(string $lifeAssured): self
     {
         $obj = clone $this;
-        $obj->lifeAssured = $lifeAssured;
+        $obj->life_assured = $lifeAssured;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class LifeInsurancePolicy implements BaseModel
     public function withPolicyName(string $policyName): self
     {
         $obj = clone $this;
-        $obj->policyName = $policyName;
+        $obj->policy_name = $policyName;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class LifeInsurancePolicy implements BaseModel
     public function withPolicyNumber(string $policyNumber): self
     {
         $obj = clone $this;
-        $obj->policyNumber = $policyNumber;
+        $obj->policy_number = $policyNumber;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class LifeInsurancePolicy implements BaseModel
     public function withPremiumAmount(float $premiumAmount): self
     {
         $obj = clone $this;
-        $obj->premiumAmount = $premiumAmount;
+        $obj->premium_amount = $premiumAmount;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class LifeInsurancePolicy implements BaseModel
     public function withPremiumFrequency(string $premiumFrequency): self
     {
         $obj = clone $this;
-        $obj->premiumFrequency = $premiumFrequency;
+        $obj->premium_frequency = $premiumFrequency;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class LifeInsurancePolicy implements BaseModel
     public function withSumAssured(float $sumAssured): self
     {
         $obj = clone $this;
-        $obj->sumAssured = $sumAssured;
+        $obj->sum_assured = $sumAssured;
 
         return $obj;
     }

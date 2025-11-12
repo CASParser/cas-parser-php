@@ -12,14 +12,14 @@ use CasParser\Core\Contracts\BaseModel;
  * Additional information specific to the demat account type.
  *
  * @phpstan-type AdditionalInfoShape = array{
- *   boStatus?: string,
- *   boSubStatus?: string,
- *   boType?: string,
- *   bsda?: string,
- *   email?: string,
- *   linkedPans?: list<string>,
- *   nominee?: string,
- *   status?: string,
+ *   bo_status?: string|null,
+ *   bo_sub_status?: string|null,
+ *   bo_type?: string|null,
+ *   bsda?: string|null,
+ *   email?: string|null,
+ *   linked_pans?: list<string>|null,
+ *   nominee?: string|null,
+ *   status?: string|null,
  * }
  */
 final class AdditionalInfo implements BaseModel
@@ -30,20 +30,20 @@ final class AdditionalInfo implements BaseModel
     /**
      * Beneficiary Owner status (CDSL).
      */
-    #[Api('bo_status', optional: true)]
-    public ?string $boStatus;
+    #[Api(optional: true)]
+    public ?string $bo_status;
 
     /**
      * Beneficiary Owner sub-status (CDSL).
      */
-    #[Api('bo_sub_status', optional: true)]
-    public ?string $boSubStatus;
+    #[Api(optional: true)]
+    public ?string $bo_sub_status;
 
     /**
      * Beneficiary Owner type (CDSL).
      */
-    #[Api('bo_type', optional: true)]
-    public ?string $boType;
+    #[Api(optional: true)]
+    public ?string $bo_type;
 
     /**
      * Basic Services Demat Account status (CDSL).
@@ -60,10 +60,10 @@ final class AdditionalInfo implements BaseModel
     /**
      * List of linked PAN numbers (NSDL).
      *
-     * @var list<string>|null $linkedPans
+     * @var list<string>|null $linked_pans
      */
-    #[Api('linked_pans', list: 'string', optional: true)]
-    public ?array $linkedPans;
+    #[Api(list: 'string', optional: true)]
+    public ?array $linked_pans;
 
     /**
      * Nominee details (CDSL).
@@ -87,26 +87,26 @@ final class AdditionalInfo implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $linkedPans
+     * @param list<string> $linked_pans
      */
     public static function with(
-        ?string $boStatus = null,
-        ?string $boSubStatus = null,
-        ?string $boType = null,
+        ?string $bo_status = null,
+        ?string $bo_sub_status = null,
+        ?string $bo_type = null,
         ?string $bsda = null,
         ?string $email = null,
-        ?array $linkedPans = null,
+        ?array $linked_pans = null,
         ?string $nominee = null,
         ?string $status = null,
     ): self {
         $obj = new self;
 
-        null !== $boStatus && $obj->boStatus = $boStatus;
-        null !== $boSubStatus && $obj->boSubStatus = $boSubStatus;
-        null !== $boType && $obj->boType = $boType;
+        null !== $bo_status && $obj->bo_status = $bo_status;
+        null !== $bo_sub_status && $obj->bo_sub_status = $bo_sub_status;
+        null !== $bo_type && $obj->bo_type = $bo_type;
         null !== $bsda && $obj->bsda = $bsda;
         null !== $email && $obj->email = $email;
-        null !== $linkedPans && $obj->linkedPans = $linkedPans;
+        null !== $linked_pans && $obj->linked_pans = $linked_pans;
         null !== $nominee && $obj->nominee = $nominee;
         null !== $status && $obj->status = $status;
 
@@ -119,7 +119,7 @@ final class AdditionalInfo implements BaseModel
     public function withBoStatus(string $boStatus): self
     {
         $obj = clone $this;
-        $obj->boStatus = $boStatus;
+        $obj->bo_status = $boStatus;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class AdditionalInfo implements BaseModel
     public function withBoSubStatus(string $boSubStatus): self
     {
         $obj = clone $this;
-        $obj->boSubStatus = $boSubStatus;
+        $obj->bo_sub_status = $boSubStatus;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class AdditionalInfo implements BaseModel
     public function withBoType(string $boType): self
     {
         $obj = clone $this;
-        $obj->boType = $boType;
+        $obj->bo_type = $boType;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class AdditionalInfo implements BaseModel
     public function withLinkedPans(array $linkedPans): self
     {
         $obj = clone $this;
-        $obj->linkedPans = $linkedPans;
+        $obj->linked_pans = $linkedPans;
 
         return $obj;
     }

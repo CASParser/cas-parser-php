@@ -16,7 +16,7 @@ use CasParser\Core\Contracts\BaseModel;
  * @see CasParser\CasParser->cdsl
  *
  * @phpstan-type CasParserCdslParamsShape = array{
- *   password?: string, pdfFile?: string, pdfURL?: string
+ *   password?: string, pdf_file?: string, pdf_url?: string
  * }
  */
 final class CasParserCdslParams implements BaseModel
@@ -34,14 +34,14 @@ final class CasParserCdslParams implements BaseModel
     /**
      * Base64 encoded CAS PDF file.
      */
-    #[Api('pdf_file', optional: true)]
-    public ?string $pdfFile;
+    #[Api(optional: true)]
+    public ?string $pdf_file;
 
     /**
      * URL to the CAS PDF file.
      */
-    #[Api('pdf_url', optional: true)]
-    public ?string $pdfURL;
+    #[Api(optional: true)]
+    public ?string $pdf_url;
 
     public function __construct()
     {
@@ -55,14 +55,14 @@ final class CasParserCdslParams implements BaseModel
      */
     public static function with(
         ?string $password = null,
-        ?string $pdfFile = null,
-        ?string $pdfURL = null
+        ?string $pdf_file = null,
+        ?string $pdf_url = null
     ): self {
         $obj = new self;
 
         null !== $password && $obj->password = $password;
-        null !== $pdfFile && $obj->pdfFile = $pdfFile;
-        null !== $pdfURL && $obj->pdfURL = $pdfURL;
+        null !== $pdf_file && $obj->pdf_file = $pdf_file;
+        null !== $pdf_url && $obj->pdf_url = $pdf_url;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class CasParserCdslParams implements BaseModel
     public function withPdfFile(string $pdfFile): self
     {
         $obj = clone $this;
-        $obj->pdfFile = $pdfFile;
+        $obj->pdf_file = $pdfFile;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class CasParserCdslParams implements BaseModel
     public function withPdfURL(string $pdfURL): self
     {
         $obj = clone $this;
-        $obj->pdfURL = $pdfURL;
+        $obj->pdf_url = $pdfURL;
 
         return $obj;
     }

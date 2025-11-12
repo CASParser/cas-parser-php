@@ -49,7 +49,7 @@ use CasParser\Client;
 
 $client = new Client(apiKey: getenv("CAS_PARSER_API_KEY") ?: "My API Key");
 
-$unifiedResponse = $client->casParser->smartParse();
+$unifiedResponse = $client->casParser->smartParse([]);
 
 var_dump($unifiedResponse->demat_accounts);
 ```
@@ -71,7 +71,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use CasParser\Core\Exceptions\APIConnectionException;
 
 try {
-  $unifiedResponse = $client->casParser->smartParse();
+  $unifiedResponse = $client->casParser->smartParse([]);
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
@@ -118,7 +118,7 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->casParser->smartParse(
-  requestOptions: RequestOptions::with(maxRetries: 5)
+  [], RequestOptions::with(maxRetries: 5)
 );
 ```
 
@@ -138,14 +138,13 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 use CasParser\RequestOptions;
 
 $unifiedResponse = $client->casParser->smartParse(
-  requestOptions: RequestOptions::with(
+  [],
+  RequestOptions::with(
     extraQueryParams: ["my_query_parameter" => "value"],
     extraBodyParams: ["my_body_parameter" => "value"],
     extraHeaders: ["my-header" => "value"],
   ),
 );
-
-var_dump($unifiedResponse["my_undocumented_property"]);
 ```
 
 #### Undocumented request params

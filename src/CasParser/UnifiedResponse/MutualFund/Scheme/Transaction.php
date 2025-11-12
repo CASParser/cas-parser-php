@@ -10,14 +10,14 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TransactionShape = array{
- *   amount?: float,
- *   balance?: float,
- *   date?: \DateTimeInterface,
- *   description?: string,
- *   dividendRate?: float,
- *   nav?: float,
- *   type?: string,
- *   units?: float,
+ *   amount?: float|null,
+ *   balance?: float|null,
+ *   date?: \DateTimeInterface|null,
+ *   description?: string|null,
+ *   dividend_rate?: float|null,
+ *   nav?: float|null,
+ *   type?: string|null,
+ *   units?: float|null,
  * }
  */
 final class Transaction implements BaseModel
@@ -52,8 +52,8 @@ final class Transaction implements BaseModel
     /**
      * Dividend rate (for dividend transactions).
      */
-    #[Api('dividend_rate', optional: true)]
-    public ?float $dividendRate;
+    #[Api(optional: true)]
+    public ?float $dividend_rate;
 
     /**
      * NAV on transaction date.
@@ -88,7 +88,7 @@ final class Transaction implements BaseModel
         ?float $balance = null,
         ?\DateTimeInterface $date = null,
         ?string $description = null,
-        ?float $dividendRate = null,
+        ?float $dividend_rate = null,
         ?float $nav = null,
         ?string $type = null,
         ?float $units = null,
@@ -99,7 +99,7 @@ final class Transaction implements BaseModel
         null !== $balance && $obj->balance = $balance;
         null !== $date && $obj->date = $date;
         null !== $description && $obj->description = $description;
-        null !== $dividendRate && $obj->dividendRate = $dividendRate;
+        null !== $dividend_rate && $obj->dividend_rate = $dividend_rate;
         null !== $nav && $obj->nav = $nav;
         null !== $type && $obj->type = $type;
         null !== $units && $obj->units = $units;
@@ -157,7 +157,7 @@ final class Transaction implements BaseModel
     public function withDividendRate(float $dividendRate): self
     {
         $obj = clone $this;
-        $obj->dividendRate = $dividendRate;
+        $obj->dividend_rate = $dividendRate;
 
         return $obj;
     }

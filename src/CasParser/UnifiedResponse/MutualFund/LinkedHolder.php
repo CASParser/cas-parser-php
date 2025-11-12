@@ -9,7 +9,7 @@ use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type LinkedHolderShape = array{name?: string, pan?: string}
+ * @phpstan-type LinkedHolderShape = array{name?: string|null, pan?: string|null}
  */
 final class LinkedHolder implements BaseModel
 {

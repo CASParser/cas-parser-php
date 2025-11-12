@@ -12,12 +12,12 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type NpShape = array{
- *   additionalInfo?: mixed,
- *   cra?: string,
- *   funds?: list<Fund>,
- *   linkedHolders?: list<LinkedHolder>,
- *   pran?: string,
- *   value?: float,
+ *   additional_info?: mixed,
+ *   cra?: string|null,
+ *   funds?: list<Fund>|null,
+ *   linked_holders?: list<LinkedHolder>|null,
+ *   pran?: string|null,
+ *   value?: float|null,
  * }
  */
 final class Np implements BaseModel
@@ -28,8 +28,8 @@ final class Np implements BaseModel
     /**
      * Additional information specific to the NPS account.
      */
-    #[Api('additional_info', optional: true)]
-    public mixed $additionalInfo;
+    #[Api(optional: true)]
+    public mixed $additional_info;
 
     /**
      * Central Record Keeping Agency name.
@@ -44,10 +44,10 @@ final class Np implements BaseModel
     /**
      * List of account holders linked to this NPS account.
      *
-     * @var list<LinkedHolder>|null $linkedHolders
+     * @var list<LinkedHolder>|null $linked_holders
      */
-    #[Api('linked_holders', list: LinkedHolder::class, optional: true)]
-    public ?array $linkedHolders;
+    #[Api(list: LinkedHolder::class, optional: true)]
+    public ?array $linked_holders;
 
     /**
      * Permanent Retirement Account Number (PRAN).
@@ -72,22 +72,22 @@ final class Np implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Fund> $funds
-     * @param list<LinkedHolder> $linkedHolders
+     * @param list<LinkedHolder> $linked_holders
      */
     public static function with(
-        mixed $additionalInfo = null,
+        mixed $additional_info = null,
         ?string $cra = null,
         ?array $funds = null,
-        ?array $linkedHolders = null,
+        ?array $linked_holders = null,
         ?string $pran = null,
         ?float $value = null,
     ): self {
         $obj = new self;
 
-        null !== $additionalInfo && $obj->additionalInfo = $additionalInfo;
+        null !== $additional_info && $obj->additional_info = $additional_info;
         null !== $cra && $obj->cra = $cra;
         null !== $funds && $obj->funds = $funds;
-        null !== $linkedHolders && $obj->linkedHolders = $linkedHolders;
+        null !== $linked_holders && $obj->linked_holders = $linked_holders;
         null !== $pran && $obj->pran = $pran;
         null !== $value && $obj->value = $value;
 
@@ -100,7 +100,7 @@ final class Np implements BaseModel
     public function withAdditionalInfo(mixed $additionalInfo): self
     {
         $obj = clone $this;
-        $obj->additionalInfo = $additionalInfo;
+        $obj->additional_info = $additionalInfo;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class Np implements BaseModel
     public function withLinkedHolders(array $linkedHolders): self
     {
         $obj = clone $this;
-        $obj->linkedHolders = $linkedHolders;
+        $obj->linked_holders = $linkedHolders;
 
         return $obj;
     }

@@ -10,11 +10,11 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type EquityShape = array{
- *   additionalInfo?: mixed,
- *   isin?: string,
- *   name?: string,
- *   units?: float,
- *   value?: float,
+ *   additional_info?: mixed,
+ *   isin?: string|null,
+ *   name?: string|null,
+ *   units?: float|null,
+ *   value?: float|null,
  * }
  */
 final class Equity implements BaseModel
@@ -25,8 +25,8 @@ final class Equity implements BaseModel
     /**
      * Additional information specific to the equity.
      */
-    #[Api('additional_info', optional: true)]
-    public mixed $additionalInfo;
+    #[Api(optional: true)]
+    public mixed $additional_info;
 
     /**
      * ISIN code of the equity.
@@ -63,7 +63,7 @@ final class Equity implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        mixed $additionalInfo = null,
+        mixed $additional_info = null,
         ?string $isin = null,
         ?string $name = null,
         ?float $units = null,
@@ -71,7 +71,7 @@ final class Equity implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $additionalInfo && $obj->additionalInfo = $additionalInfo;
+        null !== $additional_info && $obj->additional_info = $additional_info;
         null !== $isin && $obj->isin = $isin;
         null !== $name && $obj->name = $name;
         null !== $units && $obj->units = $units;
@@ -86,7 +86,7 @@ final class Equity implements BaseModel
     public function withAdditionalInfo(mixed $additionalInfo): self
     {
         $obj = clone $this;
-        $obj->additionalInfo = $additionalInfo;
+        $obj->additional_info = $additionalInfo;
 
         return $obj;
     }

@@ -19,13 +19,13 @@ use CasParser\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type UnifiedResponseShape = array{
- *   dematAccounts?: list<DematAccount>,
- *   insurance?: Insurance,
- *   investor?: Investor,
- *   meta?: Meta,
- *   mutualFunds?: list<MutualFund>,
- *   nps?: list<Np>,
- *   summary?: Summary,
+ *   demat_accounts?: list<DematAccount>|null,
+ *   insurance?: Insurance|null,
+ *   investor?: Investor|null,
+ *   meta?: Meta|null,
+ *   mutual_funds?: list<MutualFund>|null,
+ *   nps?: list<Np>|null,
+ *   summary?: Summary|null,
  * }
  */
 final class UnifiedResponse implements BaseModel, ResponseConverter
@@ -35,9 +35,9 @@ final class UnifiedResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    /** @var list<DematAccount>|null $dematAccounts */
-    #[Api('demat_accounts', list: DematAccount::class, optional: true)]
-    public ?array $dematAccounts;
+    /** @var list<DematAccount>|null $demat_accounts */
+    #[Api(list: DematAccount::class, optional: true)]
+    public ?array $demat_accounts;
 
     #[Api(optional: true)]
     public ?Insurance $insurance;
@@ -48,9 +48,9 @@ final class UnifiedResponse implements BaseModel, ResponseConverter
     #[Api(optional: true)]
     public ?Meta $meta;
 
-    /** @var list<MutualFund>|null $mutualFunds */
-    #[Api('mutual_funds', list: MutualFund::class, optional: true)]
-    public ?array $mutualFunds;
+    /** @var list<MutualFund>|null $mutual_funds */
+    #[Api(list: MutualFund::class, optional: true)]
+    public ?array $mutual_funds;
 
     /**
      * List of NPS accounts.
@@ -73,26 +73,26 @@ final class UnifiedResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DematAccount> $dematAccounts
-     * @param list<MutualFund> $mutualFunds
+     * @param list<DematAccount> $demat_accounts
+     * @param list<MutualFund> $mutual_funds
      * @param list<Np> $nps
      */
     public static function with(
-        ?array $dematAccounts = null,
+        ?array $demat_accounts = null,
         ?Insurance $insurance = null,
         ?Investor $investor = null,
         ?Meta $meta = null,
-        ?array $mutualFunds = null,
+        ?array $mutual_funds = null,
         ?array $nps = null,
         ?Summary $summary = null,
     ): self {
         $obj = new self;
 
-        null !== $dematAccounts && $obj->dematAccounts = $dematAccounts;
+        null !== $demat_accounts && $obj->demat_accounts = $demat_accounts;
         null !== $insurance && $obj->insurance = $insurance;
         null !== $investor && $obj->investor = $investor;
         null !== $meta && $obj->meta = $meta;
-        null !== $mutualFunds && $obj->mutualFunds = $mutualFunds;
+        null !== $mutual_funds && $obj->mutual_funds = $mutual_funds;
         null !== $nps && $obj->nps = $nps;
         null !== $summary && $obj->summary = $summary;
 
@@ -105,7 +105,7 @@ final class UnifiedResponse implements BaseModel, ResponseConverter
     public function withDematAccounts(array $dematAccounts): self
     {
         $obj = clone $this;
-        $obj->dematAccounts = $dematAccounts;
+        $obj->demat_accounts = $dematAccounts;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class UnifiedResponse implements BaseModel, ResponseConverter
     public function withMutualFunds(array $mutualFunds): self
     {
         $obj = clone $this;
-        $obj->mutualFunds = $mutualFunds;
+        $obj->mutual_funds = $mutualFunds;
 
         return $obj;
     }

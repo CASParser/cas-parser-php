@@ -13,13 +13,13 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MutualFundShape = array{
- *   additionalInfo?: AdditionalInfo,
- *   amc?: string,
- *   folioNumber?: string,
- *   linkedHolders?: list<LinkedHolder>,
- *   registrar?: string,
- *   schemes?: list<Scheme>,
- *   value?: float,
+ *   additional_info?: AdditionalInfo|null,
+ *   amc?: string|null,
+ *   folio_number?: string|null,
+ *   linked_holders?: list<LinkedHolder>|null,
+ *   registrar?: string|null,
+ *   schemes?: list<Scheme>|null,
+ *   value?: float|null,
  * }
  */
 final class MutualFund implements BaseModel
@@ -30,8 +30,8 @@ final class MutualFund implements BaseModel
     /**
      * Additional folio information.
      */
-    #[Api('additional_info', optional: true)]
-    public ?AdditionalInfo $additionalInfo;
+    #[Api(optional: true)]
+    public ?AdditionalInfo $additional_info;
 
     /**
      * Asset Management Company name.
@@ -42,16 +42,16 @@ final class MutualFund implements BaseModel
     /**
      * Folio number.
      */
-    #[Api('folio_number', optional: true)]
-    public ?string $folioNumber;
+    #[Api(optional: true)]
+    public ?string $folio_number;
 
     /**
      * List of account holders linked to this mutual fund folio.
      *
-     * @var list<LinkedHolder>|null $linkedHolders
+     * @var list<LinkedHolder>|null $linked_holders
      */
-    #[Api('linked_holders', list: LinkedHolder::class, optional: true)]
-    public ?array $linkedHolders;
+    #[Api(list: LinkedHolder::class, optional: true)]
+    public ?array $linked_holders;
 
     /**
      * Registrar and Transfer Agent name.
@@ -79,24 +79,24 @@ final class MutualFund implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LinkedHolder> $linkedHolders
+     * @param list<LinkedHolder> $linked_holders
      * @param list<Scheme> $schemes
      */
     public static function with(
-        ?AdditionalInfo $additionalInfo = null,
+        ?AdditionalInfo $additional_info = null,
         ?string $amc = null,
-        ?string $folioNumber = null,
-        ?array $linkedHolders = null,
+        ?string $folio_number = null,
+        ?array $linked_holders = null,
         ?string $registrar = null,
         ?array $schemes = null,
         ?float $value = null,
     ): self {
         $obj = new self;
 
-        null !== $additionalInfo && $obj->additionalInfo = $additionalInfo;
+        null !== $additional_info && $obj->additional_info = $additional_info;
         null !== $amc && $obj->amc = $amc;
-        null !== $folioNumber && $obj->folioNumber = $folioNumber;
-        null !== $linkedHolders && $obj->linkedHolders = $linkedHolders;
+        null !== $folio_number && $obj->folio_number = $folio_number;
+        null !== $linked_holders && $obj->linked_holders = $linked_holders;
         null !== $registrar && $obj->registrar = $registrar;
         null !== $schemes && $obj->schemes = $schemes;
         null !== $value && $obj->value = $value;
@@ -110,7 +110,7 @@ final class MutualFund implements BaseModel
     public function withAdditionalInfo(AdditionalInfo $additionalInfo): self
     {
         $obj = clone $this;
-        $obj->additionalInfo = $additionalInfo;
+        $obj->additional_info = $additionalInfo;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class MutualFund implements BaseModel
     public function withFolioNumber(string $folioNumber): self
     {
         $obj = clone $this;
-        $obj->folioNumber = $folioNumber;
+        $obj->folio_number = $folioNumber;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class MutualFund implements BaseModel
     public function withLinkedHolders(array $linkedHolders): self
     {
         $obj = clone $this;
-        $obj->linkedHolders = $linkedHolders;
+        $obj->linked_holders = $linkedHolders;
 
         return $obj;
     }

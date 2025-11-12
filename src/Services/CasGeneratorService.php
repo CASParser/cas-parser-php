@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace CasParser\Services;
 
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams;
-use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
 use CasParser\CasGenerator\CasGeneratorGenerateCasResponse;
 use CasParser\Client;
 use CasParser\Core\Exceptions\APIException;
 use CasParser\RequestOptions;
 use CasParser\ServiceContracts\CasGeneratorContract;
-
-use const CasParser\Core\OMIT as omit;
 
 final class CasGeneratorService implements CasGeneratorContract
 {
@@ -27,50 +24,24 @@ final class CasGeneratorService implements CasGeneratorContract
      * This endpoint generates CAS (Consolidated Account Statement) documents by submitting a mailback request to the specified CAS authority.
      * Currently only supports KFintech, with plans to support CAMS, CDSL, and NSDL in the future.
      *
-     * @param string $email Email address to receive the CAS document
-     * @param string $fromDate Start date for the CAS period (format YYYY-MM-DD)
-     * @param string $password Password to protect the generated CAS PDF
-     * @param string $toDate End date for the CAS period (format YYYY-MM-DD)
-     * @param CasAuthority|value-of<CasAuthority> $casAuthority CAS authority to generate the document from (currently only kfintech is supported)
-     * @param string $panNo PAN number (optional for some CAS authorities)
+     * @param array{
+     *   email: string,
+     *   from_date: string,
+     *   password: string,
+     *   to_date: string,
+     *   cas_authority?: "kfintech"|"cams"|"cdsl"|"nsdl",
+     *   pan_no?: string,
+     * }|CasGeneratorGenerateCasParams $params
      *
      * @throws APIException
      */
     public function generateCas(
-        $email,
-        $fromDate,
-        $password,
-        $toDate,
-        $casAuthority = omit,
-        $panNo = omit,
+        array|CasGeneratorGenerateCasParams $params,
         ?RequestOptions $requestOptions = null,
-    ): CasGeneratorGenerateCasResponse {
-        $params = [
-            'email' => $email,
-            'fromDate' => $fromDate,
-            'password' => $password,
-            'toDate' => $toDate,
-            'casAuthority' => $casAuthority,
-            'panNo' => $panNo,
-        ];
-
-        return $this->generateCasRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function generateCasRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): CasGeneratorGenerateCasResponse {
         [$parsed, $options] = CasGeneratorGenerateCasParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

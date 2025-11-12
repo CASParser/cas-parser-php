@@ -14,17 +14,17 @@ use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SchemeShape = array{
- *   additionalInfo?: AdditionalInfo,
- *   cost?: float,
- *   gain?: Gain,
- *   isin?: string,
- *   name?: string,
- *   nav?: float,
- *   nominees?: list<string>,
- *   transactions?: list<Transaction>,
- *   type?: value-of<Type>,
- *   units?: float,
- *   value?: float,
+ *   additional_info?: AdditionalInfo|null,
+ *   cost?: float|null,
+ *   gain?: Gain|null,
+ *   isin?: string|null,
+ *   name?: string|null,
+ *   nav?: float|null,
+ *   nominees?: list<string>|null,
+ *   transactions?: list<Transaction>|null,
+ *   type?: value-of<Type>|null,
+ *   units?: float|null,
+ *   value?: float|null,
  * }
  */
 final class Scheme implements BaseModel
@@ -35,8 +35,8 @@ final class Scheme implements BaseModel
     /**
      * Additional information specific to the scheme.
      */
-    #[Api('additional_info', optional: true)]
-    public ?AdditionalInfo $additionalInfo;
+    #[Api(optional: true)]
+    public ?AdditionalInfo $additional_info;
 
     /**
      * Cost of investment.
@@ -112,7 +112,7 @@ final class Scheme implements BaseModel
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        ?AdditionalInfo $additionalInfo = null,
+        ?AdditionalInfo $additional_info = null,
         ?float $cost = null,
         ?Gain $gain = null,
         ?string $isin = null,
@@ -126,7 +126,7 @@ final class Scheme implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $additionalInfo && $obj->additionalInfo = $additionalInfo;
+        null !== $additional_info && $obj->additional_info = $additional_info;
         null !== $cost && $obj->cost = $cost;
         null !== $gain && $obj->gain = $gain;
         null !== $isin && $obj->isin = $isin;
@@ -147,7 +147,7 @@ final class Scheme implements BaseModel
     public function withAdditionalInfo(AdditionalInfo $additionalInfo): self
     {
         $obj = clone $this;
-        $obj->additionalInfo = $additionalInfo;
+        $obj->additional_info = $additionalInfo;
 
         return $obj;
     }
