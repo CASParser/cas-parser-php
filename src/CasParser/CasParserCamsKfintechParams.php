@@ -13,7 +13,7 @@ use CasParser\Core\Contracts\BaseModel;
  * This endpoint specifically parses CAMS/KFintech CAS (Consolidated Account Statement) PDF files and returns data in a unified format.
  * Use this endpoint when you know the PDF is from CAMS or KFintech.
  *
- * @see CasParser\CasParser->camsKfintech
+ * @see CasParser\Services\CasParserService::camsKfintech()
  *
  * @phpstan-type CasParserCamsKfintechParamsShape = array{
  *   password?: string, pdf_file?: string, pdf_url?: string
