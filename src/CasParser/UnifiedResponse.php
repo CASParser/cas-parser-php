@@ -11,56 +11,60 @@ use CasParser\CasParser\UnifiedResponse\Meta;
 use CasParser\CasParser\UnifiedResponse\MutualFund;
 use CasParser\CasParser\UnifiedResponse\Np;
 use CasParser\CasParser\UnifiedResponse\Summary;
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
-use CasParser\Core\Concerns\SdkResponse;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\Contracts\ResponseConverter;
 
 /**
+ * @phpstan-import-type DematAccountShape from \CasParser\CasParser\UnifiedResponse\DematAccount
+ * @phpstan-import-type InsuranceShape from \CasParser\CasParser\UnifiedResponse\Insurance
+ * @phpstan-import-type InvestorShape from \CasParser\CasParser\UnifiedResponse\Investor
+ * @phpstan-import-type MetaShape from \CasParser\CasParser\UnifiedResponse\Meta
+ * @phpstan-import-type MutualFundShape from \CasParser\CasParser\UnifiedResponse\MutualFund
+ * @phpstan-import-type NpShape from \CasParser\CasParser\UnifiedResponse\Np
+ * @phpstan-import-type SummaryShape from \CasParser\CasParser\UnifiedResponse\Summary
+ *
  * @phpstan-type UnifiedResponseShape = array{
- *   demat_accounts?: list<DematAccount>|null,
- *   insurance?: Insurance|null,
- *   investor?: Investor|null,
- *   meta?: Meta|null,
- *   mutual_funds?: list<MutualFund>|null,
- *   nps?: list<Np>|null,
- *   summary?: Summary|null,
+ *   dematAccounts?: list<DematAccountShape>|null,
+ *   insurance?: null|Insurance|InsuranceShape,
+ *   investor?: null|Investor|InvestorShape,
+ *   meta?: null|Meta|MetaShape,
+ *   mutualFunds?: list<MutualFundShape>|null,
+ *   nps?: list<NpShape>|null,
+ *   summary?: null|Summary|SummaryShape,
  * }
  */
-final class UnifiedResponse implements BaseModel, ResponseConverter
+final class UnifiedResponse implements BaseModel
 {
     /** @use SdkModel<UnifiedResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /** @var list<DematAccount>|null $dematAccounts */
+    #[Optional('demat_accounts', list: DematAccount::class)]
+    public ?array $dematAccounts;
 
-    /** @var list<DematAccount>|null $demat_accounts */
-    #[Api(list: DematAccount::class, optional: true)]
-    public ?array $demat_accounts;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Insurance $insurance;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Investor $investor;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
-    /** @var list<MutualFund>|null $mutual_funds */
-    #[Api(list: MutualFund::class, optional: true)]
-    public ?array $mutual_funds;
+    /** @var list<MutualFund>|null $mutualFunds */
+    #[Optional('mutual_funds', list: MutualFund::class)]
+    public ?array $mutualFunds;
 
     /**
      * List of NPS accounts.
      *
      * @var list<Np>|null $nps
      */
-    #[Api(list: Np::class, optional: true)]
+    #[Optional(list: Np::class)]
     public ?array $nps;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Summary $summary;
 
     public function __construct()
@@ -73,96 +77,112 @@ final class UnifiedResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DematAccount> $demat_accounts
-     * @param list<MutualFund> $mutual_funds
-     * @param list<Np> $nps
+     * @param list<DematAccountShape>|null $dematAccounts
+     * @param Insurance|InsuranceShape|null $insurance
+     * @param Investor|InvestorShape|null $investor
+     * @param Meta|MetaShape|null $meta
+     * @param list<MutualFundShape>|null $mutualFunds
+     * @param list<NpShape>|null $nps
+     * @param Summary|SummaryShape|null $summary
      */
     public static function with(
-        ?array $demat_accounts = null,
-        ?Insurance $insurance = null,
-        ?Investor $investor = null,
-        ?Meta $meta = null,
-        ?array $mutual_funds = null,
+        ?array $dematAccounts = null,
+        Insurance|array|null $insurance = null,
+        Investor|array|null $investor = null,
+        Meta|array|null $meta = null,
+        ?array $mutualFunds = null,
         ?array $nps = null,
-        ?Summary $summary = null,
+        Summary|array|null $summary = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $demat_accounts && $obj->demat_accounts = $demat_accounts;
-        null !== $insurance && $obj->insurance = $insurance;
-        null !== $investor && $obj->investor = $investor;
-        null !== $meta && $obj->meta = $meta;
-        null !== $mutual_funds && $obj->mutual_funds = $mutual_funds;
-        null !== $nps && $obj->nps = $nps;
-        null !== $summary && $obj->summary = $summary;
+        null !== $dematAccounts && $self['dematAccounts'] = $dematAccounts;
+        null !== $insurance && $self['insurance'] = $insurance;
+        null !== $investor && $self['investor'] = $investor;
+        null !== $meta && $self['meta'] = $meta;
+        null !== $mutualFunds && $self['mutualFunds'] = $mutualFunds;
+        null !== $nps && $self['nps'] = $nps;
+        null !== $summary && $self['summary'] = $summary;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<DematAccount> $dematAccounts
+     * @param list<DematAccountShape> $dematAccounts
      */
     public function withDematAccounts(array $dematAccounts): self
     {
-        $obj = clone $this;
-        $obj->demat_accounts = $dematAccounts;
+        $self = clone $this;
+        $self['dematAccounts'] = $dematAccounts;
 
-        return $obj;
-    }
-
-    public function withInsurance(Insurance $insurance): self
-    {
-        $obj = clone $this;
-        $obj->insurance = $insurance;
-
-        return $obj;
-    }
-
-    public function withInvestor(Investor $investor): self
-    {
-        $obj = clone $this;
-        $obj->investor = $investor;
-
-        return $obj;
-    }
-
-    public function withMeta(Meta $meta): self
-    {
-        $obj = clone $this;
-        $obj->meta = $meta;
-
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<MutualFund> $mutualFunds
+     * @param Insurance|InsuranceShape $insurance
+     */
+    public function withInsurance(Insurance|array $insurance): self
+    {
+        $self = clone $this;
+        $self['insurance'] = $insurance;
+
+        return $self;
+    }
+
+    /**
+     * @param Investor|InvestorShape $investor
+     */
+    public function withInvestor(Investor|array $investor): self
+    {
+        $self = clone $this;
+        $self['investor'] = $investor;
+
+        return $self;
+    }
+
+    /**
+     * @param Meta|MetaShape $meta
+     */
+    public function withMeta(Meta|array $meta): self
+    {
+        $self = clone $this;
+        $self['meta'] = $meta;
+
+        return $self;
+    }
+
+    /**
+     * @param list<MutualFundShape> $mutualFunds
      */
     public function withMutualFunds(array $mutualFunds): self
     {
-        $obj = clone $this;
-        $obj->mutual_funds = $mutualFunds;
+        $self = clone $this;
+        $self['mutualFunds'] = $mutualFunds;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of NPS accounts.
      *
-     * @param list<Np> $nps
+     * @param list<NpShape> $nps
      */
     public function withNps(array $nps): self
     {
-        $obj = clone $this;
-        $obj->nps = $nps;
+        $self = clone $this;
+        $self['nps'] = $nps;
 
-        return $obj;
+        return $self;
     }
 
-    public function withSummary(Summary $summary): self
+    /**
+     * @param Summary|SummaryShape $summary
+     */
+    public function withSummary(Summary|array $summary): self
     {
-        $obj = clone $this;
-        $obj->summary = $summary;
+        $self = clone $this;
+        $self['summary'] = $summary;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\Summary\Accounts;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MutualFundsShape = array{
- *   count?: int|null, total_value?: float|null
+ *   count?: int|null, totalValue?: float|null
  * }
  */
 final class MutualFunds implements BaseModel
@@ -21,14 +21,14 @@ final class MutualFunds implements BaseModel
     /**
      * Number of mutual fund folios.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $count;
 
     /**
      * Total value of mutual funds.
      */
-    #[Api(optional: true)]
-    public ?float $total_value;
+    #[Optional('total_value')]
+    public ?float $totalValue;
 
     public function __construct()
     {
@@ -42,14 +42,14 @@ final class MutualFunds implements BaseModel
      */
     public static function with(
         ?int $count = null,
-        ?float $total_value = null
+        ?float $totalValue = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $count && $obj->count = $count;
-        null !== $total_value && $obj->total_value = $total_value;
+        null !== $count && $self['count'] = $count;
+        null !== $totalValue && $self['totalValue'] = $totalValue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class MutualFunds implements BaseModel
      */
     public function withCount(int $count): self
     {
-        $obj = clone $this;
-        $obj->count = $count;
+        $self = clone $this;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class MutualFunds implements BaseModel
      */
     public function withTotalValue(float $totalValue): self
     {
-        $obj = clone $this;
-        $obj->total_value = $totalValue;
+        $self = clone $this;
+        $self['totalValue'] = $totalValue;
 
-        return $obj;
+        return $self;
     }
 }

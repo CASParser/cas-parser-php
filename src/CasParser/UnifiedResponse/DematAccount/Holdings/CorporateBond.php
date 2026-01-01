@@ -4,15 +4,21 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\DematAccount\Holdings;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\CorporateBond\AdditionalInfo;
+use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\CorporateBond\Transaction;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AdditionalInfoShape from \CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\CorporateBond\AdditionalInfo
+ * @phpstan-import-type TransactionShape from \CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\CorporateBond\Transaction
+ *
  * @phpstan-type CorporateBondShape = array{
- *   additional_info?: mixed,
+ *   additionalInfo?: null|AdditionalInfo|AdditionalInfoShape,
  *   isin?: string|null,
  *   name?: string|null,
+ *   transactions?: list<TransactionShape>|null,
  *   units?: float|null,
  *   value?: float|null,
  * }
@@ -25,31 +31,39 @@ final class CorporateBond implements BaseModel
     /**
      * Additional information specific to the corporate bond.
      */
-    #[Api(optional: true)]
-    public mixed $additional_info;
+    #[Optional('additional_info')]
+    public ?AdditionalInfo $additionalInfo;
 
     /**
      * ISIN code of the corporate bond.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $isin;
 
     /**
      * Name of the corporate bond.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
+
+    /**
+     * List of transactions for this holding (beta).
+     *
+     * @var list<Transaction>|null $transactions
+     */
+    #[Optional(list: Transaction::class)]
+    public ?array $transactions;
 
     /**
      * Number of units held.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $units;
 
     /**
      * Current market value of the holding.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $value;
 
     public function __construct()
@@ -61,34 +75,42 @@ final class CorporateBond implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AdditionalInfo|AdditionalInfoShape|null $additionalInfo
+     * @param list<TransactionShape>|null $transactions
      */
     public static function with(
-        mixed $additional_info = null,
+        AdditionalInfo|array|null $additionalInfo = null,
         ?string $isin = null,
         ?string $name = null,
+        ?array $transactions = null,
         ?float $units = null,
         ?float $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additional_info && $obj->additional_info = $additional_info;
-        null !== $isin && $obj->isin = $isin;
-        null !== $name && $obj->name = $name;
-        null !== $units && $obj->units = $units;
-        null !== $value && $obj->value = $value;
+        null !== $additionalInfo && $self['additionalInfo'] = $additionalInfo;
+        null !== $isin && $self['isin'] = $isin;
+        null !== $name && $self['name'] = $name;
+        null !== $transactions && $self['transactions'] = $transactions;
+        null !== $units && $self['units'] = $units;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Additional information specific to the corporate bond.
+     *
+     * @param AdditionalInfo|AdditionalInfoShape $additionalInfo
      */
-    public function withAdditionalInfo(mixed $additionalInfo): self
-    {
-        $obj = clone $this;
-        $obj->additional_info = $additionalInfo;
+    public function withAdditionalInfo(
+        AdditionalInfo|array $additionalInfo
+    ): self {
+        $self = clone $this;
+        $self['additionalInfo'] = $additionalInfo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +118,10 @@ final class CorporateBond implements BaseModel
      */
     public function withIsin(string $isin): self
     {
-        $obj = clone $this;
-        $obj->isin = $isin;
+        $self = clone $this;
+        $self['isin'] = $isin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +129,23 @@ final class CorporateBond implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * List of transactions for this holding (beta).
+     *
+     * @param list<TransactionShape> $transactions
+     */
+    public function withTransactions(array $transactions): self
+    {
+        $self = clone $this;
+        $self['transactions'] = $transactions;
+
+        return $self;
     }
 
     /**
@@ -118,10 +153,10 @@ final class CorporateBond implements BaseModel
      */
     public function withUnits(float $units): self
     {
-        $obj = clone $this;
-        $obj->units = $units;
+        $self = clone $this;
+        $self['units'] = $units;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +164,9 @@ final class CorporateBond implements BaseModel
      */
     public function withValue(float $value): self
     {
-        $obj = clone $this;
-        $obj->value = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

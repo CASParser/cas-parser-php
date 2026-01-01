@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type InvestorShape = array{
  *   address?: string|null,
- *   cas_id?: string|null,
+ *   casID?: string|null,
  *   email?: string|null,
  *   mobile?: string|null,
  *   name?: string|null,
@@ -27,43 +27,43 @@ final class Investor implements BaseModel
     /**
      * Address of the investor.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $address;
 
     /**
      * CAS ID of the investor (only for NSDL and CDSL).
      */
-    #[Api(optional: true)]
-    public ?string $cas_id;
+    #[Optional('cas_id')]
+    public ?string $casID;
 
     /**
      * Email address of the investor.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $email;
 
     /**
      * Mobile number of the investor.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mobile;
 
     /**
      * Name of the investor.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * PAN (Permanent Account Number) of the investor.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pan;
 
     /**
      * Postal code of the investor's address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pincode;
 
     public function __construct()
@@ -78,24 +78,24 @@ final class Investor implements BaseModel
      */
     public static function with(
         ?string $address = null,
-        ?string $cas_id = null,
+        ?string $casID = null,
         ?string $email = null,
         ?string $mobile = null,
         ?string $name = null,
         ?string $pan = null,
         ?string $pincode = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $address && $obj->address = $address;
-        null !== $cas_id && $obj->cas_id = $cas_id;
-        null !== $email && $obj->email = $email;
-        null !== $mobile && $obj->mobile = $mobile;
-        null !== $name && $obj->name = $name;
-        null !== $pan && $obj->pan = $pan;
-        null !== $pincode && $obj->pincode = $pincode;
+        null !== $address && $self['address'] = $address;
+        null !== $casID && $self['casID'] = $casID;
+        null !== $email && $self['email'] = $email;
+        null !== $mobile && $self['mobile'] = $mobile;
+        null !== $name && $self['name'] = $name;
+        null !== $pan && $self['pan'] = $pan;
+        null !== $pincode && $self['pincode'] = $pincode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class Investor implements BaseModel
      */
     public function withAddress(string $address): self
     {
-        $obj = clone $this;
-        $obj->address = $address;
+        $self = clone $this;
+        $self['address'] = $address;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Investor implements BaseModel
      */
     public function withCasID(string $casID): self
     {
-        $obj = clone $this;
-        $obj->cas_id = $casID;
+        $self = clone $this;
+        $self['casID'] = $casID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Investor implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj->email = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class Investor implements BaseModel
      */
     public function withMobile(string $mobile): self
     {
-        $obj = clone $this;
-        $obj->mobile = $mobile;
+        $self = clone $this;
+        $self['mobile'] = $mobile;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class Investor implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class Investor implements BaseModel
      */
     public function withPan(string $pan): self
     {
-        $obj = clone $this;
-        $obj->pan = $pan;
+        $self = clone $this;
+        $self['pan'] = $pan;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,9 +169,9 @@ final class Investor implements BaseModel
      */
     public function withPincode(string $pincode): self
     {
-        $obj = clone $this;
-        $obj->pincode = $pincode;
+        $self = clone $this;
+        $self['pincode'] = $pincode;
 
-        return $obj;
+        return $self;
     }
 }

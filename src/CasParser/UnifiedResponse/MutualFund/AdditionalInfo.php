@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\MutualFund;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class AdditionalInfo implements BaseModel
     /**
      * KYC status of the folio.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $kyc;
 
     /**
      * PAN associated with the folio.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pan;
 
     /**
      * PAN KYC status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pankyc;
 
     public function __construct()
@@ -53,13 +53,13 @@ final class AdditionalInfo implements BaseModel
         ?string $pan = null,
         ?string $pankyc = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $kyc && $obj->kyc = $kyc;
-        null !== $pan && $obj->pan = $pan;
-        null !== $pankyc && $obj->pankyc = $pankyc;
+        null !== $kyc && $self['kyc'] = $kyc;
+        null !== $pan && $self['pan'] = $pan;
+        null !== $pankyc && $self['pankyc'] = $pankyc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class AdditionalInfo implements BaseModel
      */
     public function withKYC(string $kyc): self
     {
-        $obj = clone $this;
-        $obj->kyc = $kyc;
+        $self = clone $this;
+        $self['kyc'] = $kyc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class AdditionalInfo implements BaseModel
      */
     public function withPan(string $pan): self
     {
-        $obj = clone $this;
-        $obj->pan = $pan;
+        $self = clone $this;
+        $self['pan'] = $pan;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class AdditionalInfo implements BaseModel
      */
     public function withPankyc(string $pankyc): self
     {
-        $obj = clone $this;
-        $obj->pankyc = $pankyc;
+        $self = clone $this;
+        $self['pankyc'] = $pankyc;
 
-        return $obj;
+        return $self;
     }
 }

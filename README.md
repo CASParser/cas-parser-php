@@ -47,9 +47,11 @@ Parameters with a default value must be set by name.
 
 use CasParser\Client;
 
-$client = new Client(apiKey: getenv("CAS_PARSER_API_KEY") ?: "My API Key");
+$client = new Client(apiKey: getenv('CAS_PARSER_API_KEY') ?: 'My API Key');
 
-$unifiedResponse = $client->casParser->smartParse([]);
+$unifiedResponse = $client->casParser->smartParse(
+  password: 'ABCDF', pdfURL: 'https://your-cas-pdf-url-here.com'
+);
 
 var_dump($unifiedResponse->demat_accounts);
 ```
@@ -71,11 +73,11 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use CasParser\Core\Exceptions\APIConnectionException;
 
 try {
-  $unifiedResponse = $client->casParser->smartParse([]);
+  $unifiedResponse = $client->casParser->smartParse();
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
-} catch (RateLimitError $_) {
+} catch (RateLimitError $e) {
   echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
 } catch (APIStatusError $e) {
   echo "Another non-200-range status code was received", PHP_EOL;
@@ -118,7 +120,9 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->casParser->smartParse(
-  [], RequestOptions::with(maxRetries: 5)
+  password: 'ABCDF',
+  pdfURL: 'https://you-cas-pdf-url-here.com',
+  requestOptions: RequestOptions::with(maxRetries: 5),
 );
 ```
 
@@ -138,11 +142,12 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 use CasParser\RequestOptions;
 
 $unifiedResponse = $client->casParser->smartParse(
-  [],
-  RequestOptions::with(
-    extraQueryParams: ["my_query_parameter" => "value"],
-    extraBodyParams: ["my_body_parameter" => "value"],
-    extraHeaders: ["my-header" => "value"],
+  password: 'ABCDF',
+  pdfURL: 'https://you-cas-pdf-url-here.com',
+  requestOptions: RequestOptions::with(
+    extraQueryParams: ['my_query_parameter' => 'value'],
+    extraBodyParams: ['my_body_parameter' => 'value'],
+    extraHeaders: ['my-header' => 'value'],
   ),
 );
 ```

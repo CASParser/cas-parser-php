@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\Np\Fund;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class AdditionalInfo implements BaseModel
     /**
      * Fund manager name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $manager;
 
     /**
      * NPS tier (Tier I or Tier II).
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?float $tier;
 
     public function __construct()
@@ -46,12 +46,12 @@ final class AdditionalInfo implements BaseModel
         ?string $manager = null,
         ?float $tier = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $manager && $obj->manager = $manager;
-        null !== $tier && $obj->tier = $tier;
+        null !== $manager && $self['manager'] = $manager;
+        null !== $tier && $self['tier'] = $tier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class AdditionalInfo implements BaseModel
      */
     public function withManager(string $manager): self
     {
-        $obj = clone $this;
-        $obj->manager = $manager;
+        $self = clone $this;
+        $self['manager'] = $manager;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class AdditionalInfo implements BaseModel
      */
     public function withTier(?float $tier): self
     {
-        $obj = clone $this;
-        $obj->tier = $tier;
+        $self = clone $this;
+        $self['tier'] = $tier;
 
-        return $obj;
+        return $self;
     }
 }

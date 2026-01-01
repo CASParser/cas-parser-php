@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace CasParser\ServiceContracts;
 
-use CasParser\CasParser\CasParserCamsKfintechParams;
-use CasParser\CasParser\CasParserCdslParams;
-use CasParser\CasParser\CasParserNsdlParams;
-use CasParser\CasParser\CasParserSmartParseParams;
 use CasParser\CasParser\UnifiedResponse;
 use CasParser\Core\Exceptions\APIException;
 use CasParser\RequestOptions;
@@ -17,48 +13,64 @@ interface CasParserContract
     /**
      * @api
      *
-     * @param array<mixed>|CasParserCamsKfintechParams $params
+     * @param string $password Password for the PDF file (if required)
+     * @param string $pdfFile Base64 encoded CAS PDF file
+     * @param string $pdfURL URL to the CAS PDF file
      *
      * @throws APIException
      */
     public function camsKfintech(
-        array|CasParserCamsKfintechParams $params,
+        ?string $password = null,
+        ?string $pdfFile = null,
+        ?string $pdfURL = null,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|CasParserCdslParams $params
+     * @param string $password Password for the PDF file (if required)
+     * @param string $pdfFile Base64 encoded CAS PDF file
+     * @param string $pdfURL URL to the CAS PDF file
      *
      * @throws APIException
      */
     public function cdsl(
-        array|CasParserCdslParams $params,
+        ?string $password = null,
+        ?string $pdfFile = null,
+        ?string $pdfURL = null,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|CasParserNsdlParams $params
+     * @param string $password Password for the PDF file (if required)
+     * @param string $pdfFile Base64 encoded CAS PDF file
+     * @param string $pdfURL URL to the CAS PDF file
      *
      * @throws APIException
      */
     public function nsdl(
-        array|CasParserNsdlParams $params,
+        ?string $password = null,
+        ?string $pdfFile = null,
+        ?string $pdfURL = null,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|CasParserSmartParseParams $params
+     * @param string $password Password for the PDF file (if required)
+     * @param string $pdfFile Base64 encoded CAS PDF file
+     * @param string $pdfURL URL to the CAS PDF file
      *
      * @throws APIException
      */
     public function smartParse(
-        array|CasParserSmartParseParams $params,
+        ?string $password = null,
+        ?string $pdfFile = null,
+        ?string $pdfURL = null,
         ?RequestOptions $requestOptions = null,
     ): UnifiedResponse;
 }

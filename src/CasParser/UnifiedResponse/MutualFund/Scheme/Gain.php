@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Gain implements BaseModel
     /**
      * Absolute gain or loss.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $absolute;
 
     /**
      * Percentage gain or loss.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $percentage;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class Gain implements BaseModel
         ?float $absolute = null,
         ?float $percentage = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $absolute && $obj->absolute = $absolute;
-        null !== $percentage && $obj->percentage = $percentage;
+        null !== $absolute && $self['absolute'] = $absolute;
+        null !== $percentage && $self['percentage'] = $percentage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Gain implements BaseModel
      */
     public function withAbsolute(float $absolute): self
     {
-        $obj = clone $this;
-        $obj->absolute = $absolute;
+        $self = clone $this;
+        $self['absolute'] = $absolute;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Gain implements BaseModel
      */
     public function withPercentage(float $percentage): self
     {
-        $obj = clone $this;
-        $obj->percentage = $percentage;
+        $self = clone $this;
+        $self['percentage'] = $percentage;
 
-        return $obj;
+        return $self;
     }
 }
