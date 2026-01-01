@@ -8,21 +8,25 @@ use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\AdditionalInfo;
 use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Gain;
 use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Transaction;
 use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Type;
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AdditionalInfoShape from \CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\AdditionalInfo
+ * @phpstan-import-type GainShape from \CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Gain
+ * @phpstan-import-type TransactionShape from \CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Transaction
+ *
  * @phpstan-type SchemeShape = array{
- *   additional_info?: AdditionalInfo|null,
+ *   additionalInfo?: null|\CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\AdditionalInfo|AdditionalInfoShape,
  *   cost?: float|null,
- *   gain?: Gain|null,
+ *   gain?: null|Gain|GainShape,
  *   isin?: string|null,
  *   name?: string|null,
  *   nav?: float|null,
  *   nominees?: list<string>|null,
- *   transactions?: list<Transaction>|null,
- *   type?: value-of<Type>|null,
+ *   transactions?: list<TransactionShape>|null,
+ *   type?: null|Type|value-of<Type>,
  *   units?: float|null,
  *   value?: float|null,
  * }
@@ -35,34 +39,34 @@ final class Scheme implements BaseModel
     /**
      * Additional information specific to the scheme.
      */
-    #[Api(optional: true)]
-    public ?AdditionalInfo $additional_info;
+    #[Optional('additional_info')]
+    public ?AdditionalInfo $additionalInfo;
 
     /**
      * Cost of investment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $cost;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Gain $gain;
 
     /**
      * ISIN code of the scheme.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $isin;
 
     /**
      * Scheme name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Net Asset Value per unit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $nav;
 
     /**
@@ -70,11 +74,11 @@ final class Scheme implements BaseModel
      *
      * @var list<string>|null $nominees
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $nominees;
 
     /** @var list<Transaction>|null $transactions */
-    #[Api(list: Transaction::class, optional: true)]
+    #[Optional(list: Transaction::class)]
     public ?array $transactions;
 
     /**
@@ -82,19 +86,19 @@ final class Scheme implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * Number of units held.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $units;
 
     /**
      * Current market value of the holding.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $value;
 
     public function __construct()
@@ -107,14 +111,16 @@ final class Scheme implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $nominees
-     * @param list<Transaction> $transactions
-     * @param Type|value-of<Type> $type
+     * @param AdditionalInfo|AdditionalInfoShape|null $additionalInfo
+     * @param Gain|GainShape|null $gain
+     * @param list<string>|null $nominees
+     * @param list<TransactionShape>|null $transactions
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
-        ?AdditionalInfo $additional_info = null,
+        AdditionalInfo|array|null $additionalInfo = null,
         ?float $cost = null,
-        ?Gain $gain = null,
+        Gain|array|null $gain = null,
         ?string $isin = null,
         ?string $name = null,
         ?float $nav = null,
@@ -124,32 +130,35 @@ final class Scheme implements BaseModel
         ?float $units = null,
         ?float $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additional_info && $obj->additional_info = $additional_info;
-        null !== $cost && $obj->cost = $cost;
-        null !== $gain && $obj->gain = $gain;
-        null !== $isin && $obj->isin = $isin;
-        null !== $name && $obj->name = $name;
-        null !== $nav && $obj->nav = $nav;
-        null !== $nominees && $obj->nominees = $nominees;
-        null !== $transactions && $obj->transactions = $transactions;
-        null !== $type && $obj['type'] = $type;
-        null !== $units && $obj->units = $units;
-        null !== $value && $obj->value = $value;
+        null !== $additionalInfo && $self['additionalInfo'] = $additionalInfo;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $gain && $self['gain'] = $gain;
+        null !== $isin && $self['isin'] = $isin;
+        null !== $name && $self['name'] = $name;
+        null !== $nav && $self['nav'] = $nav;
+        null !== $nominees && $self['nominees'] = $nominees;
+        null !== $transactions && $self['transactions'] = $transactions;
+        null !== $type && $self['type'] = $type;
+        null !== $units && $self['units'] = $units;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Additional information specific to the scheme.
+     *
+     * @param AdditionalInfo|AdditionalInfoShape $additionalInfo
      */
-    public function withAdditionalInfo(AdditionalInfo $additionalInfo): self
-    {
-        $obj = clone $this;
-        $obj->additional_info = $additionalInfo;
+    public function withAdditionalInfo(
+        AdditionalInfo|array $additionalInfo,
+    ): self {
+        $self = clone $this;
+        $self['additionalInfo'] = $additionalInfo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,18 +166,21 @@ final class Scheme implements BaseModel
      */
     public function withCost(float $cost): self
     {
-        $obj = clone $this;
-        $obj->cost = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
-    public function withGain(Gain $gain): self
+    /**
+     * @param Gain|GainShape $gain
+     */
+    public function withGain(Gain|array $gain): self
     {
-        $obj = clone $this;
-        $obj->gain = $gain;
+        $self = clone $this;
+        $self['gain'] = $gain;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +188,10 @@ final class Scheme implements BaseModel
      */
     public function withIsin(string $isin): self
     {
-        $obj = clone $this;
-        $obj->isin = $isin;
+        $self = clone $this;
+        $self['isin'] = $isin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +199,10 @@ final class Scheme implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +210,10 @@ final class Scheme implements BaseModel
      */
     public function withNav(float $nav): self
     {
-        $obj = clone $this;
-        $obj->nav = $nav;
+        $self = clone $this;
+        $self['nav'] = $nav;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,21 +223,21 @@ final class Scheme implements BaseModel
      */
     public function withNominees(array $nominees): self
     {
-        $obj = clone $this;
-        $obj->nominees = $nominees;
+        $self = clone $this;
+        $self['nominees'] = $nominees;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Transaction> $transactions
+     * @param list<TransactionShape> $transactions
      */
     public function withTransactions(array $transactions): self
     {
-        $obj = clone $this;
-        $obj->transactions = $transactions;
+        $self = clone $this;
+        $self['transactions'] = $transactions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -235,10 +247,10 @@ final class Scheme implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,10 +258,10 @@ final class Scheme implements BaseModel
      */
     public function withUnits(float $units): self
     {
-        $obj = clone $this;
-        $obj->units = $units;
+        $self = clone $this;
+        $self['units'] = $units;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -257,9 +269,9 @@ final class Scheme implements BaseModel
      */
     public function withValue(float $value): self
     {
-        $obj = clone $this;
-        $obj->value = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
@@ -16,7 +16,7 @@ use CasParser\Core\Contracts\BaseModel;
  * @see CasParser\Services\CasParserService::camsKfintech()
  *
  * @phpstan-type CasParserCamsKfintechParamsShape = array{
- *   password?: string, pdf_file?: string, pdf_url?: string
+ *   password?: string|null, pdfFile?: string|null, pdfURL?: string|null
  * }
  */
 final class CasParserCamsKfintechParams implements BaseModel
@@ -28,20 +28,20 @@ final class CasParserCamsKfintechParams implements BaseModel
     /**
      * Password for the PDF file (if required).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $password;
 
     /**
      * Base64 encoded CAS PDF file.
      */
-    #[Api(optional: true)]
-    public ?string $pdf_file;
+    #[Optional('pdf_file')]
+    public ?string $pdfFile;
 
     /**
      * URL to the CAS PDF file.
      */
-    #[Api(optional: true)]
-    public ?string $pdf_url;
+    #[Optional('pdf_url')]
+    public ?string $pdfURL;
 
     public function __construct()
     {
@@ -55,16 +55,16 @@ final class CasParserCamsKfintechParams implements BaseModel
      */
     public static function with(
         ?string $password = null,
-        ?string $pdf_file = null,
-        ?string $pdf_url = null
+        ?string $pdfFile = null,
+        ?string $pdfURL = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $password && $obj->password = $password;
-        null !== $pdf_file && $obj->pdf_file = $pdf_file;
-        null !== $pdf_url && $obj->pdf_url = $pdf_url;
+        null !== $password && $self['password'] = $password;
+        null !== $pdfFile && $self['pdfFile'] = $pdfFile;
+        null !== $pdfURL && $self['pdfURL'] = $pdfURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,10 +72,10 @@ final class CasParserCamsKfintechParams implements BaseModel
      */
     public function withPassword(string $password): self
     {
-        $obj = clone $this;
-        $obj->password = $password;
+        $self = clone $this;
+        $self['password'] = $password;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class CasParserCamsKfintechParams implements BaseModel
      */
     public function withPdfFile(string $pdfFile): self
     {
-        $obj = clone $this;
-        $obj->pdf_file = $pdfFile;
+        $self = clone $this;
+        $self['pdfFile'] = $pdfFile;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,9 +94,9 @@ final class CasParserCamsKfintechParams implements BaseModel
      */
     public function withPdfURL(string $pdfURL): self
     {
-        $obj = clone $this;
-        $obj->pdf_url = $pdfURL;
+        $self = clone $this;
+        $self['pdfURL'] = $pdfURL;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\MutualFund;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class LinkedHolder implements BaseModel
     /**
      * Name of the account holder.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * PAN of the account holder.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pan;
 
     public function __construct()
@@ -40,12 +40,12 @@ final class LinkedHolder implements BaseModel
      */
     public static function with(?string $name = null, ?string $pan = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $pan && $obj->pan = $pan;
+        null !== $name && $self['name'] = $name;
+        null !== $pan && $self['pan'] = $pan;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,10 +53,10 @@ final class LinkedHolder implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +64,9 @@ final class LinkedHolder implements BaseModel
      */
     public function withPan(string $pan): self
     {
-        $obj = clone $this;
-        $obj->pan = $pan;
+        $self = clone $this;
+        $self['pan'] = $pan;
 
-        return $obj;
+        return $self;
     }
 }

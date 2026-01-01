@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\CasParser\UnifiedResponse\Insurance\LifeInsurancePolicy;
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type LifeInsurancePolicyShape from \CasParser\CasParser\UnifiedResponse\Insurance\LifeInsurancePolicy
+ *
  * @phpstan-type InsuranceShape = array{
- *   life_insurance_policies?: list<LifeInsurancePolicy>|null
+ *   lifeInsurancePolicies?: list<LifeInsurancePolicyShape>|null
  * }
  */
 final class Insurance implements BaseModel
@@ -19,9 +21,9 @@ final class Insurance implements BaseModel
     /** @use SdkModel<InsuranceShape> */
     use SdkModel;
 
-    /** @var list<LifeInsurancePolicy>|null $life_insurance_policies */
-    #[Api(list: LifeInsurancePolicy::class, optional: true)]
-    public ?array $life_insurance_policies;
+    /** @var list<LifeInsurancePolicy>|null $lifeInsurancePolicies */
+    #[Optional('life_insurance_policies', list: LifeInsurancePolicy::class)]
+    public ?array $lifeInsurancePolicies;
 
     public function __construct()
     {
@@ -33,26 +35,26 @@ final class Insurance implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LifeInsurancePolicy> $life_insurance_policies
+     * @param list<LifeInsurancePolicyShape>|null $lifeInsurancePolicies
      */
-    public static function with(?array $life_insurance_policies = null): self
+    public static function with(?array $lifeInsurancePolicies = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $life_insurance_policies && $obj->life_insurance_policies = $life_insurance_policies;
+        null !== $lifeInsurancePolicies && $self['lifeInsurancePolicies'] = $lifeInsurancePolicies;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<LifeInsurancePolicy> $lifeInsurancePolicies
+     * @param list<LifeInsurancePolicyShape> $lifeInsurancePolicies
      */
     public function withLifeInsurancePolicies(
         array $lifeInsurancePolicies
     ): self {
-        $obj = clone $this;
-        $obj->life_insurance_policies = $lifeInsurancePolicies;
+        $self = clone $this;
+        $self['lifeInsurancePolicies'] = $lifeInsurancePolicies;
 
-        return $obj;
+        return $self;
     }
 }

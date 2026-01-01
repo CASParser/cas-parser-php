@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\Meta;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type StatementPeriodShape = array{
- *   from?: \DateTimeInterface|null, to?: \DateTimeInterface|null
- * }
+ * @phpstan-type StatementPeriodShape = array{from?: string|null, to?: string|null}
  */
 final class StatementPeriod implements BaseModel
 {
@@ -21,14 +19,14 @@ final class StatementPeriod implements BaseModel
     /**
      * Start date of the statement period.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $from;
+    #[Optional]
+    public ?string $from;
 
     /**
      * End date of the statement period.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $to;
+    #[Optional]
+    public ?string $to;
 
     public function __construct()
     {
@@ -40,37 +38,35 @@ final class StatementPeriod implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        ?\DateTimeInterface $from = null,
-        ?\DateTimeInterface $to = null
-    ): self {
-        $obj = new self;
+    public static function with(?string $from = null, ?string $to = null): self
+    {
+        $self = new self;
 
-        null !== $from && $obj->from = $from;
-        null !== $to && $obj->to = $to;
+        null !== $from && $self['from'] = $from;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Start date of the statement period.
      */
-    public function withFrom(\DateTimeInterface $from): self
+    public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * End date of the statement period.
      */
-    public function withTo(\DateTimeInterface $to): self
+    public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

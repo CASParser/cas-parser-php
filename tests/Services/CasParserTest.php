@@ -2,6 +2,7 @@
 
 namespace Tests\Services;
 
+use CasParser\CasParser\UnifiedResponse;
 use CasParser\Client;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -33,9 +34,10 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casParser->camsKfintech([]);
+        $result = $this->client->casParser->camsKfintech();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UnifiedResponse::class, $result);
     }
 
     #[Test]
@@ -45,9 +47,10 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casParser->cdsl([]);
+        $result = $this->client->casParser->cdsl();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UnifiedResponse::class, $result);
     }
 
     #[Test]
@@ -57,9 +60,10 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casParser->nsdl([]);
+        $result = $this->client->casParser->nsdl();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UnifiedResponse::class, $result);
     }
 
     #[Test]
@@ -69,8 +73,9 @@ final class CasParserTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casParser->smartParse([]);
+        $result = $this->client->casParser->smartParse();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UnifiedResponse::class, $result);
     }
 }

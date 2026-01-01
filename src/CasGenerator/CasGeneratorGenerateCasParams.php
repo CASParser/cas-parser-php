@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace CasParser\CasGenerator;
 
 use CasParser\CasGenerator\CasGeneratorGenerateCasParams\CasAuthority;
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
+use CasParser\Core\Attributes\Required;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
@@ -18,11 +19,11 @@ use CasParser\Core\Contracts\BaseModel;
  *
  * @phpstan-type CasGeneratorGenerateCasParamsShape = array{
  *   email: string,
- *   from_date: string,
+ *   fromDate: string,
  *   password: string,
- *   to_date: string,
- *   cas_authority?: CasAuthority|value-of<CasAuthority>,
- *   pan_no?: string,
+ *   toDate: string,
+ *   casAuthority?: null|CasAuthority|value-of<CasAuthority>,
+ *   panNo?: string|null,
  * }
  */
 final class CasGeneratorGenerateCasParams implements BaseModel
@@ -34,40 +35,40 @@ final class CasGeneratorGenerateCasParams implements BaseModel
     /**
      * Email address to receive the CAS document.
      */
-    #[Api]
+    #[Required]
     public string $email;
 
     /**
      * Start date for the CAS period (format YYYY-MM-DD).
      */
-    #[Api]
-    public string $from_date;
+    #[Required('from_date')]
+    public string $fromDate;
 
     /**
      * Password to protect the generated CAS PDF.
      */
-    #[Api]
+    #[Required]
     public string $password;
 
     /**
      * End date for the CAS period (format YYYY-MM-DD).
      */
-    #[Api]
-    public string $to_date;
+    #[Required('to_date')]
+    public string $toDate;
 
     /**
      * CAS authority to generate the document from (currently only kfintech is supported).
      *
-     * @var value-of<CasAuthority>|null $cas_authority
+     * @var value-of<CasAuthority>|null $casAuthority
      */
-    #[Api(enum: CasAuthority::class, optional: true)]
-    public ?string $cas_authority;
+    #[Optional('cas_authority', enum: CasAuthority::class)]
+    public ?string $casAuthority;
 
     /**
      * PAN number (optional for some CAS authorities).
      */
-    #[Api(optional: true)]
-    public ?string $pan_no;
+    #[Optional('pan_no')]
+    public ?string $panNo;
 
     /**
      * `new CasGeneratorGenerateCasParams()` is missing required properties by the API.
@@ -75,7 +76,7 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      * To enforce required parameters use
      * ```
      * CasGeneratorGenerateCasParams::with(
-     *   email: ..., from_date: ..., password: ..., to_date: ...
+     *   email: ..., fromDate: ..., password: ..., toDate: ...
      * )
      * ```
      *
@@ -99,27 +100,27 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CasAuthority|value-of<CasAuthority> $cas_authority
+     * @param CasAuthority|value-of<CasAuthority>|null $casAuthority
      */
     public static function with(
         string $email,
-        string $from_date,
+        string $fromDate,
         string $password,
-        string $to_date,
-        CasAuthority|string|null $cas_authority = null,
-        ?string $pan_no = null,
+        string $toDate,
+        CasAuthority|string|null $casAuthority = null,
+        ?string $panNo = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->email = $email;
-        $obj->from_date = $from_date;
-        $obj->password = $password;
-        $obj->to_date = $to_date;
+        $self['email'] = $email;
+        $self['fromDate'] = $fromDate;
+        $self['password'] = $password;
+        $self['toDate'] = $toDate;
 
-        null !== $cas_authority && $obj['cas_authority'] = $cas_authority;
-        null !== $pan_no && $obj->pan_no = $pan_no;
+        null !== $casAuthority && $self['casAuthority'] = $casAuthority;
+        null !== $panNo && $self['panNo'] = $panNo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +128,10 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj->email = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +139,10 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      */
     public function withFromDate(string $fromDate): self
     {
-        $obj = clone $this;
-        $obj->from_date = $fromDate;
+        $self = clone $this;
+        $self['fromDate'] = $fromDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +150,10 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      */
     public function withPassword(string $password): self
     {
-        $obj = clone $this;
-        $obj->password = $password;
+        $self = clone $this;
+        $self['password'] = $password;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +161,10 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      */
     public function withToDate(string $toDate): self
     {
-        $obj = clone $this;
-        $obj->to_date = $toDate;
+        $self = clone $this;
+        $self['toDate'] = $toDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +174,10 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      */
     public function withCasAuthority(CasAuthority|string $casAuthority): self
     {
-        $obj = clone $this;
-        $obj['cas_authority'] = $casAuthority;
+        $self = clone $this;
+        $self['casAuthority'] = $casAuthority;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,9 +185,9 @@ final class CasGeneratorGenerateCasParams implements BaseModel
      */
     public function withPanNo(string $panNo): self
     {
-        $obj = clone $this;
-        $obj->pan_no = $panNo;
+        $self = clone $this;
+        $self['panNo'] = $panNo;
 
-        return $obj;
+        return $self;
     }
 }

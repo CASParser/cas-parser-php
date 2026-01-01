@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\CasParser\UnifiedResponse\Summary\Accounts;
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AccountsShape from \CasParser\CasParser\UnifiedResponse\Summary\Accounts
+ *
  * @phpstan-type SummaryShape = array{
- *   accounts?: Accounts|null, total_value?: float|null
+ *   accounts?: null|Accounts|AccountsShape, totalValue?: float|null
  * }
  */
 final class Summary implements BaseModel
@@ -19,14 +21,14 @@ final class Summary implements BaseModel
     /** @use SdkModel<SummaryShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Accounts $accounts;
 
     /**
      * Total portfolio value across all accounts.
      */
-    #[Api(optional: true)]
-    public ?float $total_value;
+    #[Optional('total_value')]
+    public ?float $totalValue;
 
     public function __construct()
     {
@@ -37,25 +39,30 @@ final class Summary implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Accounts|AccountsShape|null $accounts
      */
     public static function with(
-        ?Accounts $accounts = null,
-        ?float $total_value = null
+        Accounts|array|null $accounts = null,
+        ?float $totalValue = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accounts && $obj->accounts = $accounts;
-        null !== $total_value && $obj->total_value = $total_value;
+        null !== $accounts && $self['accounts'] = $accounts;
+        null !== $totalValue && $self['totalValue'] = $totalValue;
 
-        return $obj;
+        return $self;
     }
 
-    public function withAccounts(Accounts $accounts): self
+    /**
+     * @param Accounts|AccountsShape $accounts
+     */
+    public function withAccounts(Accounts|array $accounts): self
     {
-        $obj = clone $this;
-        $obj->accounts = $accounts;
+        $self = clone $this;
+        $self['accounts'] = $accounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,9 +70,9 @@ final class Summary implements BaseModel
      */
     public function withTotalValue(float $totalValue): self
     {
-        $obj = clone $this;
-        $obj->total_value = $totalValue;
+        $self = clone $this;
+        $self['totalValue'] = $totalValue;
 
-        return $obj;
+        return $self;
     }
 }

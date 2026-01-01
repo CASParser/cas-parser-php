@@ -8,20 +8,24 @@ use CasParser\CasParser\UnifiedResponse\DematAccount\AdditionalInfo;
 use CasParser\CasParser\UnifiedResponse\DematAccount\DematType;
 use CasParser\CasParser\UnifiedResponse\DematAccount\Holdings;
 use CasParser\CasParser\UnifiedResponse\DematAccount\LinkedHolder;
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AdditionalInfoShape from \CasParser\CasParser\UnifiedResponse\DematAccount\AdditionalInfo
+ * @phpstan-import-type HoldingsShape from \CasParser\CasParser\UnifiedResponse\DematAccount\Holdings
+ * @phpstan-import-type LinkedHolderShape from \CasParser\CasParser\UnifiedResponse\DematAccount\LinkedHolder
+ *
  * @phpstan-type DematAccountShape = array{
- *   additional_info?: AdditionalInfo|null,
- *   bo_id?: string|null,
- *   client_id?: string|null,
- *   demat_type?: value-of<DematType>|null,
- *   dp_id?: string|null,
- *   dp_name?: string|null,
- *   holdings?: Holdings|null,
- *   linked_holders?: list<LinkedHolder>|null,
+ *   additionalInfo?: null|AdditionalInfo|AdditionalInfoShape,
+ *   boID?: string|null,
+ *   clientID?: string|null,
+ *   dematType?: null|DematType|value-of<DematType>,
+ *   dpID?: string|null,
+ *   dpName?: string|null,
+ *   holdings?: null|Holdings|HoldingsShape,
+ *   linkedHolders?: list<LinkedHolderShape>|null,
  *   value?: float|null,
  * }
  */
@@ -33,56 +37,56 @@ final class DematAccount implements BaseModel
     /**
      * Additional information specific to the demat account type.
      */
-    #[Api(optional: true)]
-    public ?AdditionalInfo $additional_info;
+    #[Optional('additional_info')]
+    public ?AdditionalInfo $additionalInfo;
 
     /**
      * Beneficiary Owner ID (primarily for CDSL).
      */
-    #[Api(optional: true)]
-    public ?string $bo_id;
+    #[Optional('bo_id')]
+    public ?string $boID;
 
     /**
      * Client ID.
      */
-    #[Api(optional: true)]
-    public ?string $client_id;
+    #[Optional('client_id')]
+    public ?string $clientID;
 
     /**
      * Type of demat account.
      *
-     * @var value-of<DematType>|null $demat_type
+     * @var value-of<DematType>|null $dematType
      */
-    #[Api(enum: DematType::class, optional: true)]
-    public ?string $demat_type;
+    #[Optional('demat_type', enum: DematType::class)]
+    public ?string $dematType;
 
     /**
      * Depository Participant ID.
      */
-    #[Api(optional: true)]
-    public ?string $dp_id;
+    #[Optional('dp_id')]
+    public ?string $dpID;
 
     /**
      * Depository Participant name.
      */
-    #[Api(optional: true)]
-    public ?string $dp_name;
+    #[Optional('dp_name')]
+    public ?string $dpName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Holdings $holdings;
 
     /**
      * List of account holders linked to this demat account.
      *
-     * @var list<LinkedHolder>|null $linked_holders
+     * @var list<LinkedHolder>|null $linkedHolders
      */
-    #[Api(list: LinkedHolder::class, optional: true)]
-    public ?array $linked_holders;
+    #[Optional('linked_holders', list: LinkedHolder::class)]
+    public ?array $linkedHolders;
 
     /**
      * Total value of the demat account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $value;
 
     public function __construct()
@@ -95,44 +99,49 @@ final class DematAccount implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DematType|value-of<DematType> $demat_type
-     * @param list<LinkedHolder> $linked_holders
+     * @param AdditionalInfo|AdditionalInfoShape|null $additionalInfo
+     * @param DematType|value-of<DematType>|null $dematType
+     * @param Holdings|HoldingsShape|null $holdings
+     * @param list<LinkedHolderShape>|null $linkedHolders
      */
     public static function with(
-        ?AdditionalInfo $additional_info = null,
-        ?string $bo_id = null,
-        ?string $client_id = null,
-        DematType|string|null $demat_type = null,
-        ?string $dp_id = null,
-        ?string $dp_name = null,
-        ?Holdings $holdings = null,
-        ?array $linked_holders = null,
+        AdditionalInfo|array|null $additionalInfo = null,
+        ?string $boID = null,
+        ?string $clientID = null,
+        DematType|string|null $dematType = null,
+        ?string $dpID = null,
+        ?string $dpName = null,
+        Holdings|array|null $holdings = null,
+        ?array $linkedHolders = null,
         ?float $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additional_info && $obj->additional_info = $additional_info;
-        null !== $bo_id && $obj->bo_id = $bo_id;
-        null !== $client_id && $obj->client_id = $client_id;
-        null !== $demat_type && $obj['demat_type'] = $demat_type;
-        null !== $dp_id && $obj->dp_id = $dp_id;
-        null !== $dp_name && $obj->dp_name = $dp_name;
-        null !== $holdings && $obj->holdings = $holdings;
-        null !== $linked_holders && $obj->linked_holders = $linked_holders;
-        null !== $value && $obj->value = $value;
+        null !== $additionalInfo && $self['additionalInfo'] = $additionalInfo;
+        null !== $boID && $self['boID'] = $boID;
+        null !== $clientID && $self['clientID'] = $clientID;
+        null !== $dematType && $self['dematType'] = $dematType;
+        null !== $dpID && $self['dpID'] = $dpID;
+        null !== $dpName && $self['dpName'] = $dpName;
+        null !== $holdings && $self['holdings'] = $holdings;
+        null !== $linkedHolders && $self['linkedHolders'] = $linkedHolders;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Additional information specific to the demat account type.
+     *
+     * @param AdditionalInfo|AdditionalInfoShape $additionalInfo
      */
-    public function withAdditionalInfo(AdditionalInfo $additionalInfo): self
-    {
-        $obj = clone $this;
-        $obj->additional_info = $additionalInfo;
+    public function withAdditionalInfo(
+        AdditionalInfo|array $additionalInfo
+    ): self {
+        $self = clone $this;
+        $self['additionalInfo'] = $additionalInfo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +149,10 @@ final class DematAccount implements BaseModel
      */
     public function withBoID(string $boID): self
     {
-        $obj = clone $this;
-        $obj->bo_id = $boID;
+        $self = clone $this;
+        $self['boID'] = $boID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +160,10 @@ final class DematAccount implements BaseModel
      */
     public function withClientID(string $clientID): self
     {
-        $obj = clone $this;
-        $obj->client_id = $clientID;
+        $self = clone $this;
+        $self['clientID'] = $clientID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +173,10 @@ final class DematAccount implements BaseModel
      */
     public function withDematType(DematType|string $dematType): self
     {
-        $obj = clone $this;
-        $obj['demat_type'] = $dematType;
+        $self = clone $this;
+        $self['dematType'] = $dematType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +184,10 @@ final class DematAccount implements BaseModel
      */
     public function withDpID(string $dpID): self
     {
-        $obj = clone $this;
-        $obj->dp_id = $dpID;
+        $self = clone $this;
+        $self['dpID'] = $dpID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,31 +195,34 @@ final class DematAccount implements BaseModel
      */
     public function withDpName(string $dpName): self
     {
-        $obj = clone $this;
-        $obj->dp_name = $dpName;
+        $self = clone $this;
+        $self['dpName'] = $dpName;
 
-        return $obj;
+        return $self;
     }
 
-    public function withHoldings(Holdings $holdings): self
+    /**
+     * @param Holdings|HoldingsShape $holdings
+     */
+    public function withHoldings(Holdings|array $holdings): self
     {
-        $obj = clone $this;
-        $obj->holdings = $holdings;
+        $self = clone $this;
+        $self['holdings'] = $holdings;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of account holders linked to this demat account.
      *
-     * @param list<LinkedHolder> $linkedHolders
+     * @param list<LinkedHolderShape> $linkedHolders
      */
     public function withLinkedHolders(array $linkedHolders): self
     {
-        $obj = clone $this;
-        $obj->linked_holders = $linkedHolders;
+        $self = clone $this;
+        $self['linkedHolders'] = $linkedHolders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,9 +230,9 @@ final class DematAccount implements BaseModel
      */
     public function withValue(float $value): self
     {
-        $obj = clone $this;
-        $obj->value = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

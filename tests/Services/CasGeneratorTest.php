@@ -2,6 +2,7 @@
 
 namespace Tests\Services;
 
+use CasParser\CasGenerator\CasGeneratorGenerateCasResponse;
 use CasParser\Client;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -33,14 +34,15 @@ final class CasGeneratorTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casGenerator->generateCas([
-            'email' => 'user@example.com',
-            'from_date' => '2023-01-01',
-            'password' => 'Abcdefghi12$',
-            'to_date' => '2023-12-31',
-        ]);
+        $result = $this->client->casGenerator->generateCas(
+            email: 'user@example.com',
+            fromDate: '2023-01-01',
+            password: 'Abcdefghi12$',
+            toDate: '2023-12-31',
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CasGeneratorGenerateCasResponse::class, $result);
     }
 
     #[Test]
@@ -50,13 +52,16 @@ final class CasGeneratorTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->casGenerator->generateCas([
-            'email' => 'user@example.com',
-            'from_date' => '2023-01-01',
-            'password' => 'Abcdefghi12$',
-            'to_date' => '2023-12-31',
-        ]);
+        $result = $this->client->casGenerator->generateCas(
+            email: 'user@example.com',
+            fromDate: '2023-01-01',
+            password: 'Abcdefghi12$',
+            toDate: '2023-12-31',
+            casAuthority: 'kfintech',
+            panNo: 'ABCDE1234F',
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CasGeneratorGenerateCasResponse::class, $result);
     }
 }

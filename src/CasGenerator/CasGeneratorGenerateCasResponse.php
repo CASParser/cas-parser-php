@@ -4,28 +4,24 @@ declare(strict_types=1);
 
 namespace CasParser\CasGenerator;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
-use CasParser\Core\Concerns\SdkResponse;
 use CasParser\Core\Contracts\BaseModel;
-use CasParser\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CasGeneratorGenerateCasResponseShape = array{
  *   msg?: string|null, status?: string|null
  * }
  */
-final class CasGeneratorGenerateCasResponse implements BaseModel, ResponseConverter
+final class CasGeneratorGenerateCasResponse implements BaseModel
 {
     /** @use SdkModel<CasGeneratorGenerateCasResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $msg;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()
@@ -40,27 +36,27 @@ final class CasGeneratorGenerateCasResponse implements BaseModel, ResponseConver
      */
     public static function with(?string $msg = null, ?string $status = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $msg && $obj->msg = $msg;
-        null !== $status && $obj->status = $status;
+        null !== $msg && $self['msg'] = $msg;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withMsg(string $msg): self
     {
-        $obj = clone $this;
-        $obj->msg = $msg;
+        $self = clone $this;
+        $self['msg'] = $msg;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

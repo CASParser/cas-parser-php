@@ -4,19 +4,26 @@ declare(strict_types=1);
 
 namespace CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Transaction\AdditionalInfo;
+use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Transaction\Type;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * Unified transaction schema for all holding types (MF folios, equities, bonds, etc.).
+ *
+ * @phpstan-import-type AdditionalInfoShape from \CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Transaction\AdditionalInfo
+ *
  * @phpstan-type TransactionShape = array{
+ *   additionalInfo?: null|\CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Transaction\AdditionalInfo|AdditionalInfoShape,
  *   amount?: float|null,
  *   balance?: float|null,
- *   date?: \DateTimeInterface|null,
+ *   date?: string|null,
  *   description?: string|null,
- *   dividend_rate?: float|null,
+ *   dividendRate?: float|null,
  *   nav?: float|null,
- *   type?: string|null,
+ *   type?: null|\CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Transaction\Type|value-of<\CasParser\CasParser\UnifiedResponse\MutualFund\Scheme\Transaction\Type>,
  *   units?: float|null,
  * }
  */
@@ -26,51 +33,61 @@ final class Transaction implements BaseModel
     use SdkModel;
 
     /**
-     * Transaction amount.
+     * Additional transaction-specific fields that vary by source.
      */
-    #[Api(optional: true)]
+    #[Optional('additional_info')]
+    public ?AdditionalInfo $additionalInfo;
+
+    /**
+     * Transaction amount in currency (computed from units × price/NAV).
+     */
+    #[Optional(nullable: true)]
     public ?float $amount;
 
     /**
      * Balance units after transaction.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $balance;
 
     /**
-     * Transaction date.
+     * Transaction date (YYYY-MM-DD).
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $date;
+    #[Optional]
+    public ?string $date;
 
     /**
-     * Transaction description.
+     * Transaction description/particulars.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
-     * Dividend rate (for dividend transactions).
+     * Dividend rate (for DIVIDEND_PAYOUT transactions).
      */
-    #[Api(optional: true)]
-    public ?float $dividend_rate;
+    #[Optional('dividend_rate', nullable: true)]
+    public ?float $dividendRate;
 
     /**
-     * NAV on transaction date.
+     * NAV/price per unit on transaction date.
      */
-    #[Api(optional: true)]
+    #[Optional(nullable: true)]
     public ?float $nav;
 
     /**
-     * Transaction type detected based on description. Possible values are PURCHASE,PURCHASE_SIP,REDEMPTION,SWITCH_IN,SWITCH_IN_MERGER,SWITCH_OUT,SWITCH_OUT_MERGER,DIVIDEND_PAYOUT,DIVIDEND_REINVESTMENT,SEGREGATION,STAMP_DUTY_TAX,TDS_TAX,STT_TAX,MISC. If dividend_rate is present, then possible values are dividend_rate is applicable only for DIVIDEND_PAYOUT and DIVIDEND_REINVESTMENT.
+     * Transaction type. Possible values are PURCHASE, PURCHASE_SIP, REDEMPTION, SWITCH_IN, SWITCH_IN_MERGER, SWITCH_OUT, SWITCH_OUT_MERGER, DIVIDEND_PAYOUT, DIVIDEND_REINVEST, SEGREGATION, STAMP_DUTY_TAX, TDS_TAX, STT_TAX, MISC, REVERSAL, UNKNOWN.
+     *
+     * @var value-of<Type>|null $type
      */
-    #[Api(optional: true)]
+    #[Optional(
+        enum: Type::class,
+    )]
     public ?string $type;
 
     /**
-     * Number of units involved.
+     * Number of units involved in transaction.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $units;
 
     public function __construct()
@@ -82,40 +99,59 @@ final class Transaction implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AdditionalInfo|AdditionalInfoShape|null $additionalInfo
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
+        AdditionalInfo|array|null $additionalInfo = null,
         ?float $amount = null,
         ?float $balance = null,
-        ?\DateTimeInterface $date = null,
+        ?string $date = null,
         ?string $description = null,
-        ?float $dividend_rate = null,
+        ?float $dividendRate = null,
         ?float $nav = null,
-        ?string $type = null,
+        Type|string|null $type = null,
         ?float $units = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $balance && $obj->balance = $balance;
-        null !== $date && $obj->date = $date;
-        null !== $description && $obj->description = $description;
-        null !== $dividend_rate && $obj->dividend_rate = $dividend_rate;
-        null !== $nav && $obj->nav = $nav;
-        null !== $type && $obj->type = $type;
-        null !== $units && $obj->units = $units;
+        null !== $additionalInfo && $self['additionalInfo'] = $additionalInfo;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $balance && $self['balance'] = $balance;
+        null !== $date && $self['date'] = $date;
+        null !== $description && $self['description'] = $description;
+        null !== $dividendRate && $self['dividendRate'] = $dividendRate;
+        null !== $nav && $self['nav'] = $nav;
+        null !== $type && $self['type'] = $type;
+        null !== $units && $self['units'] = $units;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * Transaction amount.
+     * Additional transaction-specific fields that vary by source.
+     *
+     * @param AdditionalInfo|AdditionalInfoShape $additionalInfo
      */
-    public function withAmount(float $amount): self
-    {
-        $obj = clone $this;
-        $obj->amount = $amount;
+    public function withAdditionalInfo(
+        AdditionalInfo|array $additionalInfo,
+    ): self {
+        $self = clone $this;
+        $self['additionalInfo'] = $additionalInfo;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Transaction amount in currency (computed from units × price/NAV).
+     */
+    public function withAmount(?float $amount): self
+    {
+        $self = clone $this;
+        $self['amount'] = $amount;
+
+        return $self;
     }
 
     /**
@@ -123,75 +159,78 @@ final class Transaction implements BaseModel
      */
     public function withBalance(float $balance): self
     {
-        $obj = clone $this;
-        $obj->balance = $balance;
+        $self = clone $this;
+        $self['balance'] = $balance;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * Transaction date.
+     * Transaction date (YYYY-MM-DD).
      */
-    public function withDate(\DateTimeInterface $date): self
+    public function withDate(string $date): self
     {
-        $obj = clone $this;
-        $obj->date = $date;
+        $self = clone $this;
+        $self['date'] = $date;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * Transaction description.
+     * Transaction description/particulars.
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * Dividend rate (for dividend transactions).
+     * Dividend rate (for DIVIDEND_PAYOUT transactions).
      */
-    public function withDividendRate(float $dividendRate): self
+    public function withDividendRate(?float $dividendRate): self
     {
-        $obj = clone $this;
-        $obj->dividend_rate = $dividendRate;
+        $self = clone $this;
+        $self['dividendRate'] = $dividendRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * NAV on transaction date.
+     * NAV/price per unit on transaction date.
      */
-    public function withNav(float $nav): self
+    public function withNav(?float $nav): self
     {
-        $obj = clone $this;
-        $obj->nav = $nav;
+        $self = clone $this;
+        $self['nav'] = $nav;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * Transaction type detected based on description. Possible values are PURCHASE,PURCHASE_SIP,REDEMPTION,SWITCH_IN,SWITCH_IN_MERGER,SWITCH_OUT,SWITCH_OUT_MERGER,DIVIDEND_PAYOUT,DIVIDEND_REINVESTMENT,SEGREGATION,STAMP_DUTY_TAX,TDS_TAX,STT_TAX,MISC. If dividend_rate is present, then possible values are dividend_rate is applicable only for DIVIDEND_PAYOUT and DIVIDEND_REINVESTMENT.
+     * Transaction type. Possible values are PURCHASE, PURCHASE_SIP, REDEMPTION, SWITCH_IN, SWITCH_IN_MERGER, SWITCH_OUT, SWITCH_OUT_MERGER, DIVIDEND_PAYOUT, DIVIDEND_REINVEST, SEGREGATION, STAMP_DUTY_TAX, TDS_TAX, STT_TAX, MISC, REVERSAL, UNKNOWN.
+     *
+     * @param Type|value-of<Type> $type
      */
-    public function withType(string $type): self
-    {
-        $obj = clone $this;
-        $obj->type = $type;
+    public function withType(
+        Type|string $type,
+    ): self {
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * Number of units involved.
+     * Number of units involved in transaction.
      */
     public function withUnits(float $units): self
     {
-        $obj = clone $this;
-        $obj->units = $units;
+        $self = clone $this;
+        $self['units'] = $units;
 
-        return $obj;
+        return $self;
     }
 }

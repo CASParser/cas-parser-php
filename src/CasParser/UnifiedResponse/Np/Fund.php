@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace CasParser\CasParser\UnifiedResponse\Np;
 
 use CasParser\CasParser\UnifiedResponse\Np\Fund\AdditionalInfo;
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AdditionalInfoShape from \CasParser\CasParser\UnifiedResponse\Np\Fund\AdditionalInfo
+ *
  * @phpstan-type FundShape = array{
- *   additional_info?: AdditionalInfo|null,
+ *   additionalInfo?: null|AdditionalInfo|AdditionalInfoShape,
  *   cost?: float|null,
  *   name?: string|null,
  *   nav?: float|null,
@@ -27,37 +29,37 @@ final class Fund implements BaseModel
     /**
      * Additional information specific to the NPS fund.
      */
-    #[Api(optional: true)]
-    public ?AdditionalInfo $additional_info;
+    #[Optional('additional_info')]
+    public ?AdditionalInfo $additionalInfo;
 
     /**
      * Cost of investment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $cost;
 
     /**
      * Name of the NPS fund.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Net Asset Value per unit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $nav;
 
     /**
      * Number of units held.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $units;
 
     /**
      * Current market value of the holding.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $value;
 
     public function __construct()
@@ -69,36 +71,41 @@ final class Fund implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AdditionalInfo|AdditionalInfoShape|null $additionalInfo
      */
     public static function with(
-        ?AdditionalInfo $additional_info = null,
+        AdditionalInfo|array|null $additionalInfo = null,
         ?float $cost = null,
         ?string $name = null,
         ?float $nav = null,
         ?float $units = null,
         ?float $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additional_info && $obj->additional_info = $additional_info;
-        null !== $cost && $obj->cost = $cost;
-        null !== $name && $obj->name = $name;
-        null !== $nav && $obj->nav = $nav;
-        null !== $units && $obj->units = $units;
-        null !== $value && $obj->value = $value;
+        null !== $additionalInfo && $self['additionalInfo'] = $additionalInfo;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $name && $self['name'] = $name;
+        null !== $nav && $self['nav'] = $nav;
+        null !== $units && $self['units'] = $units;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Additional information specific to the NPS fund.
+     *
+     * @param AdditionalInfo|AdditionalInfoShape $additionalInfo
      */
-    public function withAdditionalInfo(AdditionalInfo $additionalInfo): self
-    {
-        $obj = clone $this;
-        $obj->additional_info = $additionalInfo;
+    public function withAdditionalInfo(
+        AdditionalInfo|array $additionalInfo
+    ): self {
+        $self = clone $this;
+        $self['additionalInfo'] = $additionalInfo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +113,10 @@ final class Fund implements BaseModel
      */
     public function withCost(float $cost): self
     {
-        $obj = clone $this;
-        $obj->cost = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +124,10 @@ final class Fund implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +135,10 @@ final class Fund implements BaseModel
      */
     public function withNav(float $nav): self
     {
-        $obj = clone $this;
-        $obj->nav = $nav;
+        $self = clone $this;
+        $self['nav'] = $nav;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +146,10 @@ final class Fund implements BaseModel
      */
     public function withUnits(float $units): self
     {
-        $obj = clone $this;
-        $obj->units = $units;
+        $self = clone $this;
+        $self['units'] = $units;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,9 +157,9 @@ final class Fund implements BaseModel
      */
     public function withValue(float $value): self
     {
-        $obj = clone $this;
-        $obj->value = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

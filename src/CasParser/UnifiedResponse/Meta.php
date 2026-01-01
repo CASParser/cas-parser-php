@@ -6,15 +6,17 @@ namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\CasParser\UnifiedResponse\Meta\CasType;
 use CasParser\CasParser\UnifiedResponse\Meta\StatementPeriod;
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type StatementPeriodShape from \CasParser\CasParser\UnifiedResponse\Meta\StatementPeriod
+ *
  * @phpstan-type MetaShape = array{
- *   cas_type?: value-of<CasType>|null,
- *   generated_at?: \DateTimeInterface|null,
- *   statement_period?: StatementPeriod|null,
+ *   casType?: null|CasType|value-of<CasType>,
+ *   generatedAt?: \DateTimeInterface|null,
+ *   statementPeriod?: null|StatementPeriod|StatementPeriodShape,
  * }
  */
 final class Meta implements BaseModel
@@ -25,19 +27,19 @@ final class Meta implements BaseModel
     /**
      * Type of CAS detected and processed.
      *
-     * @var value-of<CasType>|null $cas_type
+     * @var value-of<CasType>|null $casType
      */
-    #[Api(enum: CasType::class, optional: true)]
-    public ?string $cas_type;
+    #[Optional('cas_type', enum: CasType::class)]
+    public ?string $casType;
 
     /**
      * Timestamp when the response was generated.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $generated_at;
+    #[Optional('generated_at')]
+    public ?\DateTimeInterface $generatedAt;
 
-    #[Api(optional: true)]
-    public ?StatementPeriod $statement_period;
+    #[Optional('statement_period')]
+    public ?StatementPeriod $statementPeriod;
 
     public function __construct()
     {
@@ -49,20 +51,21 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CasType|value-of<CasType> $cas_type
+     * @param CasType|value-of<CasType>|null $casType
+     * @param StatementPeriod|StatementPeriodShape|null $statementPeriod
      */
     public static function with(
-        CasType|string|null $cas_type = null,
-        ?\DateTimeInterface $generated_at = null,
-        ?StatementPeriod $statement_period = null,
+        CasType|string|null $casType = null,
+        ?\DateTimeInterface $generatedAt = null,
+        StatementPeriod|array|null $statementPeriod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $cas_type && $obj['cas_type'] = $cas_type;
-        null !== $generated_at && $obj->generated_at = $generated_at;
-        null !== $statement_period && $obj->statement_period = $statement_period;
+        null !== $casType && $self['casType'] = $casType;
+        null !== $generatedAt && $self['generatedAt'] = $generatedAt;
+        null !== $statementPeriod && $self['statementPeriod'] = $statementPeriod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,10 +75,10 @@ final class Meta implements BaseModel
      */
     public function withCasType(CasType|string $casType): self
     {
-        $obj = clone $this;
-        $obj['cas_type'] = $casType;
+        $self = clone $this;
+        $self['casType'] = $casType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,17 +86,21 @@ final class Meta implements BaseModel
      */
     public function withGeneratedAt(\DateTimeInterface $generatedAt): self
     {
-        $obj = clone $this;
-        $obj->generated_at = $generatedAt;
+        $self = clone $this;
+        $self['generatedAt'] = $generatedAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withStatementPeriod(StatementPeriod $statementPeriod): self
-    {
-        $obj = clone $this;
-        $obj->statement_period = $statementPeriod;
+    /**
+     * @param StatementPeriod|StatementPeriodShape $statementPeriod
+     */
+    public function withStatementPeriod(
+        StatementPeriod|array $statementPeriod
+    ): self {
+        $self = clone $this;
+        $self['statementPeriod'] = $statementPeriod;
 
-        return $obj;
+        return $self;
     }
 }

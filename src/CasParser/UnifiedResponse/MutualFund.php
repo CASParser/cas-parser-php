@@ -7,18 +7,22 @@ namespace CasParser\CasParser\UnifiedResponse;
 use CasParser\CasParser\UnifiedResponse\MutualFund\AdditionalInfo;
 use CasParser\CasParser\UnifiedResponse\MutualFund\LinkedHolder;
 use CasParser\CasParser\UnifiedResponse\MutualFund\Scheme;
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AdditionalInfoShape from \CasParser\CasParser\UnifiedResponse\MutualFund\AdditionalInfo
+ * @phpstan-import-type LinkedHolderShape from \CasParser\CasParser\UnifiedResponse\MutualFund\LinkedHolder
+ * @phpstan-import-type SchemeShape from \CasParser\CasParser\UnifiedResponse\MutualFund\Scheme
+ *
  * @phpstan-type MutualFundShape = array{
- *   additional_info?: AdditionalInfo|null,
+ *   additionalInfo?: null|AdditionalInfo|AdditionalInfoShape,
  *   amc?: string|null,
- *   folio_number?: string|null,
- *   linked_holders?: list<LinkedHolder>|null,
+ *   folioNumber?: string|null,
+ *   linkedHolders?: list<LinkedHolderShape>|null,
  *   registrar?: string|null,
- *   schemes?: list<Scheme>|null,
+ *   schemes?: list<SchemeShape>|null,
  *   value?: float|null,
  * }
  */
@@ -30,43 +34,43 @@ final class MutualFund implements BaseModel
     /**
      * Additional folio information.
      */
-    #[Api(optional: true)]
-    public ?AdditionalInfo $additional_info;
+    #[Optional('additional_info')]
+    public ?AdditionalInfo $additionalInfo;
 
     /**
      * Asset Management Company name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amc;
 
     /**
      * Folio number.
      */
-    #[Api(optional: true)]
-    public ?string $folio_number;
+    #[Optional('folio_number')]
+    public ?string $folioNumber;
 
     /**
      * List of account holders linked to this mutual fund folio.
      *
-     * @var list<LinkedHolder>|null $linked_holders
+     * @var list<LinkedHolder>|null $linkedHolders
      */
-    #[Api(list: LinkedHolder::class, optional: true)]
-    public ?array $linked_holders;
+    #[Optional('linked_holders', list: LinkedHolder::class)]
+    public ?array $linkedHolders;
 
     /**
      * Registrar and Transfer Agent name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $registrar;
 
     /** @var list<Scheme>|null $schemes */
-    #[Api(list: Scheme::class, optional: true)]
+    #[Optional(list: Scheme::class)]
     public ?array $schemes;
 
     /**
      * Total value of the folio.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $value;
 
     public function __construct()
@@ -79,40 +83,44 @@ final class MutualFund implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LinkedHolder> $linked_holders
-     * @param list<Scheme> $schemes
+     * @param AdditionalInfo|AdditionalInfoShape|null $additionalInfo
+     * @param list<LinkedHolderShape>|null $linkedHolders
+     * @param list<SchemeShape>|null $schemes
      */
     public static function with(
-        ?AdditionalInfo $additional_info = null,
+        AdditionalInfo|array|null $additionalInfo = null,
         ?string $amc = null,
-        ?string $folio_number = null,
-        ?array $linked_holders = null,
+        ?string $folioNumber = null,
+        ?array $linkedHolders = null,
         ?string $registrar = null,
         ?array $schemes = null,
         ?float $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additional_info && $obj->additional_info = $additional_info;
-        null !== $amc && $obj->amc = $amc;
-        null !== $folio_number && $obj->folio_number = $folio_number;
-        null !== $linked_holders && $obj->linked_holders = $linked_holders;
-        null !== $registrar && $obj->registrar = $registrar;
-        null !== $schemes && $obj->schemes = $schemes;
-        null !== $value && $obj->value = $value;
+        null !== $additionalInfo && $self['additionalInfo'] = $additionalInfo;
+        null !== $amc && $self['amc'] = $amc;
+        null !== $folioNumber && $self['folioNumber'] = $folioNumber;
+        null !== $linkedHolders && $self['linkedHolders'] = $linkedHolders;
+        null !== $registrar && $self['registrar'] = $registrar;
+        null !== $schemes && $self['schemes'] = $schemes;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Additional folio information.
+     *
+     * @param AdditionalInfo|AdditionalInfoShape $additionalInfo
      */
-    public function withAdditionalInfo(AdditionalInfo $additionalInfo): self
-    {
-        $obj = clone $this;
-        $obj->additional_info = $additionalInfo;
+    public function withAdditionalInfo(
+        AdditionalInfo|array $additionalInfo
+    ): self {
+        $self = clone $this;
+        $self['additionalInfo'] = $additionalInfo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +128,10 @@ final class MutualFund implements BaseModel
      */
     public function withAmc(string $amc): self
     {
-        $obj = clone $this;
-        $obj->amc = $amc;
+        $self = clone $this;
+        $self['amc'] = $amc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,23 +139,23 @@ final class MutualFund implements BaseModel
      */
     public function withFolioNumber(string $folioNumber): self
     {
-        $obj = clone $this;
-        $obj->folio_number = $folioNumber;
+        $self = clone $this;
+        $self['folioNumber'] = $folioNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of account holders linked to this mutual fund folio.
      *
-     * @param list<LinkedHolder> $linkedHolders
+     * @param list<LinkedHolderShape> $linkedHolders
      */
     public function withLinkedHolders(array $linkedHolders): self
     {
-        $obj = clone $this;
-        $obj->linked_holders = $linkedHolders;
+        $self = clone $this;
+        $self['linkedHolders'] = $linkedHolders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,21 +163,21 @@ final class MutualFund implements BaseModel
      */
     public function withRegistrar(string $registrar): self
     {
-        $obj = clone $this;
-        $obj->registrar = $registrar;
+        $self = clone $this;
+        $self['registrar'] = $registrar;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Scheme> $schemes
+     * @param list<SchemeShape> $schemes
      */
     public function withSchemes(array $schemes): self
     {
-        $obj = clone $this;
-        $obj->schemes = $schemes;
+        $self = clone $this;
+        $self['schemes'] = $schemes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,9 +185,9 @@ final class MutualFund implements BaseModel
      */
     public function withValue(float $value): self
     {
-        $obj = clone $this;
-        $obj->value = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

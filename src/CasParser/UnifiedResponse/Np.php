@@ -6,16 +6,19 @@ namespace CasParser\CasParser\UnifiedResponse;
 
 use CasParser\CasParser\UnifiedResponse\Np\Fund;
 use CasParser\CasParser\UnifiedResponse\Np\LinkedHolder;
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type FundShape from \CasParser\CasParser\UnifiedResponse\Np\Fund
+ * @phpstan-import-type LinkedHolderShape from \CasParser\CasParser\UnifiedResponse\Np\LinkedHolder
+ *
  * @phpstan-type NpShape = array{
- *   additional_info?: mixed,
+ *   additionalInfo?: mixed,
  *   cra?: string|null,
- *   funds?: list<Fund>|null,
- *   linked_holders?: list<LinkedHolder>|null,
+ *   funds?: list<FundShape>|null,
+ *   linkedHolders?: list<LinkedHolderShape>|null,
  *   pran?: string|null,
  *   value?: float|null,
  * }
@@ -28,37 +31,37 @@ final class Np implements BaseModel
     /**
      * Additional information specific to the NPS account.
      */
-    #[Api(optional: true)]
-    public mixed $additional_info;
+    #[Optional('additional_info')]
+    public mixed $additionalInfo;
 
     /**
      * Central Record Keeping Agency name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cra;
 
     /** @var list<Fund>|null $funds */
-    #[Api(list: Fund::class, optional: true)]
+    #[Optional(list: Fund::class)]
     public ?array $funds;
 
     /**
      * List of account holders linked to this NPS account.
      *
-     * @var list<LinkedHolder>|null $linked_holders
+     * @var list<LinkedHolder>|null $linkedHolders
      */
-    #[Api(list: LinkedHolder::class, optional: true)]
-    public ?array $linked_holders;
+    #[Optional('linked_holders', list: LinkedHolder::class)]
+    public ?array $linkedHolders;
 
     /**
      * Permanent Retirement Account Number (PRAN).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pran;
 
     /**
      * Total value of the NPS account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $value;
 
     public function __construct()
@@ -71,27 +74,27 @@ final class Np implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Fund> $funds
-     * @param list<LinkedHolder> $linked_holders
+     * @param list<FundShape>|null $funds
+     * @param list<LinkedHolderShape>|null $linkedHolders
      */
     public static function with(
-        mixed $additional_info = null,
+        mixed $additionalInfo = null,
         ?string $cra = null,
         ?array $funds = null,
-        ?array $linked_holders = null,
+        ?array $linkedHolders = null,
         ?string $pran = null,
         ?float $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additional_info && $obj->additional_info = $additional_info;
-        null !== $cra && $obj->cra = $cra;
-        null !== $funds && $obj->funds = $funds;
-        null !== $linked_holders && $obj->linked_holders = $linked_holders;
-        null !== $pran && $obj->pran = $pran;
-        null !== $value && $obj->value = $value;
+        null !== $additionalInfo && $self['additionalInfo'] = $additionalInfo;
+        null !== $cra && $self['cra'] = $cra;
+        null !== $funds && $self['funds'] = $funds;
+        null !== $linkedHolders && $self['linkedHolders'] = $linkedHolders;
+        null !== $pran && $self['pran'] = $pran;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +102,10 @@ final class Np implements BaseModel
      */
     public function withAdditionalInfo(mixed $additionalInfo): self
     {
-        $obj = clone $this;
-        $obj->additional_info = $additionalInfo;
+        $self = clone $this;
+        $self['additionalInfo'] = $additionalInfo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,34 +113,34 @@ final class Np implements BaseModel
      */
     public function withCra(string $cra): self
     {
-        $obj = clone $this;
-        $obj->cra = $cra;
+        $self = clone $this;
+        $self['cra'] = $cra;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Fund> $funds
+     * @param list<FundShape> $funds
      */
     public function withFunds(array $funds): self
     {
-        $obj = clone $this;
-        $obj->funds = $funds;
+        $self = clone $this;
+        $self['funds'] = $funds;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of account holders linked to this NPS account.
      *
-     * @param list<LinkedHolder> $linkedHolders
+     * @param list<LinkedHolderShape> $linkedHolders
      */
     public function withLinkedHolders(array $linkedHolders): self
     {
-        $obj = clone $this;
-        $obj->linked_holders = $linkedHolders;
+        $self = clone $this;
+        $self['linkedHolders'] = $linkedHolders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +148,10 @@ final class Np implements BaseModel
      */
     public function withPran(string $pran): self
     {
-        $obj = clone $this;
-        $obj->pran = $pran;
+        $self = clone $this;
+        $self['pran'] = $pran;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,9 +159,9 @@ final class Np implements BaseModel
      */
     public function withValue(float $value): self
     {
-        $obj = clone $this;
-        $obj->value = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }
