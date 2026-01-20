@@ -25,7 +25,7 @@ use CasParser\Core\Contracts\BaseModel;
  *   name?: string|null,
  *   nav?: float|null,
  *   nominees?: list<string>|null,
- *   transactions?: list<TransactionShape>|null,
+ *   transactions?: list<Transaction|TransactionShape>|null,
  *   type?: null|Type|value-of<Type>,
  *   units?: float|null,
  *   value?: float|null,
@@ -114,7 +114,7 @@ final class Scheme implements BaseModel
      * @param AdditionalInfo|AdditionalInfoShape|null $additionalInfo
      * @param Gain|GainShape|null $gain
      * @param list<string>|null $nominees
-     * @param list<TransactionShape>|null $transactions
+     * @param list<Transaction|TransactionShape>|null $transactions
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -230,7 +230,7 @@ final class Scheme implements BaseModel
     }
 
     /**
-     * @param list<TransactionShape> $transactions
+     * @param list<Transaction|TransactionShape> $transactions
      */
     public function withTransactions(array $transactions): self
     {

@@ -15,6 +15,9 @@ use CasParser\Core\Exceptions\APIException;
 use CasParser\RequestOptions;
 use CasParser\ServiceContracts\CasParserRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
+ */
 final class CasParserRawService implements CasParserRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +35,7 @@ final class CasParserRawService implements CasParserRawContract
      * @param array{
      *   password?: string, pdfFile?: string, pdfURL?: string
      * }|CasParserCamsKfintechParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UnifiedResponse>
      *
@@ -39,7 +43,7 @@ final class CasParserRawService implements CasParserRawContract
      */
     public function camsKfintech(
         array|CasParserCamsKfintechParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CasParserCamsKfintechParams::parseRequest(
             $params,
@@ -65,6 +69,7 @@ final class CasParserRawService implements CasParserRawContract
      * @param array{
      *   password?: string, pdfFile?: string, pdfURL?: string
      * }|CasParserCdslParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UnifiedResponse>
      *
@@ -72,7 +77,7 @@ final class CasParserRawService implements CasParserRawContract
      */
     public function cdsl(
         array|CasParserCdslParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CasParserCdslParams::parseRequest(
             $params,
@@ -98,6 +103,7 @@ final class CasParserRawService implements CasParserRawContract
      * @param array{
      *   password?: string, pdfFile?: string, pdfURL?: string
      * }|CasParserNsdlParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UnifiedResponse>
      *
@@ -105,7 +111,7 @@ final class CasParserRawService implements CasParserRawContract
      */
     public function nsdl(
         array|CasParserNsdlParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CasParserNsdlParams::parseRequest(
             $params,
@@ -131,6 +137,7 @@ final class CasParserRawService implements CasParserRawContract
      * @param array{
      *   password?: string, pdfFile?: string, pdfURL?: string
      * }|CasParserSmartParseParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UnifiedResponse>
      *
@@ -138,7 +145,7 @@ final class CasParserRawService implements CasParserRawContract
      */
     public function smartParse(
         array|CasParserSmartParseParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CasParserSmartParseParams::parseRequest(
             $params,

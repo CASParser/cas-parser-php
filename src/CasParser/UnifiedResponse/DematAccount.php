@@ -25,7 +25,7 @@ use CasParser\Core\Contracts\BaseModel;
  *   dpID?: string|null,
  *   dpName?: string|null,
  *   holdings?: null|Holdings|HoldingsShape,
- *   linkedHolders?: list<LinkedHolderShape>|null,
+ *   linkedHolders?: list<LinkedHolder|LinkedHolderShape>|null,
  *   value?: float|null,
  * }
  */
@@ -102,7 +102,7 @@ final class DematAccount implements BaseModel
      * @param AdditionalInfo|AdditionalInfoShape|null $additionalInfo
      * @param DematType|value-of<DematType>|null $dematType
      * @param Holdings|HoldingsShape|null $holdings
-     * @param list<LinkedHolderShape>|null $linkedHolders
+     * @param list<LinkedHolder|LinkedHolderShape>|null $linkedHolders
      */
     public static function with(
         AdditionalInfo|array|null $additionalInfo = null,
@@ -215,7 +215,7 @@ final class DematAccount implements BaseModel
     /**
      * List of account holders linked to this demat account.
      *
-     * @param list<LinkedHolderShape> $linkedHolders
+     * @param list<LinkedHolder|LinkedHolderShape> $linkedHolders
      */
     public function withLinkedHolders(array $linkedHolders): self
     {

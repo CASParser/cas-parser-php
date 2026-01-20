@@ -18,7 +18,7 @@ use CasParser\Core\Contracts\BaseModel;
  *   additionalInfo?: null|AdditionalInfo|AdditionalInfoShape,
  *   isin?: string|null,
  *   name?: string|null,
- *   transactions?: list<TransactionShape>|null,
+ *   transactions?: list<Transaction|TransactionShape>|null,
  *   units?: float|null,
  *   value?: float|null,
  * }
@@ -77,7 +77,7 @@ final class CorporateBond implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AdditionalInfo|AdditionalInfoShape|null $additionalInfo
-     * @param list<TransactionShape>|null $transactions
+     * @param list<Transaction|TransactionShape>|null $transactions
      */
     public static function with(
         AdditionalInfo|array|null $additionalInfo = null,
@@ -138,7 +138,7 @@ final class CorporateBond implements BaseModel
     /**
      * List of transactions for this holding (beta).
      *
-     * @param list<TransactionShape> $transactions
+     * @param list<Transaction|TransactionShape> $transactions
      */
     public function withTransactions(array $transactions): self
     {

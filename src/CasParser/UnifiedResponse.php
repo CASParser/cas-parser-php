@@ -25,12 +25,12 @@ use CasParser\Core\Contracts\BaseModel;
  * @phpstan-import-type SummaryShape from \CasParser\CasParser\UnifiedResponse\Summary
  *
  * @phpstan-type UnifiedResponseShape = array{
- *   dematAccounts?: list<DematAccountShape>|null,
+ *   dematAccounts?: list<DematAccount|DematAccountShape>|null,
  *   insurance?: null|Insurance|InsuranceShape,
  *   investor?: null|Investor|InvestorShape,
  *   meta?: null|Meta|MetaShape,
- *   mutualFunds?: list<MutualFundShape>|null,
- *   nps?: list<NpShape>|null,
+ *   mutualFunds?: list<MutualFund|MutualFundShape>|null,
+ *   nps?: list<Np|NpShape>|null,
  *   summary?: null|Summary|SummaryShape,
  * }
  */
@@ -77,12 +77,12 @@ final class UnifiedResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DematAccountShape>|null $dematAccounts
+     * @param list<DematAccount|DematAccountShape>|null $dematAccounts
      * @param Insurance|InsuranceShape|null $insurance
      * @param Investor|InvestorShape|null $investor
      * @param Meta|MetaShape|null $meta
-     * @param list<MutualFundShape>|null $mutualFunds
-     * @param list<NpShape>|null $nps
+     * @param list<MutualFund|MutualFundShape>|null $mutualFunds
+     * @param list<Np|NpShape>|null $nps
      * @param Summary|SummaryShape|null $summary
      */
     public static function with(
@@ -108,7 +108,7 @@ final class UnifiedResponse implements BaseModel
     }
 
     /**
-     * @param list<DematAccountShape> $dematAccounts
+     * @param list<DematAccount|DematAccountShape> $dematAccounts
      */
     public function withDematAccounts(array $dematAccounts): self
     {
@@ -152,7 +152,7 @@ final class UnifiedResponse implements BaseModel
     }
 
     /**
-     * @param list<MutualFundShape> $mutualFunds
+     * @param list<MutualFund|MutualFundShape> $mutualFunds
      */
     public function withMutualFunds(array $mutualFunds): self
     {
@@ -165,7 +165,7 @@ final class UnifiedResponse implements BaseModel
     /**
      * List of NPS accounts.
      *
-     * @param list<NpShape> $nps
+     * @param list<Np|NpShape> $nps
      */
     public function withNps(array $nps): self
     {

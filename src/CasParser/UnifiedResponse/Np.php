@@ -17,8 +17,8 @@ use CasParser\Core\Contracts\BaseModel;
  * @phpstan-type NpShape = array{
  *   additionalInfo?: mixed,
  *   cra?: string|null,
- *   funds?: list<FundShape>|null,
- *   linkedHolders?: list<LinkedHolderShape>|null,
+ *   funds?: list<Fund|FundShape>|null,
+ *   linkedHolders?: list<LinkedHolder|LinkedHolderShape>|null,
  *   pran?: string|null,
  *   value?: float|null,
  * }
@@ -74,8 +74,8 @@ final class Np implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FundShape>|null $funds
-     * @param list<LinkedHolderShape>|null $linkedHolders
+     * @param list<Fund|FundShape>|null $funds
+     * @param list<LinkedHolder|LinkedHolderShape>|null $linkedHolders
      */
     public static function with(
         mixed $additionalInfo = null,
@@ -120,7 +120,7 @@ final class Np implements BaseModel
     }
 
     /**
-     * @param list<FundShape> $funds
+     * @param list<Fund|FundShape> $funds
      */
     public function withFunds(array $funds): self
     {
@@ -133,7 +133,7 @@ final class Np implements BaseModel
     /**
      * List of account holders linked to this NPS account.
      *
-     * @param list<LinkedHolderShape> $linkedHolders
+     * @param list<LinkedHolder|LinkedHolderShape> $linkedHolders
      */
     public function withLinkedHolders(array $linkedHolders): self
     {

@@ -11,6 +11,9 @@ use CasParser\Core\Util;
 use CasParser\RequestOptions;
 use CasParser\ServiceContracts\CasParserContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
+ */
 final class CasParserService implements CasParserContract
 {
     /**
@@ -35,6 +38,7 @@ final class CasParserService implements CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -42,7 +46,7 @@ final class CasParserService implements CasParserContract
         ?string $password = null,
         ?string $pdfFile = null,
         ?string $pdfURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UnifiedResponse {
         $params = Util::removeNulls(
             ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL]
@@ -63,6 +67,7 @@ final class CasParserService implements CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -70,7 +75,7 @@ final class CasParserService implements CasParserContract
         ?string $password = null,
         ?string $pdfFile = null,
         ?string $pdfURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UnifiedResponse {
         $params = Util::removeNulls(
             ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL]
@@ -91,6 +96,7 @@ final class CasParserService implements CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -98,7 +104,7 @@ final class CasParserService implements CasParserContract
         ?string $password = null,
         ?string $pdfFile = null,
         ?string $pdfURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UnifiedResponse {
         $params = Util::removeNulls(
             ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL]
@@ -119,6 +125,7 @@ final class CasParserService implements CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -126,7 +133,7 @@ final class CasParserService implements CasParserContract
         ?string $password = null,
         ?string $pdfFile = null,
         ?string $pdfURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UnifiedResponse {
         $params = Util::removeNulls(
             ['password' => $password, 'pdfFile' => $pdfFile, 'pdfURL' => $pdfURL]
