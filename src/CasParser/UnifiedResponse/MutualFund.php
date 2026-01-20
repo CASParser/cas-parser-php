@@ -20,9 +20,9 @@ use CasParser\Core\Contracts\BaseModel;
  *   additionalInfo?: null|AdditionalInfo|AdditionalInfoShape,
  *   amc?: string|null,
  *   folioNumber?: string|null,
- *   linkedHolders?: list<LinkedHolderShape>|null,
+ *   linkedHolders?: list<LinkedHolder|LinkedHolderShape>|null,
  *   registrar?: string|null,
- *   schemes?: list<SchemeShape>|null,
+ *   schemes?: list<Scheme|SchemeShape>|null,
  *   value?: float|null,
  * }
  */
@@ -84,8 +84,8 @@ final class MutualFund implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AdditionalInfo|AdditionalInfoShape|null $additionalInfo
-     * @param list<LinkedHolderShape>|null $linkedHolders
-     * @param list<SchemeShape>|null $schemes
+     * @param list<LinkedHolder|LinkedHolderShape>|null $linkedHolders
+     * @param list<Scheme|SchemeShape>|null $schemes
      */
     public static function with(
         AdditionalInfo|array|null $additionalInfo = null,
@@ -148,7 +148,7 @@ final class MutualFund implements BaseModel
     /**
      * List of account holders linked to this mutual fund folio.
      *
-     * @param list<LinkedHolderShape> $linkedHolders
+     * @param list<LinkedHolder|LinkedHolderShape> $linkedHolders
      */
     public function withLinkedHolders(array $linkedHolders): self
     {
@@ -170,7 +170,7 @@ final class MutualFund implements BaseModel
     }
 
     /**
-     * @param list<SchemeShape> $schemes
+     * @param list<Scheme|SchemeShape> $schemes
      */
     public function withSchemes(array $schemes): self
     {

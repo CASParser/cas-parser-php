@@ -11,6 +11,10 @@ use CasParser\Services\CasParserService;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 
+/**
+ * @phpstan-import-type NormalizedRequest from \CasParser\Core\BaseClient
+ * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
+ */
 class Client extends BaseClient
 {
     public string $apiKey;
@@ -25,19 +29,28 @@ class Client extends BaseClient
      */
     public CasGeneratorService $casGenerator;
 
-    public function __construct(?string $apiKey = null, ?string $baseUrl = null)
-    {
+    /**
+     * @param RequestOpts|null $requestOptions
+     */
+    public function __construct(
+        ?string $apiKey = null,
+        ?string $baseUrl = null,
+        RequestOptions|array|null $requestOptions = null,
+    ) {
         $this->apiKey = (string) ($apiKey ?? getenv('CAS_PARSER_API_KEY'));
 
         $baseUrl ??= getenv(
             'CAS_PARSER_BASE_URL'
         ) ?: 'https://portfolio-parser.api.casparser.in';
 
-        $options = RequestOptions::with(
-            uriFactory: Psr17FactoryDiscovery::findUriFactory(),
-            streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
-            requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
-            transporter: Psr18ClientDiscovery::find(),
+        $options = RequestOptions::parse(
+            RequestOptions::with(
+                uriFactory: Psr17FactoryDiscovery::findUriFactory(),
+                streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
+                requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
+                transporter: Psr18ClientDiscovery::find(),
+            ),
+            $requestOptions,
         );
 
         parent::__construct(
@@ -64,5 +77,33 @@ class Client extends BaseClient
     protected function authHeaders(): array
     {
         return $this->apiKey ? ['x-api-key' => $this->apiKey] : [];
+    }
+
+    /**
+     * @internal
+     *
+     * @param string|list<string> $path
+     * @param array<string,mixed> $query
+     * @param array<string,string|int|list<string|int>|null> $headers
+     * @param RequestOpts|null $opts
+     *
+     * @return array{NormalizedRequest, RequestOptions}
+     */
+    protected function buildRequest(
+        string $method,
+        string|array $path,
+        array $query,
+        array $headers,
+        mixed $body,
+        RequestOptions|array|null $opts,
+    ): array {
+        return parent::buildRequest(
+            method: $method,
+            path: $path,
+            query: $query,
+            headers: [...$this->authHeaders(), ...$headers],
+            body: $body,
+            opts: $opts,
+        );
     }
 }

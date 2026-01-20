@@ -13,12 +13,16 @@ use CasParser\Core\Contracts\BaseResponse;
 use CasParser\Core\Exceptions\APIException;
 use CasParser\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
+ */
 interface CasParserRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|CasParserCamsKfintechParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UnifiedResponse>
      *
@@ -26,13 +30,14 @@ interface CasParserRawContract
      */
     public function camsKfintech(
         array|CasParserCamsKfintechParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CasParserCdslParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UnifiedResponse>
      *
@@ -40,13 +45,14 @@ interface CasParserRawContract
      */
     public function cdsl(
         array|CasParserCdslParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CasParserNsdlParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UnifiedResponse>
      *
@@ -54,13 +60,14 @@ interface CasParserRawContract
      */
     public function nsdl(
         array|CasParserNsdlParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|CasParserSmartParseParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<UnifiedResponse>
      *
@@ -68,6 +75,6 @@ interface CasParserRawContract
      */
     public function smartParse(
         array|CasParserSmartParseParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -8,6 +8,9 @@ use CasParser\CasParser\UnifiedResponse;
 use CasParser\Core\Exceptions\APIException;
 use CasParser\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
+ */
 interface CasParserContract
 {
     /**
@@ -16,6 +19,7 @@ interface CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -23,7 +27,7 @@ interface CasParserContract
         ?string $password = null,
         ?string $pdfFile = null,
         ?string $pdfURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UnifiedResponse;
 
     /**
@@ -32,6 +36,7 @@ interface CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -39,7 +44,7 @@ interface CasParserContract
         ?string $password = null,
         ?string $pdfFile = null,
         ?string $pdfURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UnifiedResponse;
 
     /**
@@ -48,6 +53,7 @@ interface CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -55,7 +61,7 @@ interface CasParserContract
         ?string $password = null,
         ?string $pdfFile = null,
         ?string $pdfURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UnifiedResponse;
 
     /**
@@ -64,6 +70,7 @@ interface CasParserContract
      * @param string $password Password for the PDF file (if required)
      * @param string $pdfFile Base64 encoded CAS PDF file
      * @param string $pdfURL URL to the CAS PDF file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -71,6 +78,6 @@ interface CasParserContract
         ?string $password = null,
         ?string $pdfFile = null,
         ?string $pdfURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UnifiedResponse;
 }

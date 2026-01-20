@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace CasParser\Core\Contracts;
 
 /**
- * @internal
+ * @phpstan-import-type NormalizedRequest from \CasParser\Core\BaseClient
  *
- * @phpstan-import-type normalized_request from \CasParser\Core\BaseClient
+ * @internal
  *
  * @template Item
  *

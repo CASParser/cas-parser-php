@@ -13,7 +13,7 @@ use CasParser\Core\Contracts\BaseModel;
  * @phpstan-import-type LifeInsurancePolicyShape from \CasParser\CasParser\UnifiedResponse\Insurance\LifeInsurancePolicy
  *
  * @phpstan-type InsuranceShape = array{
- *   lifeInsurancePolicies?: list<LifeInsurancePolicyShape>|null
+ *   lifeInsurancePolicies?: list<LifeInsurancePolicy|LifeInsurancePolicyShape>|null,
  * }
  */
 final class Insurance implements BaseModel
@@ -35,7 +35,7 @@ final class Insurance implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LifeInsurancePolicyShape>|null $lifeInsurancePolicies
+     * @param list<LifeInsurancePolicy|LifeInsurancePolicyShape>|null $lifeInsurancePolicies
      */
     public static function with(?array $lifeInsurancePolicies = null): self
     {
@@ -47,7 +47,7 @@ final class Insurance implements BaseModel
     }
 
     /**
-     * @param list<LifeInsurancePolicyShape> $lifeInsurancePolicies
+     * @param list<LifeInsurancePolicy|LifeInsurancePolicyShape> $lifeInsurancePolicies
      */
     public function withLifeInsurancePolicies(
         array $lifeInsurancePolicies

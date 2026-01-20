@@ -21,11 +21,11 @@ use CasParser\Core\Contracts\BaseModel;
  * @phpstan-import-type GovernmentSecurityShape from \CasParser\CasParser\UnifiedResponse\DematAccount\Holdings\GovernmentSecurity
  *
  * @phpstan-type HoldingsShape = array{
- *   aifs?: list<AifShape>|null,
- *   corporateBonds?: list<CorporateBondShape>|null,
- *   dematMutualFunds?: list<DematMutualFundShape>|null,
- *   equities?: list<EquityShape>|null,
- *   governmentSecurities?: list<GovernmentSecurityShape>|null,
+ *   aifs?: list<Aif|AifShape>|null,
+ *   corporateBonds?: list<CorporateBond|CorporateBondShape>|null,
+ *   dematMutualFunds?: list<DematMutualFund|DematMutualFundShape>|null,
+ *   equities?: list<Equity|EquityShape>|null,
+ *   governmentSecurities?: list<GovernmentSecurity|GovernmentSecurityShape>|null,
  * }
  */
 final class Holdings implements BaseModel
@@ -63,11 +63,11 @@ final class Holdings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AifShape>|null $aifs
-     * @param list<CorporateBondShape>|null $corporateBonds
-     * @param list<DematMutualFundShape>|null $dematMutualFunds
-     * @param list<EquityShape>|null $equities
-     * @param list<GovernmentSecurityShape>|null $governmentSecurities
+     * @param list<Aif|AifShape>|null $aifs
+     * @param list<CorporateBond|CorporateBondShape>|null $corporateBonds
+     * @param list<DematMutualFund|DematMutualFundShape>|null $dematMutualFunds
+     * @param list<Equity|EquityShape>|null $equities
+     * @param list<GovernmentSecurity|GovernmentSecurityShape>|null $governmentSecurities
      */
     public static function with(
         ?array $aifs = null,
@@ -88,7 +88,7 @@ final class Holdings implements BaseModel
     }
 
     /**
-     * @param list<AifShape> $aifs
+     * @param list<Aif|AifShape> $aifs
      */
     public function withAifs(array $aifs): self
     {
@@ -99,7 +99,7 @@ final class Holdings implements BaseModel
     }
 
     /**
-     * @param list<CorporateBondShape> $corporateBonds
+     * @param list<CorporateBond|CorporateBondShape> $corporateBonds
      */
     public function withCorporateBonds(array $corporateBonds): self
     {
@@ -110,7 +110,7 @@ final class Holdings implements BaseModel
     }
 
     /**
-     * @param list<DematMutualFundShape> $dematMutualFunds
+     * @param list<DematMutualFund|DematMutualFundShape> $dematMutualFunds
      */
     public function withDematMutualFunds(array $dematMutualFunds): self
     {
@@ -121,7 +121,7 @@ final class Holdings implements BaseModel
     }
 
     /**
-     * @param list<EquityShape> $equities
+     * @param list<Equity|EquityShape> $equities
      */
     public function withEquities(array $equities): self
     {
@@ -132,7 +132,7 @@ final class Holdings implements BaseModel
     }
 
     /**
-     * @param list<GovernmentSecurityShape> $governmentSecurities
+     * @param list<GovernmentSecurity|GovernmentSecurityShape> $governmentSecurities
      */
     public function withGovernmentSecurities(array $governmentSecurities): self
     {
