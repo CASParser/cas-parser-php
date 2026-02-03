@@ -32,13 +32,13 @@ final class CasParserCdslParams implements BaseModel
     public ?string $password;
 
     /**
-     * Base64 encoded CAS PDF file.
+     * Base64 encoded CAS PDF file (required if pdf_url not provided).
      */
     #[Optional('pdf_file')]
     public ?string $pdfFile;
 
     /**
-     * URL to the CAS PDF file.
+     * URL to the CAS PDF file (required if pdf_file not provided).
      */
     #[Optional('pdf_url')]
     public ?string $pdfURL;
@@ -79,7 +79,7 @@ final class CasParserCdslParams implements BaseModel
     }
 
     /**
-     * Base64 encoded CAS PDF file.
+     * Base64 encoded CAS PDF file (required if pdf_url not provided).
      */
     public function withPdfFile(string $pdfFile): self
     {
@@ -90,7 +90,7 @@ final class CasParserCdslParams implements BaseModel
     }
 
     /**
-     * URL to the CAS PDF file.
+     * URL to the CAS PDF file (required if pdf_file not provided).
      */
     public function withPdfURL(string $pdfURL): self
     {

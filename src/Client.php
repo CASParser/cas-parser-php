@@ -37,9 +37,9 @@ class Client extends BaseClient
         ?string $baseUrl = null,
         RequestOptions|array|null $requestOptions = null,
     ) {
-        $this->apiKey = (string) ($apiKey ?? getenv('CAS_PARSER_API_KEY'));
+        $this->apiKey = (string) ($apiKey ?? Util::getenv('CAS_PARSER_API_KEY'));
 
-        $baseUrl ??= getenv(
+        $baseUrl ??= Util::getenv(
             'CAS_PARSER_BASE_URL'
         ) ?: 'https://portfolio-parser.api.casparser.in';
 

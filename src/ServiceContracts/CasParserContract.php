@@ -17,8 +17,8 @@ interface CasParserContract
      * @api
      *
      * @param string $password Password for the PDF file (if required)
-     * @param string $pdfFile Base64 encoded CAS PDF file
-     * @param string $pdfURL URL to the CAS PDF file
+     * @param string $pdfFile Base64 encoded CAS PDF file (required if pdf_url not provided)
+     * @param string $pdfURL URL to the CAS PDF file (required if pdf_file not provided)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -34,8 +34,8 @@ interface CasParserContract
      * @api
      *
      * @param string $password Password for the PDF file (if required)
-     * @param string $pdfFile Base64 encoded CAS PDF file
-     * @param string $pdfURL URL to the CAS PDF file
+     * @param string $pdfFile Base64 encoded CAS PDF file (required if pdf_url not provided)
+     * @param string $pdfURL URL to the CAS PDF file (required if pdf_file not provided)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -51,8 +51,8 @@ interface CasParserContract
      * @api
      *
      * @param string $password Password for the PDF file (if required)
-     * @param string $pdfFile Base64 encoded CAS PDF file
-     * @param string $pdfURL URL to the CAS PDF file
+     * @param string $pdfFile Base64 encoded CAS PDF file (required if pdf_url not provided)
+     * @param string $pdfURL URL to the CAS PDF file (required if pdf_file not provided)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -68,8 +68,8 @@ interface CasParserContract
      * @api
      *
      * @param string $password Password for the PDF file (if required)
-     * @param string $pdfFile Base64 encoded CAS PDF file
-     * @param string $pdfURL URL to the CAS PDF file
+     * @param string $pdfFile Base64 encoded CAS PDF file (required if pdf_url not provided)
+     * @param string $pdfURL URL to the CAS PDF file (required if pdf_file not provided)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
