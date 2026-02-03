@@ -1,5 +1,43 @@
 # Changelog
 
+## 0.3.0 (2026-02-03)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/CASParser/cas-parser-php/compare/v0.2.0...v0.3.0)
+
+### ⚠ BREAKING CHANGES
+
+* **client:** redesign methods
+* remove confusing `toArray()` alias to `__serialize()` in favour of `toProperties()`
+
+### Features
+
+* **api:** api update ([bbcfa14](https://github.com/CASParser/cas-parser-php/commit/bbcfa141a593d0d34c361c8ff2192dbd9e1ff0e3))
+* **api:** api update ([7bb648b](https://github.com/CASParser/cas-parser-php/commit/7bb648b9b9d87fa14c75e16628fe6d01e99f1198))
+* **api:** api update ([43a24ef](https://github.com/CASParser/cas-parser-php/commit/43a24ef1b13a87d203170dcc187c90045472cdea))
+* **api:** api update ([a45d08d](https://github.com/CASParser/cas-parser-php/commit/a45d08d64d5a4ad700f31d9180d5f79ce5ef06f2))
+* **api:** api update ([90a131a](https://github.com/CASParser/cas-parser-php/commit/90a131ad218e94a908056b01fb8425ab8783bbd4))
+* **api:** api update ([da8b838](https://github.com/CASParser/cas-parser-php/commit/da8b83821dab28680f72e98a943af25df296e314))
+* **client:** redesign methods ([5bc4f8f](https://github.com/CASParser/cas-parser-php/commit/5bc4f8fbca8bd998535963059460dcc2285c479e))
+* remove confusing `toArray()` alias to `__serialize()` in favour of `toProperties()` ([84053c4](https://github.com/CASParser/cas-parser-php/commit/84053c4b32db33f341e5e9bf89f2aabe982a2695))
+
+
+### Bug Fixes
+
+* **ci:** release doctor workflow ([d7d0f00](https://github.com/CASParser/cas-parser-php/commit/d7d0f005e9022cce83d3316626e5746a3a02b694))
+* ensure auth methods return non-nullable arrays ([fd0ab3b](https://github.com/CASParser/cas-parser-php/commit/fd0ab3bb4232369f31350fb47d0aca4d916f5739))
+* inverted retry condition ([0112a9a](https://github.com/CASParser/cas-parser-php/commit/0112a9a50be77cb4681413034b3d88d791774f6c))
+* rename invalid types ([6b7a996](https://github.com/CASParser/cas-parser-php/commit/6b7a99682bfce707850bfddeb41d2474f109ba83))
+
+
+### Chores
+
+* add license ([7742369](https://github.com/CASParser/cas-parser-php/commit/7742369f0a91046a7aa843391627e8931c6280f8))
+* **client:** send metadata headers ([9a72241](https://github.com/CASParser/cas-parser-php/commit/9a72241ae57939ae08709709a26a87f1ad83d9e2))
+* **docs:** update readme formatting ([f992e92](https://github.com/CASParser/cas-parser-php/commit/f992e921cd7043ea562ad58fb01905bd2039fa50))
+* **internal:** codegen related update ([c124b7b](https://github.com/CASParser/cas-parser-php/commit/c124b7bdd9b7d6f7bbef3d386f9eb4038a6b20f3))
+* refactor methods ([e25fa02](https://github.com/CASParser/cas-parser-php/commit/e25fa02ca0d7d49d88f1859c99e2db925a74e722))
+* use pascal case for phpstan typedefs ([574d168](https://github.com/CASParser/cas-parser-php/commit/574d1680fbbaccfc4281a98e33d205f4d8a7e043))
+
 ## 0.2.0 (2025-09-13)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/CASParser/cas-parser-php/compare/v0.1.0...v0.2.0)
