@@ -1,7 +1,10 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
+  "license": "Apache-2.0",
   "autoload": {
-    "files": ["src/Core.php", "src/Client.php"],
+    "files": [
+      "src/Version.php"
+    ],
     "psr-4": {
       "CasParser\\": "src/"
     }
@@ -37,6 +40,7 @@
     "friendsofphp/php-cs-fixer": "^3",
     "nyholm/psr7": "^1",
     "pestphp/pest": "^3",
+    "php-http/mock-client": "^1",
     "phpstan/extension-installer": "^1",
     "phpstan/phpstan": "^2",
     "phpstan/phpstan-phpunit": "^2",

@@ -1,19 +1,10 @@
 # Cas Parser PHP API library
 
-> [!NOTE]
-> The Cas Parser PHP API Library is currently in **beta** and we're excited for you to experiment with it!
->
-> This library has not yet been exhaustively tested in production environments and may be missing some features you'd expect in a stable release. As we continue development, there may be breaking changes that require updates to your code.
->
-> **We'd love your feedback!** Please share any suggestions, bug reports, feature requests, or general thoughts by [filing an issue](https://www.github.com/CASParser/cas-parser-php/issues/new).
-
 The Cas Parser PHP library provides convenient access to the Cas Parser REST API from any PHP 8.1.0+ application.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
-
-The REST API documentation can be found on [docs.casparser.in](https://docs.casparser.in/reference).
 
 ## Installation
 
@@ -47,11 +38,14 @@ Parameters with a default value must be set by name.
 
 use CasParser\Client;
 
-$client = new Client(apiKey: getenv("CAS_PARSER_API_KEY") ?: "My API Key");
+$client = new Client(
+  apiKey: getenv('CAS_PARSER_API_KEY') ?: 'My API Key',
+  environment: 'environment_1',
+);
 
-$unifiedResponse = $client->casParser->smartParse();
+$response = $client->credits->check();
 
-var_dump($unifiedResponse->demat_accounts);
+var_dump($response->enabled_features);
 ```
 
 ### Value Objects
@@ -69,15 +63,17 @@ When the library is unable to connect to the API, or if the API returns a non-su
 <?php
 
 use CasParser\Core\Exceptions\APIConnectionException;
+use CasParser\Core\Exceptions\RateLimitException;
+use CasParser\Core\Exceptions\APIStatusException;
 
 try {
-  $unifiedResponse = $client->casParser->smartParse();
+  $response = $client->credits->check();
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
-} catch (RateLimitError $_) {
+} catch (RateLimitException $e) {
   echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
-} catch (APIStatusError $e) {
+} catch (APIStatusException $e) {
   echo "Another non-200-range status code was received", PHP_EOL;
   echo $e->getMessage();
 }
@@ -111,16 +107,12 @@ You can use the `maxRetries` option to configure or disable this:
 <?php
 
 use CasParser\Client;
-use CasParser\RequestOptions;
 
 // Configure the default for all requests:
-$client = new Client(maxRetries: 0);
+$client = new Client(requestOptions: ['maxRetries' => 0]);
 
 // Or, configure per-request:
-
-$result = $client->casParser->smartParse(
-  requestOptions: RequestOptions::with(maxRetries: 5)
-);
+$result = $client->credits->check(requestOptions: ['maxRetries' => 5]);
 ```
 
 ## Advanced concepts
@@ -136,17 +128,13 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 ```php
 <?php
 
-use CasParser\RequestOptions;
-
-$unifiedResponse = $client->casParser->smartParse(
-  requestOptions: RequestOptions::with(
-    extraQueryParams: ["my_query_parameter" => "value"],
-    extraBodyParams: ["my_body_parameter" => "value"],
-    extraHeaders: ["my-header" => "value"],
-  ),
+$response = $client->credits->check(
+  requestOptions: [
+    'extraQueryParams' => ['my_query_parameter' => 'value'],
+    'extraBodyParams' => ['my_body_parameter' => 'value'],
+    'extraHeaders' => ['my-header' => 'value'],
+  ],
 );
-
-var_dump($unifiedResponse["my_undocumented_property"]);
 ```
 
 #### Undocumented request params

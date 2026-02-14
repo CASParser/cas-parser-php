@@ -4,15 +4,10 @@ declare(strict_types=1);
 
 namespace CasParser\Core\Contracts;
 
-use CasParser\Client;
-use CasParser\Core\Conversion\Contracts\Converter;
-use CasParser\Core\Conversion\Contracts\ConverterSource;
-use CasParser\RequestOptions;
-
 /**
- * @internal
+ * @phpstan-import-type NormalizedRequest from \CasParser\Core\BaseClient
  *
- * @phpstan-import-type normalized_request from \CasParser\Core\BaseClient
+ * @internal
  *
  * @template Item
  *
@@ -20,19 +15,6 @@ use CasParser\RequestOptions;
  */
 interface BasePage extends \IteratorAggregate
 {
-    /**
-     * @internal
-     *
-     * @param normalized_request $request
-     */
-    public function __construct(
-        Converter|ConverterSource|string $convert,
-        Client $client,
-        array $request,
-        RequestOptions $options,
-        mixed $data,
-    );
-
     public function hasNextPage(): bool;
 
     /**

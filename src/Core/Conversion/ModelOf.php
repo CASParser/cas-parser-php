@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace CasParser\Core\Conversion;
 
-use CasParser\Core\Attributes\Api;
+use CasParser\Core\Attributes\Optional;
+use CasParser\Core\Attributes\Required;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\Core\Conversion;
 use CasParser\Core\Conversion\Contracts\Converter;
@@ -27,7 +28,9 @@ final class ModelOf implements Converter
         $properties = [];
 
         foreach ($this->class->getProperties() as $property) {
-            if (!empty($property->getAttributes(Api::class))) {
+            $attributes = [...$property->getAttributes(Required::class), ...$property->getAttributes(Optional::class)];
+
+            if (!empty($attributes)) {
                 $name = $property->getName();
                 $properties[$name] = new PropertyInfo($property);
             }
@@ -88,7 +91,36 @@ final class ModelOf implements Converter
             $acc[$name] = $item;
         }
 
-        return $this->from($acc); // @phpstan-ignore-line
+        // @phpstan-ignore-next-line return.type
+        return $this->from($acc);
+    }
+
+    public function dump(mixed $value, DumpState $state): mixed
+    {
+        if ($value instanceof BaseModel) {
+            $value = $value->toProperties();
+        }
+
+        if (is_array($value)) {
+            ++$state->yes;
+            $acc = [];
+
+            foreach ($value as $name => $item) {
+                if (array_key_exists($name, array: $this->properties)) {
+                    ++$state->yes;
+                    $info = $this->properties[$name];
+                    $acc[$info->apiName] = Conversion::dump($info->type, value: $item, state: $state);
+                } else {
+                    $acc[$name] = Conversion::dump_unknown($item, state: $state);
+                }
+            }
+
+            return empty($acc) ? ((object) $acc) : $acc;
+        }
+
+        ++$state->no;
+
+        return Conversion::dump_unknown($value, state: $state);
     }
 
     /**
@@ -97,32 +129,9 @@ final class ModelOf implements Converter
     public function from(array $data): BaseModel
     {
         $instance = $this->class->newInstanceWithoutConstructor();
-        $instance->__unserialize($data); // @phpstan-ignore-line
+        // @phpstan-ignore-next-line
+        $instance->__unserialize($data);
 
         return $instance;
-    }
-
-    public function dump(mixed $value, DumpState $state): mixed
-    {
-        if ($value instanceof BaseModel) {
-            $value = $value->toArray();
-        }
-
-        if (is_array($value)) {
-            $acc = [];
-
-            foreach ($value as $name => $item) {
-                if (array_key_exists($name, array: $this->properties)) {
-                    $info = $this->properties[$name];
-                    $acc[$info->apiName] = Conversion::dump($info->type, value: $item, state: $state);
-                } else {
-                    $acc[$name] = Conversion::dump_unknown($item, state: $state);
-                }
-            }
-
-            return empty($acc) ? ((object) []) : $acc;
-        }
-
-        return Conversion::dump_unknown($value, state: $state);
     }
 }

@@ -6,7 +6,6 @@ namespace CasParser\Core\Concerns;
 
 use CasParser\Core\Conversion;
 use CasParser\Core\Conversion\DumpState;
-use CasParser\Core\Util;
 use CasParser\RequestOptions;
 
 /**
@@ -15,23 +14,23 @@ use CasParser\RequestOptions;
 trait SdkParams
 {
     /**
-     * @param array<string, mixed>|self|null           $params
      * @param array<string, mixed>|RequestOptions|null $options
      *
      * @return array{array<string, mixed>, RequestOptions}
      */
-    public static function parseRequest(array|self|null $params, array|RequestOptions|null $options): array
+    public static function parseRequest(mixed $params, array|RequestOptions|null $options): array
     {
-        $value = is_array($params) ? Util::array_filter_omit($params) : $params;
         $converter = self::converter();
         $state = new DumpState;
-        $dumped = (array) Conversion::dump($converter, value: $value, state: $state);
-        $opts = RequestOptions::parse($options); // @phpstan-ignore-line
+        $dumped = (array) Conversion::dump($converter, value: $params, state: $state);
+        // @phpstan-ignore-next-line argument.type
+        $opts = RequestOptions::parse($options);
 
         if (!$state->canRetry) {
             $opts->maxRetries = 0;
         }
 
-        return [$dumped, $opts]; // @phpstan-ignore-line
+        // @phpstan-ignore-next-line return.type
+        return [$dumped, $opts];
     }
 }
