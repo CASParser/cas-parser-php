@@ -6,8 +6,17 @@ namespace CasParser;
 
 use CasParser\Core\BaseClient;
 use CasParser\Core\Util;
-use CasParser\Services\CasGeneratorService;
-use CasParser\Services\CasParserService;
+use CasParser\Services\AccessTokenService;
+use CasParser\Services\CamsKfintechService;
+use CasParser\Services\CdslService;
+use CasParser\Services\ContractNoteService;
+use CasParser\Services\CreditsService;
+use CasParser\Services\InboxService;
+use CasParser\Services\KfintechService;
+use CasParser\Services\LogsService;
+use CasParser\Services\NsdlService;
+use CasParser\Services\SmartService;
+use CasParser\Services\VerifyTokenService;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 
@@ -22,12 +31,57 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public CasParserService $casParser;
+    public CreditsService $credits;
 
     /**
      * @api
      */
-    public CasGeneratorService $casGenerator;
+    public LogsService $logs;
+
+    /**
+     * @api
+     */
+    public AccessTokenService $accessToken;
+
+    /**
+     * @api
+     */
+    public VerifyTokenService $verifyToken;
+
+    /**
+     * @api
+     */
+    public CamsKfintechService $camsKfintech;
+
+    /**
+     * @api
+     */
+    public CdslService $cdsl;
+
+    /**
+     * @api
+     */
+    public ContractNoteService $contractNote;
+
+    /**
+     * @api
+     */
+    public InboxService $inbox;
+
+    /**
+     * @api
+     */
+    public KfintechService $kfintech;
+
+    /**
+     * @api
+     */
+    public NsdlService $nsdl;
+
+    /**
+     * @api
+     */
+    public SmartService $smart;
 
     /**
      * @param RequestOpts|null $requestOptions
@@ -57,7 +111,7 @@ class Client extends BaseClient
             headers: [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-                'User-Agent' => sprintf('CAS Parser/PHP %s', VERSION),
+                'User-Agent' => sprintf('cas-parser/PHP %s', VERSION),
                 'X-Stainless-Lang' => 'php',
                 'X-Stainless-Package-Version' => '0.0.1',
                 'X-Stainless-Arch' => Util::machtype(),
@@ -69,8 +123,17 @@ class Client extends BaseClient
             options: $options
         );
 
-        $this->casParser = new CasParserService($this);
-        $this->casGenerator = new CasGeneratorService($this);
+        $this->credits = new CreditsService($this);
+        $this->logs = new LogsService($this);
+        $this->accessToken = new AccessTokenService($this);
+        $this->verifyToken = new VerifyTokenService($this);
+        $this->camsKfintech = new CamsKfintechService($this);
+        $this->cdsl = new CdslService($this);
+        $this->contractNote = new ContractNoteService($this);
+        $this->inbox = new InboxService($this);
+        $this->kfintech = new KfintechService($this);
+        $this->nsdl = new NsdlService($this);
+        $this->smart = new SmartService($this);
     }
 
     /** @return array<string,string> */
