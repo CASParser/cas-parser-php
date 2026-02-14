@@ -6,20 +6,16 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [docs.casparser.in](https://docs.casparser.in/reference).
-
 ## Installation
 
 To use this package, install via Composer by adding the following to your application's `composer.json`:
-
-<!-- x-release-please-start-version -->
 
 ```json
 {
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:CASParser/cas-parser-php.git"
+      "url": "git@github.com:stainless-sdks/cas-parser-php.git"
     }
   ],
   "require": {
@@ -27,8 +23,6 @@ To use this package, install via Composer by adding the following to your applic
   }
 }
 ```
-
-<!-- x-release-please-end -->
 
 ## Usage
 
@@ -40,13 +34,14 @@ Parameters with a default value must be set by name.
 
 use CasParser\Client;
 
-$client = new Client(apiKey: getenv('CAS_PARSER_API_KEY') ?: 'My API Key');
-
-$unifiedResponse = $client->casParser->smartParse(
-  password: 'ABCDF', pdfURL: 'https://your-cas-pdf-url-here.com'
+$client = new Client(
+  apiKey: getenv('CAS_PARSER_API_KEY') ?: 'My API Key',
+  environment: 'environment_1',
 );
 
-var_dump($unifiedResponse->demat_accounts);
+$response = $client->credits->check();
+
+var_dump($response->enabled_features);
 ```
 
 ### Value Objects
@@ -68,7 +63,7 @@ use CasParser\Core\Exceptions\RateLimitException;
 use CasParser\Core\Exceptions\APIStatusException;
 
 try {
-  $unifiedResponse = $client->casParser->smartParse();
+  $response = $client->credits->check();
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
@@ -113,11 +108,7 @@ use CasParser\Client;
 $client = new Client(requestOptions: ['maxRetries' => 0]);
 
 // Or, configure per-request:
-$result = $client->casParser->smartParse(
-  password: 'ABCDF',
-  pdfURL: 'https://you-cas-pdf-url-here.com',
-  requestOptions: ['maxRetries' => 5],
-);
+$result = $client->credits->check(requestOptions: ['maxRetries' => 5]);
 ```
 
 ## Advanced concepts
@@ -133,9 +124,7 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 ```php
 <?php
 
-$unifiedResponse = $client->casParser->smartParse(
-  password: 'ABCDF',
-  pdfURL: 'https://you-cas-pdf-url-here.com',
+$response = $client->credits->check(
   requestOptions: [
     'extraQueryParams' => ['my_query_parameter' => 'value'],
     'extraBodyParams' => ['my_body_parameter' => 'value'],
@@ -176,4 +165,4 @@ PHP 8.1.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/CASParser/cas-parser-php/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/stainless-sdks/cas-parser-php/tree/main/CONTRIBUTING.md).

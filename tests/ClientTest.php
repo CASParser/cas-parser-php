@@ -32,7 +32,7 @@ class ClientTest extends TestCase
             requestOptions: ['transporter' => $transporter],
         );
 
-        $client->casParser->smartParse();
+        $client->credits->check();
 
         $this->assertNotFalse($requested = $transporter->getRequests()[0] ?? false);
 
