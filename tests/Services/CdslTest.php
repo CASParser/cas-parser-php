@@ -32,7 +32,7 @@ final class CdslTest extends TestCase
     public function testParsePdf(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->cdsl->parsePdf();

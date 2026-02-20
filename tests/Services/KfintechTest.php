@@ -32,7 +32,7 @@ final class KfintechTest extends TestCase
     public function testGenerateCas(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->kfintech->generateCas(
@@ -50,7 +50,7 @@ final class KfintechTest extends TestCase
     public function testGenerateCasWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->kfintech->generateCas(
