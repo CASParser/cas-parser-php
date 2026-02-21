@@ -32,7 +32,7 @@ class ClientTest extends TestCase
             requestOptions: ['transporter' => $transporter],
         );
 
-        $client->credits->check();
+        $client->camsKfintech->parse();
 
         $this->assertNotFalse($requested = $transporter->getRequests()[0] ?? false);
 
