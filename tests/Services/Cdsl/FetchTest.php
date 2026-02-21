@@ -33,7 +33,7 @@ final class FetchTest extends TestCase
     public function testRequestOtp(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->cdsl->fetch->requestOtp(
@@ -50,7 +50,7 @@ final class FetchTest extends TestCase
     public function testRequestOtpWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->cdsl->fetch->requestOtp(
@@ -67,7 +67,7 @@ final class FetchTest extends TestCase
     public function testVerifyOtp(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->cdsl->fetch->verifyOtp(
@@ -83,7 +83,7 @@ final class FetchTest extends TestCase
     public function testVerifyOtpWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->cdsl->fetch->verifyOtp(

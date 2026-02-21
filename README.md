@@ -45,9 +45,9 @@ $client = new Client(
   environment: 'environment_1',
 );
 
-$response = $client->credits->check();
+$unifiedResponse = $client->camsKfintech->parse();
 
-var_dump($response->enabled_features);
+var_dump($unifiedResponse->demat_accounts);
 ```
 
 ### Value Objects
@@ -69,7 +69,7 @@ use CasParser\Core\Exceptions\RateLimitException;
 use CasParser\Core\Exceptions\APIStatusException;
 
 try {
-  $response = $client->credits->check();
+  $unifiedResponse = $client->camsKfintech->parse();
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
@@ -114,7 +114,7 @@ use CasParser\Client;
 $client = new Client(requestOptions: ['maxRetries' => 0]);
 
 // Or, configure per-request:
-$result = $client->credits->check(requestOptions: ['maxRetries' => 5]);
+$result = $client->camsKfintech->parse(requestOptions: ['maxRetries' => 5]);
 ```
 
 ## Advanced concepts
@@ -130,7 +130,7 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 ```php
 <?php
 
-$response = $client->credits->check(
+$unifiedResponse = $client->camsKfintech->parse(
   requestOptions: [
     'extraQueryParams' => ['my_query_parameter' => 'value'],
     'extraBodyParams' => ['my_body_parameter' => 'value'],

@@ -35,7 +35,7 @@ final class InboxTest extends TestCase
     public function testCheckConnectionStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->inbox->checkConnectionStatus(
@@ -50,7 +50,7 @@ final class InboxTest extends TestCase
     public function testCheckConnectionStatusWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->inbox->checkConnectionStatus(
@@ -65,7 +65,7 @@ final class InboxTest extends TestCase
     public function testConnectEmail(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->inbox->connectEmail(
@@ -80,7 +80,7 @@ final class InboxTest extends TestCase
     public function testConnectEmailWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->inbox->connectEmail(
@@ -96,7 +96,7 @@ final class InboxTest extends TestCase
     public function testDisconnectEmail(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->inbox->disconnectEmail(
@@ -111,7 +111,7 @@ final class InboxTest extends TestCase
     public function testDisconnectEmailWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->inbox->disconnectEmail(
@@ -126,7 +126,7 @@ final class InboxTest extends TestCase
     public function testListCasFiles(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->inbox->listCasFiles(xInboxToken: 'x-inbox-token');
@@ -139,7 +139,7 @@ final class InboxTest extends TestCase
     public function testListCasFilesWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->inbox->listCasFiles(
