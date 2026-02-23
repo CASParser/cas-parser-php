@@ -68,7 +68,7 @@ final class File implements BaseModel
     public ?string $originalFilename;
 
     /**
-     * Email address of the CAS authority who sent this.
+     * Email address of the CAS authority (CDSL, NSDL, CAMS, or KFintech) who originally sent this statement.
      */
     #[Optional('sender_email')]
     public ?string $senderEmail;
@@ -192,7 +192,7 @@ final class File implements BaseModel
     }
 
     /**
-     * Email address of the CAS authority who sent this.
+     * Email address of the CAS authority (CDSL, NSDL, CAMS, or KFintech) who originally sent this statement.
      */
     public function withSenderEmail(string $senderEmail): self
     {
