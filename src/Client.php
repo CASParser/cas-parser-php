@@ -101,7 +101,7 @@ class Client extends BaseClient
 
         $baseUrl ??= Util::getenv(
             'CAS_PARSER_BASE_URL'
-        ) ?: 'https://portfolio-parser.api.casparser.in';
+        ) ?: 'https://api.casparser.in';
 
         $options = RequestOptions::parse(
             RequestOptions::with(
