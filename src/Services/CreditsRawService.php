@@ -46,7 +46,7 @@ final class CreditsRawService implements CreditsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'credits',
+            path: 'v1/credits',
             options: $requestOptions,
             convert: CreditCheckResponse::class,
         );

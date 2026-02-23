@@ -30,6 +30,8 @@ final class AccessTokenRawService implements AccessTokenRawContract
      *
      * **Use this endpoint from your backend** to create tokens that can be safely passed to frontend/SDK.
      *
+     * **Legacy path:** `/v1/access-token` (still supported)
+     *
      * Access tokens:
      * - Are prefixed with `at_` for easy identification
      * - Valid for up to 60 minutes
@@ -55,7 +57,7 @@ final class AccessTokenRawService implements AccessTokenRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'v1/access-token',
+            path: 'v1/token',
             body: (object) $parsed,
             options: $options,
             convert: AccessTokenNewResponse::class,

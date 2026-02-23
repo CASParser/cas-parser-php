@@ -14,6 +14,8 @@ use CasParser\Core\Contracts\BaseModel;
  *
  * Useful for understanding which API features are being used most and tracking usage trends.
  *
+ * **Legacy path:** `/logs/summary` (still supported)
+ *
  * @see CasParser\Services\LogsService::getSummary()
  *
  * @phpstan-type LogGetSummaryParamsShape = array{

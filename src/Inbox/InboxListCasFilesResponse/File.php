@@ -19,6 +19,7 @@ use CasParser\Inbox\InboxListCasFilesResponse\File\CasType;
  *   messageDate?: string|null,
  *   messageID?: string|null,
  *   originalFilename?: string|null,
+ *   senderEmail?: string|null,
  *   size?: int|null,
  *   url?: string|null,
  * }
@@ -67,6 +68,12 @@ final class File implements BaseModel
     public ?string $originalFilename;
 
     /**
+     * Email address of the CAS authority (CDSL, NSDL, CAMS, or KFintech) who originally sent this statement.
+     */
+    #[Optional('sender_email')]
+    public ?string $senderEmail;
+
+    /**
      * File size in bytes.
      */
     #[Optional]
@@ -97,6 +104,7 @@ final class File implements BaseModel
         ?string $messageDate = null,
         ?string $messageID = null,
         ?string $originalFilename = null,
+        ?string $senderEmail = null,
         ?int $size = null,
         ?string $url = null,
     ): self {
@@ -108,6 +116,7 @@ final class File implements BaseModel
         null !== $messageDate && $self['messageDate'] = $messageDate;
         null !== $messageID && $self['messageID'] = $messageID;
         null !== $originalFilename && $self['originalFilename'] = $originalFilename;
+        null !== $senderEmail && $self['senderEmail'] = $senderEmail;
         null !== $size && $self['size'] = $size;
         null !== $url && $self['url'] = $url;
 
@@ -178,6 +187,17 @@ final class File implements BaseModel
     {
         $self = clone $this;
         $self['originalFilename'] = $originalFilename;
+
+        return $self;
+    }
+
+    /**
+     * Email address of the CAS authority (CDSL, NSDL, CAMS, or KFintech) who originally sent this statement.
+     */
+    public function withSenderEmail(string $senderEmail): self
+    {
+        $self = clone $this;
+        $self['senderEmail'] = $senderEmail;
 
         return $self;
     }

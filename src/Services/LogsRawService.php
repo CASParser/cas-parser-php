@@ -33,6 +33,8 @@ final class LogsRawService implements LogsRawContract
      * Returns a list of API calls with timestamps, features used, status codes, and credits consumed.
      * Useful for monitoring usage patterns and debugging.
      *
+     * **Legacy path:** `/logs` (still supported)
+     *
      * @param array{
      *   endTime?: \DateTimeInterface, limit?: int, startTime?: \DateTimeInterface
      * }|LogCreateParams $params
@@ -54,7 +56,7 @@ final class LogsRawService implements LogsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'logs',
+            path: 'v1/usage',
             body: (object) $parsed,
             options: $options,
             convert: LogNewResponse::class,
@@ -67,6 +69,8 @@ final class LogsRawService implements LogsRawContract
      * Get aggregated usage statistics grouped by feature.
      *
      * Useful for understanding which API features are being used most and tracking usage trends.
+     *
+     * **Legacy path:** `/logs/summary` (still supported)
      *
      * @param array{
      *   endTime?: \DateTimeInterface, startTime?: \DateTimeInterface
@@ -89,7 +93,7 @@ final class LogsRawService implements LogsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'logs/summary',
+            path: 'v1/usage/summary',
             body: (object) $parsed,
             options: $options,
             convert: LogGetSummaryResponse::class,

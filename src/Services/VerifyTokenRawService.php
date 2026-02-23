@@ -40,7 +40,7 @@ final class VerifyTokenRawService implements VerifyTokenRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'v1/verify-token',
+            path: 'v1/token/verify',
             options: $requestOptions,
             convert: VerifyTokenVerifyResponse::class,
         );

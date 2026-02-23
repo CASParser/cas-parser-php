@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.5.0 (2026-02-23)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/CASParser/cas-parser-php/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** api update ([d8c85b9](https://github.com/CASParser/cas-parser-php/commit/d8c85b904f3df1c7242527d1dd66996d0e8cd6e8))
+* **api:** api update ([92b50de](https://github.com/CASParser/cas-parser-php/commit/92b50de8ea771c015e38a2635f1ee5c011156008))
+* **api:** api update ([c0fc7b8](https://github.com/CASParser/cas-parser-php/commit/c0fc7b8b4284930ca1d6eec4c58e88b026cf2da5))
+* **api:** manual updates ([83a811c](https://github.com/CASParser/cas-parser-php/commit/83a811cd2ac157f781caeabff6e8e0f4b757435e))
+
+
+### Chores
+
+* **internal:** remove mock server code ([e868489](https://github.com/CASParser/cas-parser-php/commit/e8684893f2f7c4ab6d75c2be56fc9f2d7c6a5323))
+* update mock server docs ([8a17bde](https://github.com/CASParser/cas-parser-php/commit/8a17bdee09cb200c74522cdf7ed35f8934ba4ecd))
+
 ## 0.4.0 (2026-02-14)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/CASParser/cas-parser-php/compare/v0.3.0...v0.4.0)

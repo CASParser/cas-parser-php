@@ -15,6 +15,8 @@ use CasParser\Core\Contracts\BaseModel;
  * Returns a list of API calls with timestamps, features used, status codes, and credits consumed.
  * Useful for monitoring usage patterns and debugging.
  *
+ * **Legacy path:** `/logs` (still supported)
+ *
  * @see CasParser\Services\LogsService::create()
  *
  * @phpstan-type LogCreateParamsShape = array{

@@ -38,6 +38,8 @@ final class LogsService implements LogsContract
      * Returns a list of API calls with timestamps, features used, status codes, and credits consumed.
      * Useful for monitoring usage patterns and debugging.
      *
+     * **Legacy path:** `/logs` (still supported)
+     *
      * @param \DateTimeInterface $endTime End time filter (ISO 8601). Defaults to now.
      * @param int $limit Maximum number of logs to return
      * @param \DateTimeInterface $startTime Start time filter (ISO 8601). Defaults to 30 days ago.
@@ -67,6 +69,8 @@ final class LogsService implements LogsContract
      * Get aggregated usage statistics grouped by feature.
      *
      * Useful for understanding which API features are being used most and tracking usage trends.
+     *
+     * **Legacy path:** `/logs/summary` (still supported)
      *
      * @param \DateTimeInterface $endTime End time filter (ISO 8601). Defaults to now.
      * @param \DateTimeInterface $startTime Start time filter (ISO 8601). Defaults to start of current month.

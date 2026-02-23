@@ -36,6 +36,8 @@ final class AccessTokenService implements AccessTokenContract
      *
      * **Use this endpoint from your backend** to create tokens that can be safely passed to frontend/SDK.
      *
+     * **Legacy path:** `/v1/access-token` (still supported)
+     *
      * Access tokens:
      * - Are prefixed with `at_` for easy identification
      * - Valid for up to 60 minutes
