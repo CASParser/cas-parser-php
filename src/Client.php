@@ -11,6 +11,7 @@ use CasParser\Services\CamsKfintechService;
 use CasParser\Services\CdslService;
 use CasParser\Services\ContractNoteService;
 use CasParser\Services\CreditsService;
+use CasParser\Services\InboundEmailService;
 use CasParser\Services\InboxService;
 use CasParser\Services\KfintechService;
 use CasParser\Services\LogsService;
@@ -84,6 +85,11 @@ class Client extends BaseClient
     public SmartService $smart;
 
     /**
+     * @api
+     */
+    public InboundEmailService $inboundEmail;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -134,6 +140,7 @@ class Client extends BaseClient
         $this->kfintech = new KfintechService($this);
         $this->nsdl = new NsdlService($this);
         $this->smart = new SmartService($this);
+        $this->inboundEmail = new InboundEmailService($this);
     }
 
     /** @return array<string,string> */
