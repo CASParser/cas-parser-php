@@ -6,7 +6,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [docs.casparser.in](https://docs.casparser.in).
+The REST API documentation can be found on [casparser.in](https://casparser.in/docs).
 
 ## Installation
 
@@ -40,10 +40,7 @@ Parameters with a default value must be set by name.
 
 use CasParser\Client;
 
-$client = new Client(
-  apiKey: getenv('CAS_PARSER_API_KEY') ?: 'My API Key',
-  environment: 'environment_1',
-);
+$client = new Client(apiKey: getenv('CAS_PARSER_API_KEY') ?: 'My API Key');
 
 $response = $client->credits->check();
 

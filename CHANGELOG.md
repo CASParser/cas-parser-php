@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 (2026-02-23)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/CASParser/cas-parser-php/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** manual updates ([7a23bb1](https://github.com/CASParser/cas-parser-php/commit/7a23bb10766f159a5dbbb92e80d8609a30274273))
+
 ## 0.5.0 (2026-02-23)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/CASParser/cas-parser-php/compare/v0.4.0...v0.5.0)
