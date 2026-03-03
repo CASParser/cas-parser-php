@@ -12,6 +12,8 @@ use CasParser\RequestOptions;
 use CasParser\ServiceContracts\NsdlContract;
 
 /**
+ * Endpoints for parsing CAS PDF files from different sources.
+ *
  * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
  */
 final class NsdlService implements NsdlContract

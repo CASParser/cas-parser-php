@@ -13,6 +13,8 @@ use CasParser\ServiceContracts\SmartRawContract;
 use CasParser\Smart\SmartParseCasPdfParams;
 
 /**
+ * Endpoints for parsing CAS PDF files from different sources.
+ *
  * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
  */
 final class SmartRawService implements SmartRawContract

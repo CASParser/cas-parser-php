@@ -14,6 +14,8 @@ use CasParser\RequestOptions;
 use CasParser\ServiceContracts\ContractNoteRawContract;
 
 /**
+ * Endpoints for parsing Contract Note PDF files from various SEBI brokers like Zerodha, Groww, Upstox, ICICI etc.
+ *
  * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
  */
 final class ContractNoteRawService implements ContractNoteRawContract
