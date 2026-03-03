@@ -13,6 +13,8 @@ use CasParser\RequestOptions;
 use CasParser\ServiceContracts\CdslRawContract;
 
 /**
+ * Endpoints for parsing CAS PDF files from different sources.
+ *
  * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
  */
 final class CdslRawService implements CdslRawContract
