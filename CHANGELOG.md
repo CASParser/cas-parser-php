@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.1 (2026-03-03)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/CASParser/cas-parser-php/compare/v0.6.0...v0.6.1)
+
+### Chores
+
+* **internal:** codegen related update ([decef42](https://github.com/CASParser/cas-parser-php/commit/decef42bb63d7f55cd4078ccd78a041fd80d90e9))
+* **internal:** upgrade phpunit ([6aae9d0](https://github.com/CASParser/cas-parser-php/commit/6aae9d0dbaf7cba07bf7f05db9e306541bf122f2))
+
 ## 0.6.0 (2026-02-23)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/CASParser/cas-parser-php/compare/v0.5.0...v0.6.0)
