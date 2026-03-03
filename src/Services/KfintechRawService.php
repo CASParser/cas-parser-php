@@ -13,6 +13,8 @@ use CasParser\RequestOptions;
 use CasParser\ServiceContracts\KfintechRawContract;
 
 /**
+ * Endpoints for generating new CAS documents via email mailback (KFintech).
+ *
  * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
  */
 final class KfintechRawService implements KfintechRawContract

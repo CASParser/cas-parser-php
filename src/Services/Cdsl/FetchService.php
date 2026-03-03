@@ -13,6 +13,9 @@ use CasParser\RequestOptions;
 use CasParser\ServiceContracts\Cdsl\FetchContract;
 
 /**
+ * Endpoints for fetching CAS documents with instant download.
+ * Currently supports CDSL via OTP authentication.
+ *
  * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
  */
 final class FetchService implements FetchContract

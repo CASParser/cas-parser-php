@@ -12,6 +12,9 @@ use CasParser\RequestOptions;
 use CasParser\ServiceContracts\CreditsRawContract;
 
 /**
+ * Endpoints for checking API quota and credits usage.
+ * These endpoints help you monitor your API usage and remaining quota.
+ *
  * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
  */
 final class CreditsRawService implements CreditsRawContract

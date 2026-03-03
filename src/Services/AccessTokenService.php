@@ -12,6 +12,10 @@ use CasParser\RequestOptions;
 use CasParser\ServiceContracts\AccessTokenContract;
 
 /**
+ * Endpoints for managing access tokens for the Portfolio Connect SDK.
+ * Use these to generate short-lived `at_` prefixed tokens that can be safely passed to frontend applications.
+ * Access tokens can be used in place of API keys on all v4 endpoints.
+ *
  * @phpstan-import-type RequestOpts from \CasParser\RequestOptions
  */
 final class AccessTokenService implements AccessTokenContract
