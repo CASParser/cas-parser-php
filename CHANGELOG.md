@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.2 (2026-03-17)
+
+Full Changelog: [v0.6.1...v0.6.2](https://github.com/CASParser/cas-parser-php/compare/v0.6.1...v0.6.2)
+
+### Chores
+
+* **internal:** tweak CI branches ([0c04e9f](https://github.com/CASParser/cas-parser-php/commit/0c04e9f8263c149f9ef085463d9b859a1cf3375a))
+
 ## 0.6.1 (2026-03-03)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/CASParser/cas-parser-php/compare/v0.6.0...v0.6.1)
