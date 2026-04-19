@@ -53,7 +53,7 @@ interface InboundEmailContract
     /**
      * @api
      *
-     * @param string $inboundEmailID Inbound Email ID (e.g., ie_a1b2c3d4e5f6)
+     * @param string $inboundEmailID Inbound Email ID
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
