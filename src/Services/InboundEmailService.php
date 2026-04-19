@@ -58,34 +58,27 @@ final class InboundEmailService implements InboundEmailContract
     /**
      * @api
      *
-     * Create a dedicated inbound email address for collecting CAS statements via email forwarding.
+     * Create a dedicated inbound email address for collecting CAS statements
+     * via email forwarding. When an investor forwards a CAS email to this
+     * address, we verify the sender and make the file available to you.
      *
-     * **How it works:**
-     * 1. Create an inbound email with your webhook URL
-     * 2. Display the email address to your user (e.g., "Forward your CAS to ie_xxx@import.casparser.in")
-     * 3. When an investor forwards a CAS email, we verify the sender and deliver to your webhook
+     * `callback_url` is **optional**:
+     * - **Set it** — we POST each parsed email to your webhook as it arrives.
+     * - **Omit it** — retrieve files via `GET /v4/inbound-email/{id}/files`
+     *   without building a webhook consumer.
      *
-     * **Webhook Delivery:**
-     * - We POST to your `callback_url` with JSON body containing files (matching EmailCASFile schema)
-     * - Failed deliveries are retried automatically with exponential backoff
-     *
-     * **Inactivity:**
-     * - Inbound emails with no activity in 30 days are marked inactive
-     * - Active inbound emails remain operational indefinitely
-     *
-     * @param string $callbackURL Webhook URL where we POST email notifications.
-     * Must be HTTPS in production (HTTP allowed for localhost during development).
-     * @param string $alias Optional custom email prefix for user-friendly addresses.
-     * - Must be 3-32 characters
-     * - Alphanumeric + hyphens only
-     * - Must start and end with letter/number
-     * - Example: `john-portfolio@import.casparser.in`
-     * - If omitted, generates random ID like `ie_abc123xyz@import.casparser.in`
+     * @param string $alias Optional custom email prefix (e.g.
+     * `john-portfolio@import.casparser.in`). 3-32 chars,
+     * alphanumeric + hyphens, must start/end with a letter or
+     * number. If omitted, a random ID is generated.
      * @param list<AllowedSource|value-of<AllowedSource>> $allowedSources Filter emails by CAS provider. If omitted, accepts all providers.
      * - `cdsl` → eCAS@cdslstatement.com
      * - `nsdl` → NSDL-CAS@nsdl.co.in
      * - `cams` → donotreply@camsonline.com
      * - `kfintech` → samfS@kfintech.com
+     * @param string|null $callbackURL Optional webhook URL where we POST parsed emails. Must be
+     * HTTPS in production (HTTP allowed for localhost). If omitted,
+     * retrieve files via `GET /v4/inbound-email/{id}/files`.
      * @param array<string,string> $metadata Optional key-value pairs (max 10) to include in webhook payload.
      * Useful for passing context like plan_type, campaign_id, etc.
      * @param string $reference Your internal identifier (e.g., user_id, account_id).
@@ -95,18 +88,18 @@ final class InboundEmailService implements InboundEmailContract
      * @throws APIException
      */
     public function create(
-        string $callbackURL,
         ?string $alias = null,
         ?array $allowedSources = null,
+        ?string $callbackURL = null,
         ?array $metadata = null,
         ?string $reference = null,
         RequestOptions|array|null $requestOptions = null,
     ): InboundEmailNewResponse {
         $params = Util::removeNulls(
             [
-                'callbackURL' => $callbackURL,
                 'alias' => $alias,
                 'allowedSources' => $allowedSources,
+                'callbackURL' => $callbackURL,
                 'metadata' => $metadata,
                 'reference' => $reference,
             ],
