@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.7.0 (2026-04-19)
+
+Full Changelog: [v0.6.2...v0.7.0](https://github.com/CASParser/cas-parser-php/compare/v0.6.2...v0.7.0)
+
+### Features
+
+* **api:** api update ([5550179](https://github.com/CASParser/cas-parser-php/commit/5550179c5e002c9d2e91e912b8fee39e4af803fd))
+* **api:** api update ([2892c8f](https://github.com/CASParser/cas-parser-php/commit/2892c8f1f0d9cc800e8e03e9899c7f7cef3185c3))
+
+
+### Bug Fixes
+
+* **client:** properly generate file params ([59582b0](https://github.com/CASParser/cas-parser-php/commit/59582b0bcdd8be588e3f53f062a2ff16d29df00d))
+* **client:** resolve serialization issue with unions and enums ([5257135](https://github.com/CASParser/cas-parser-php/commit/5257135e3688cfa7d602bcf7211c1fef01181b59))
+* populate enum-typed properties with enum instances ([4fe2734](https://github.com/CASParser/cas-parser-php/commit/4fe2734cd1aa30730c5192cb8a1e20e0a5b0a5a5))
+
 ## 0.6.2 (2026-03-17)
 
 Full Changelog: [v0.6.1...v0.6.2](https://github.com/CASParser/cas-parser-php/compare/v0.6.1...v0.6.2)
