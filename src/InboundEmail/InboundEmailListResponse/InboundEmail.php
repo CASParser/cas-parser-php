@@ -39,9 +39,10 @@ final class InboundEmail implements BaseModel
     public ?array $allowedSources;
 
     /**
-     * Webhook URL for email notifications.
+     * Webhook URL for email notifications. `null` means files are only
+     * retrievable via `GET /v4/inbound-email/{id}/files` (pull delivery).
      */
-    #[Optional('callback_url')]
+    #[Optional('callback_url', nullable: true)]
     public ?string $callbackURL;
 
     /**
@@ -144,9 +145,10 @@ final class InboundEmail implements BaseModel
     }
 
     /**
-     * Webhook URL for email notifications.
+     * Webhook URL for email notifications. `null` means files are only
+     * retrievable via `GET /v4/inbound-email/{id}/files` (pull delivery).
      */
-    public function withCallbackURL(string $callbackURL): self
+    public function withCallbackURL(?string $callbackURL): self
     {
         $self = clone $this;
         $self['callbackURL'] = $callbackURL;
