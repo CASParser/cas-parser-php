@@ -38,28 +38,7 @@ final class InboundEmailTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->inboundEmail->create(
-            callbackURL: 'https://api.yourapp.com/webhooks/cas-email'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(InboundEmailNewResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCreateWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->inboundEmail->create(
-            callbackURL: 'https://api.yourapp.com/webhooks/cas-email',
-            alias: 'john-portfolio',
-            allowedSources: ['cdsl', 'nsdl'],
-            metadata: ['plan' => 'premium', 'source' => 'onboarding'],
-            reference: 'user_12345',
-        );
+        $result = $this->client->inboundEmail->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InboundEmailNewResponse::class, $result);
@@ -72,7 +51,7 @@ final class InboundEmailTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->inboundEmail->retrieve('ie_a1b2c3d4e5f6');
+        $result = $this->client->inboundEmail->retrieve('inbound_email_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InboundEmailGetResponse::class, $result);

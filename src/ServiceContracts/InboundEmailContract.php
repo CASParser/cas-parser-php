@@ -21,19 +21,18 @@ interface InboundEmailContract
     /**
      * @api
      *
-     * @param string $callbackURL Webhook URL where we POST email notifications.
-     * Must be HTTPS in production (HTTP allowed for localhost during development).
-     * @param string $alias Optional custom email prefix for user-friendly addresses.
-     * - Must be 3-32 characters
-     * - Alphanumeric + hyphens only
-     * - Must start and end with letter/number
-     * - Example: `john-portfolio@import.casparser.in`
-     * - If omitted, generates random ID like `ie_abc123xyz@import.casparser.in`
+     * @param string $alias Optional custom email prefix (e.g.
+     * `john-portfolio@import.casparser.in`). 3-32 chars,
+     * alphanumeric + hyphens, must start/end with a letter or
+     * number. If omitted, a random ID is generated.
      * @param list<AllowedSource|value-of<AllowedSource>> $allowedSources Filter emails by CAS provider. If omitted, accepts all providers.
      * - `cdsl` → eCAS@cdslstatement.com
      * - `nsdl` → NSDL-CAS@nsdl.co.in
      * - `cams` → donotreply@camsonline.com
      * - `kfintech` → samfS@kfintech.com
+     * @param string|null $callbackURL Optional webhook URL where we POST parsed emails. Must be
+     * HTTPS in production (HTTP allowed for localhost). If omitted,
+     * retrieve files via `GET /v4/inbound-email/{id}/files`.
      * @param array<string,string> $metadata Optional key-value pairs (max 10) to include in webhook payload.
      * Useful for passing context like plan_type, campaign_id, etc.
      * @param string $reference Your internal identifier (e.g., user_id, account_id).
@@ -43,9 +42,9 @@ interface InboundEmailContract
      * @throws APIException
      */
     public function create(
-        string $callbackURL,
         ?string $alias = null,
         ?array $allowedSources = null,
+        ?string $callbackURL = null,
         ?array $metadata = null,
         ?string $reference = null,
         RequestOptions|array|null $requestOptions = null,
@@ -54,7 +53,7 @@ interface InboundEmailContract
     /**
      * @api
      *
-     * @param string $inboundEmailID Inbound Email ID (e.g., ie_a1b2c3d4e5f6)
+     * @param string $inboundEmailID Inbound Email ID
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

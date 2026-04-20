@@ -53,25 +53,19 @@ final class InboundEmailRawService implements InboundEmailRawContract
     /**
      * @api
      *
-     * Create a dedicated inbound email address for collecting CAS statements via email forwarding.
+     * Create a dedicated inbound email address for collecting CAS statements
+     * via email forwarding. When an investor forwards a CAS email to this
+     * address, we verify the sender and make the file available to you.
      *
-     * **How it works:**
-     * 1. Create an inbound email with your webhook URL
-     * 2. Display the email address to your user (e.g., "Forward your CAS to ie_xxx@import.casparser.in")
-     * 3. When an investor forwards a CAS email, we verify the sender and deliver to your webhook
-     *
-     * **Webhook Delivery:**
-     * - We POST to your `callback_url` with JSON body containing files (matching EmailCASFile schema)
-     * - Failed deliveries are retried automatically with exponential backoff
-     *
-     * **Inactivity:**
-     * - Inbound emails with no activity in 30 days are marked inactive
-     * - Active inbound emails remain operational indefinitely
+     * `callback_url` is **optional**:
+     * - **Set it** — we POST each parsed email to your webhook as it arrives.
+     * - **Omit it** — retrieve files via `GET /v4/inbound-email/{id}/files`
+     *   without building a webhook consumer.
      *
      * @param array{
-     *   callbackURL: string,
      *   alias?: string,
      *   allowedSources?: list<AllowedSource|value-of<AllowedSource>>,
+     *   callbackURL?: string|null,
      *   metadata?: array<string,string>,
      *   reference?: string,
      * }|InboundEmailCreateParams $params
@@ -105,7 +99,7 @@ final class InboundEmailRawService implements InboundEmailRawContract
      *
      * Retrieve details of a specific mailbox including statistics.
      *
-     * @param string $inboundEmailID Inbound Email ID (e.g., ie_a1b2c3d4e5f6)
+     * @param string $inboundEmailID Inbound Email ID
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InboundEmailGetResponse>

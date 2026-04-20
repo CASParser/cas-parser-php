@@ -5,34 +5,27 @@ declare(strict_types=1);
 namespace CasParser\InboundEmail;
 
 use CasParser\Core\Attributes\Optional;
-use CasParser\Core\Attributes\Required;
 use CasParser\Core\Concerns\SdkModel;
 use CasParser\Core\Concerns\SdkParams;
 use CasParser\Core\Contracts\BaseModel;
 use CasParser\InboundEmail\InboundEmailCreateParams\AllowedSource;
 
 /**
- * Create a dedicated inbound email address for collecting CAS statements via email forwarding.
+ * Create a dedicated inbound email address for collecting CAS statements
+ * via email forwarding. When an investor forwards a CAS email to this
+ * address, we verify the sender and make the file available to you.
  *
- * **How it works:**
- * 1. Create an inbound email with your webhook URL
- * 2. Display the email address to your user (e.g., "Forward your CAS to ie_xxx@import.casparser.in")
- * 3. When an investor forwards a CAS email, we verify the sender and deliver to your webhook
- *
- * **Webhook Delivery:**
- * - We POST to your `callback_url` with JSON body containing files (matching EmailCASFile schema)
- * - Failed deliveries are retried automatically with exponential backoff
- *
- * **Inactivity:**
- * - Inbound emails with no activity in 30 days are marked inactive
- * - Active inbound emails remain operational indefinitely
+ * `callback_url` is **optional**:
+ * - **Set it** — we POST each parsed email to your webhook as it arrives.
+ * - **Omit it** — retrieve files via `GET /v4/inbound-email/{id}/files`
+ *   without building a webhook consumer.
  *
  * @see CasParser\Services\InboundEmailService::create()
  *
  * @phpstan-type InboundEmailCreateParamsShape = array{
- *   callbackURL: string,
  *   alias?: string|null,
  *   allowedSources?: list<AllowedSource|value-of<AllowedSource>>|null,
+ *   callbackURL?: string|null,
  *   metadata?: array<string,string>|null,
  *   reference?: string|null,
  * }
@@ -44,19 +37,10 @@ final class InboundEmailCreateParams implements BaseModel
     use SdkParams;
 
     /**
-     * Webhook URL where we POST email notifications.
-     * Must be HTTPS in production (HTTP allowed for localhost during development).
-     */
-    #[Required('callback_url')]
-    public string $callbackURL;
-
-    /**
-     * Optional custom email prefix for user-friendly addresses.
-     * - Must be 3-32 characters
-     * - Alphanumeric + hyphens only
-     * - Must start and end with letter/number
-     * - Example: `john-portfolio@import.casparser.in`
-     * - If omitted, generates random ID like `ie_abc123xyz@import.casparser.in`.
+     * Optional custom email prefix (e.g.
+     * `john-portfolio@import.casparser.in`). 3-32 chars,
+     * alphanumeric + hyphens, must start/end with a letter or
+     * number. If omitted, a random ID is generated.
      */
     #[Optional]
     public ?string $alias;
@@ -74,6 +58,14 @@ final class InboundEmailCreateParams implements BaseModel
     public ?array $allowedSources;
 
     /**
+     * Optional webhook URL where we POST parsed emails. Must be
+     * HTTPS in production (HTTP allowed for localhost). If omitted,
+     * retrieve files via `GET /v4/inbound-email/{id}/files`.
+     */
+    #[Optional('callback_url', nullable: true)]
+    public ?string $callbackURL;
+
+    /**
      * Optional key-value pairs (max 10) to include in webhook payload.
      * Useful for passing context like plan_type, campaign_id, etc.
      *
@@ -89,20 +81,6 @@ final class InboundEmailCreateParams implements BaseModel
     #[Optional]
     public ?string $reference;
 
-    /**
-     * `new InboundEmailCreateParams()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * InboundEmailCreateParams::with(callbackURL: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new InboundEmailCreateParams)->withCallbackURL(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -117,18 +95,17 @@ final class InboundEmailCreateParams implements BaseModel
      * @param array<string,string>|null $metadata
      */
     public static function with(
-        string $callbackURL,
         ?string $alias = null,
         ?array $allowedSources = null,
+        ?string $callbackURL = null,
         ?array $metadata = null,
         ?string $reference = null,
     ): self {
         $self = new self;
 
-        $self['callbackURL'] = $callbackURL;
-
         null !== $alias && $self['alias'] = $alias;
         null !== $allowedSources && $self['allowedSources'] = $allowedSources;
+        null !== $callbackURL && $self['callbackURL'] = $callbackURL;
         null !== $metadata && $self['metadata'] = $metadata;
         null !== $reference && $self['reference'] = $reference;
 
@@ -136,24 +113,10 @@ final class InboundEmailCreateParams implements BaseModel
     }
 
     /**
-     * Webhook URL where we POST email notifications.
-     * Must be HTTPS in production (HTTP allowed for localhost during development).
-     */
-    public function withCallbackURL(string $callbackURL): self
-    {
-        $self = clone $this;
-        $self['callbackURL'] = $callbackURL;
-
-        return $self;
-    }
-
-    /**
-     * Optional custom email prefix for user-friendly addresses.
-     * - Must be 3-32 characters
-     * - Alphanumeric + hyphens only
-     * - Must start and end with letter/number
-     * - Example: `john-portfolio@import.casparser.in`
-     * - If omitted, generates random ID like `ie_abc123xyz@import.casparser.in`.
+     * Optional custom email prefix (e.g.
+     * `john-portfolio@import.casparser.in`). 3-32 chars,
+     * alphanumeric + hyphens, must start/end with a letter or
+     * number. If omitted, a random ID is generated.
      */
     public function withAlias(string $alias): self
     {
@@ -176,6 +139,19 @@ final class InboundEmailCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['allowedSources'] = $allowedSources;
+
+        return $self;
+    }
+
+    /**
+     * Optional webhook URL where we POST parsed emails. Must be
+     * HTTPS in production (HTTP allowed for localhost). If omitted,
+     * retrieve files via `GET /v4/inbound-email/{id}/files`.
+     */
+    public function withCallbackURL(?string $callbackURL): self
+    {
+        $self = clone $this;
+        $self['callbackURL'] = $callbackURL;
 
         return $self;
     }
