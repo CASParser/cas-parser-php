@@ -39,8 +39,9 @@ final class InboundEmail implements BaseModel
     public ?array $allowedSources;
 
     /**
-     * Webhook URL for email notifications. Empty string (`""`) means files are
-     * only retrievable via `GET /v4/inbound-email/{id}/files` (SDK / pull mode).
+     * Webhook URL for email notifications. If set, we POST each parsed
+     * email here. If omitted, files are only retrievable via
+     * `GET /v4/inbound-email/{id}/files`.
      */
     #[Optional('callback_url')]
     public ?string $callbackURL;
@@ -145,8 +146,9 @@ final class InboundEmail implements BaseModel
     }
 
     /**
-     * Webhook URL for email notifications. Empty string (`""`) means files are
-     * only retrievable via `GET /v4/inbound-email/{id}/files` (SDK / pull mode).
+     * Webhook URL for email notifications. If set, we POST each parsed
+     * email here. If omitted, files are only retrievable via
+     * `GET /v4/inbound-email/{id}/files`.
      */
     public function withCallbackURL(string $callbackURL): self
     {
