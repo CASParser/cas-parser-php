@@ -38,7 +38,10 @@ final class File implements BaseModel
     public ?string $casType;
 
     /**
-     * URL expiration time in seconds (default 86400 = 24 hours).
+     * URL expiration time in seconds. Defaults vary by source:
+     * - Gmail Inbox Import: 86400 (24h)
+     * - Inbound Email (webhook mode): 172800 (48h)
+     * - Inbound Email (SDK mode): aligned with the session TTL (~30 min)
      */
     #[Optional('expires_in')]
     public ?int $expiresIn;
@@ -137,7 +140,10 @@ final class File implements BaseModel
     }
 
     /**
-     * URL expiration time in seconds (default 86400 = 24 hours).
+     * URL expiration time in seconds. Defaults vary by source:
+     * - Gmail Inbox Import: 86400 (24h)
+     * - Inbound Email (webhook mode): 172800 (48h)
+     * - Inbound Email (SDK mode): aligned with the session TTL (~30 min)
      */
     public function withExpiresIn(int $expiresIn): self
     {

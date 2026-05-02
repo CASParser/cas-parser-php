@@ -39,14 +39,14 @@ final class InboundEmailNewResponse implements BaseModel
     public ?array $allowedSources;
 
     /**
-     * Webhook URL for email notifications. `null` means files are only
-     * retrievable via `GET /v4/inbound-email/{id}/files` (pull delivery).
+     * Webhook URL for email notifications. Empty string (`""`) means files are
+     * only retrievable via `GET /v4/inbound-email/{id}/files` (SDK / pull mode).
      */
-    #[Optional('callback_url', nullable: true)]
+    #[Optional('callback_url')]
     public ?string $callbackURL;
 
     /**
-     * When the mailbox was created.
+     * When the inbound email was created.
      */
     #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
@@ -78,7 +78,7 @@ final class InboundEmailNewResponse implements BaseModel
     public ?string $reference;
 
     /**
-     * Current mailbox status.
+     * Current inbound email lifecycle status.
      *
      * @var value-of<Status>|null $status
      */
@@ -86,7 +86,7 @@ final class InboundEmailNewResponse implements BaseModel
     public ?string $status;
 
     /**
-     * When the mailbox was last updated.
+     * When the inbound email was last updated.
      */
     #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
@@ -145,10 +145,10 @@ final class InboundEmailNewResponse implements BaseModel
     }
 
     /**
-     * Webhook URL for email notifications. `null` means files are only
-     * retrievable via `GET /v4/inbound-email/{id}/files` (pull delivery).
+     * Webhook URL for email notifications. Empty string (`""`) means files are
+     * only retrievable via `GET /v4/inbound-email/{id}/files` (SDK / pull mode).
      */
-    public function withCallbackURL(?string $callbackURL): self
+    public function withCallbackURL(string $callbackURL): self
     {
         $self = clone $this;
         $self['callbackURL'] = $callbackURL;
@@ -157,7 +157,7 @@ final class InboundEmailNewResponse implements BaseModel
     }
 
     /**
-     * When the mailbox was created.
+     * When the inbound email was created.
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
@@ -214,7 +214,7 @@ final class InboundEmailNewResponse implements BaseModel
     }
 
     /**
-     * Current mailbox status.
+     * Current inbound email lifecycle status.
      *
      * @param Status|value-of<Status> $status
      */
@@ -227,7 +227,7 @@ final class InboundEmailNewResponse implements BaseModel
     }
 
     /**
-     * When the mailbox was last updated.
+     * When the inbound email was last updated.
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CasParser\InboundEmail\InboundEmailListResponse\InboundEmail;
 
 /**
- * Current mailbox status.
+ * Current inbound email lifecycle status.
  */
 enum Status: string
 {
