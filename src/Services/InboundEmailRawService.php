@@ -97,7 +97,7 @@ final class InboundEmailRawService implements InboundEmailRawContract
     /**
      * @api
      *
-     * Retrieve details of a specific mailbox including statistics.
+     * Retrieve details of a specific inbound email including statistics.
      *
      * @param string $inboundEmailID Inbound Email ID
      * @param RequestOpts|null $requestOptions
@@ -122,8 +122,8 @@ final class InboundEmailRawService implements InboundEmailRawContract
     /**
      * @api
      *
-     * List all mailboxes associated with your API key.
-     * Returns active and inactive mailboxes (deleted mailboxes are excluded).
+     * List all inbound emails associated with your API key.
+     * Returns active and paused inbound emails (deleted ones are excluded).
      *
      * @param array{
      *   limit?: int, offset?: int, status?: Status|value-of<Status>
