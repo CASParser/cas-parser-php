@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.8.0 (2026-07-18)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/CASParser/cas-parser-php/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** api update ([61803b2](https://github.com/CASParser/cas-parser-php/commit/61803b218533dc37365058e8d109cc47253c09de))
+* **api:** api update ([673d298](https://github.com/CASParser/cas-parser-php/commit/673d29896be612e78e60e40283e6ce7bb980f0c3))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([9a46640](https://github.com/CASParser/cas-parser-php/commit/9a46640f85e4f02cf8bacafb197ae0e8f1bc902f))
+* support setting headers via env ([47b835c](https://github.com/CASParser/cas-parser-php/commit/47b835c86b80681f501f029709a8198fb44cdce3))
+
+
+### Bug Fixes
+
+* guzzle requires special handling to enable streaming ([7a5def3](https://github.com/CASParser/cas-parser-php/commit/7a5def32e6cff5d527ec67949b5882411f367253))
+* revert enum parsing change that lead to unconditional failure ([34892b3](https://github.com/CASParser/cas-parser-php/commit/34892b325daf92e6c108372a3d20372e6fbd4a61))
+
 ## 0.7.0 (2026-04-19)
 
 Full Changelog: [v0.6.2...v0.7.0](https://github.com/CASParser/cas-parser-php/compare/v0.6.2...v0.7.0)
