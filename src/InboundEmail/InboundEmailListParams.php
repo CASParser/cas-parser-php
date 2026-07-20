@@ -11,8 +11,8 @@ use CasParser\Core\Contracts\BaseModel;
 use CasParser\InboundEmail\InboundEmailListParams\Status;
 
 /**
- * List all mailboxes associated with your API key.
- * Returns active and inactive mailboxes (deleted mailboxes are excluded).
+ * List all inbound emails associated with your API key.
+ * Returns active and paused inbound emails (deleted ones are excluded).
  *
  * @see CasParser\Services\InboundEmailService::list()
  *
