@@ -15,6 +15,7 @@ use CasParser\Core\Contracts\BaseModel;
  *   advisor?: string|null,
  *   amfi?: string|null,
  *   closeUnits?: float|null,
+ *   isDemat?: bool|null,
  *   openUnits?: float|null,
  *   rtaCode?: string|null,
  * }
@@ -43,6 +44,12 @@ final class AdditionalInfo implements BaseModel
     public ?float $closeUnits;
 
     /**
+     * Whether the scheme is held in demat form (CAMS/KFintech). true = Demat, false = Non-Demat, null = not specified.
+     */
+    #[Optional('is_demat', nullable: true)]
+    public ?bool $isDemat;
+
+    /**
      * Opening balance units for the statement period.
      */
     #[Optional('open_units', nullable: true)]
@@ -68,6 +75,7 @@ final class AdditionalInfo implements BaseModel
         ?string $advisor = null,
         ?string $amfi = null,
         ?float $closeUnits = null,
+        ?bool $isDemat = null,
         ?float $openUnits = null,
         ?string $rtaCode = null,
     ): self {
@@ -76,6 +84,7 @@ final class AdditionalInfo implements BaseModel
         null !== $advisor && $self['advisor'] = $advisor;
         null !== $amfi && $self['amfi'] = $amfi;
         null !== $closeUnits && $self['closeUnits'] = $closeUnits;
+        null !== $isDemat && $self['isDemat'] = $isDemat;
         null !== $openUnits && $self['openUnits'] = $openUnits;
         null !== $rtaCode && $self['rtaCode'] = $rtaCode;
 
@@ -111,6 +120,17 @@ final class AdditionalInfo implements BaseModel
     {
         $self = clone $this;
         $self['closeUnits'] = $closeUnits;
+
+        return $self;
+    }
+
+    /**
+     * Whether the scheme is held in demat form (CAMS/KFintech). true = Demat, false = Non-Demat, null = not specified.
+     */
+    public function withIsDemat(?bool $isDemat): self
+    {
+        $self = clone $this;
+        $self['isDemat'] = $isDemat;
 
         return $self;
     }
