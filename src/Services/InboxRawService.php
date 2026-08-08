@@ -11,6 +11,7 @@ use CasParser\Core\Util;
 use CasParser\Inbox\InboxCheckConnectionStatusParams;
 use CasParser\Inbox\InboxCheckConnectionStatusResponse;
 use CasParser\Inbox\InboxConnectEmailParams;
+use CasParser\Inbox\InboxConnectEmailParams\Provider;
 use CasParser\Inbox\InboxConnectEmailResponse;
 use CasParser\Inbox\InboxDisconnectEmailParams;
 use CasParser\Inbox\InboxDisconnectEmailResponse;
@@ -104,7 +105,7 @@ final class InboxRawService implements InboxRawContract
      * **Store the `inbox_token` client-side** and use it for all subsequent inbox API calls.
      *
      * @param array{
-     *   redirectUri: string, state?: string
+     *   redirectUri: string, provider?: Provider|value-of<Provider>, state?: string
      * }|InboxConnectEmailParams $params
      * @param RequestOpts|null $requestOptions
      *

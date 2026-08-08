@@ -6,6 +6,7 @@ namespace CasParser\ServiceContracts;
 
 use CasParser\Core\Exceptions\APIException;
 use CasParser\Inbox\InboxCheckConnectionStatusResponse;
+use CasParser\Inbox\InboxConnectEmailParams\Provider;
 use CasParser\Inbox\InboxConnectEmailResponse;
 use CasParser\Inbox\InboxDisconnectEmailResponse;
 use CasParser\Inbox\InboxListCasFilesParams\CasType;
@@ -34,6 +35,13 @@ interface InboxContract
      * @api
      *
      * @param string $redirectUri Your callback URL to receive the inbox_token (must be http or https)
+     * @param Provider|value-of<Provider> $provider Mail provider to connect. Defaults to `gmail`.
+     *
+     * - `gmail` - Google accounts
+     * - `outlook` - Microsoft accounts
+     *
+     * Any value other than `outlook` is treated as `gmail`. The
+     * resolved provider is returned in the response.
      * @param string $state State parameter for CSRF protection (returned in redirect)
      * @param RequestOpts|null $requestOptions
      *
@@ -41,6 +49,7 @@ interface InboxContract
      */
     public function connectEmail(
         string $redirectUri,
+        Provider|string $provider = 'gmail',
         ?string $state = null,
         RequestOptions|array|null $requestOptions = null,
     ): InboxConnectEmailResponse;
