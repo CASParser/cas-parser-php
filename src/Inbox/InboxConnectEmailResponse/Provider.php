@@ -12,4 +12,6 @@ enum Provider: string
     case GMAIL = 'gmail';
 
     case OUTLOOK = 'outlook';
+
+    case ZOHO = 'zoho';
 }

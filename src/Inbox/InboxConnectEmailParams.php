@@ -27,6 +27,10 @@ use CasParser\Inbox\InboxConnectEmailParams\Provider;
  * - `state` - Your original state parameter
  *
  * **Store the `inbox_token` client-side** and use it for all subsequent inbox API calls.
+ * The token is long-lived (it stores an encrypted refresh token), so a single OAuth
+ * connect gives ongoing access to both historical and future CAS statements in the
+ * user's inbox. Reuse the same token until the user revokes access via
+ * `/v4/inbox/disconnect` or their provider's account settings.
  *
  * @see CasParser\Services\InboxService::connectEmail()
  *
@@ -51,11 +55,18 @@ final class InboxConnectEmailParams implements BaseModel
     /**
      * Mail provider to connect. Defaults to `gmail`.
      *
-     * - `gmail` - Google accounts
-     * - `outlook` - Microsoft accounts
+     * - `gmail` - Google accounts: `@gmail.com` and Google
+     *   Workspace domains.
+     * - `outlook` - personal Microsoft accounts: `@outlook.com`,
+     *   `@hotmail.com`, `@live.com`, `@msn.com` and localised
+     *   variants (`@hotmail.co.uk`, `@live.in`, `@hotmail.fr`).
+     *   Any other address registered as a personal Microsoft
+     *   account also works, including custom domains.
+     * - `zoho` - Zoho Mail accounts, including custom domains
+     *   hosted on Zoho.
      *
-     * Any value other than `outlook` is treated as `gmail`. The
-     * resolved provider is returned in the response.
+     * Any unrecognised value is treated as `gmail`. The resolved
+     * provider is returned in the response.
      *
      * @var value-of<Provider>|null $provider
      */
@@ -123,11 +134,18 @@ final class InboxConnectEmailParams implements BaseModel
     /**
      * Mail provider to connect. Defaults to `gmail`.
      *
-     * - `gmail` - Google accounts
-     * - `outlook` - Microsoft accounts
+     * - `gmail` - Google accounts: `@gmail.com` and Google
+     *   Workspace domains.
+     * - `outlook` - personal Microsoft accounts: `@outlook.com`,
+     *   `@hotmail.com`, `@live.com`, `@msn.com` and localised
+     *   variants (`@hotmail.co.uk`, `@live.in`, `@hotmail.fr`).
+     *   Any other address registered as a personal Microsoft
+     *   account also works, including custom domains.
+     * - `zoho` - Zoho Mail accounts, including custom domains
+     *   hosted on Zoho.
      *
-     * Any value other than `outlook` is treated as `gmail`. The
-     * resolved provider is returned in the response.
+     * Any unrecognised value is treated as `gmail`. The resolved
+     * provider is returned in the response.
      *
      * @param Provider|value-of<Provider> $provider
      */
