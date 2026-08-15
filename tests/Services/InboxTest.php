@@ -85,7 +85,8 @@ final class InboxTest extends TestCase
 
         $result = $this->client->inbox->connectEmail(
             redirectUri: 'https://yourapp.com/oauth-callback',
-            state: 'abc123'
+            provider: 'outlook',
+            state: 'abc123',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

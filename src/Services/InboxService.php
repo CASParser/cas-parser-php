@@ -8,6 +8,7 @@ use CasParser\Client;
 use CasParser\Core\Exceptions\APIException;
 use CasParser\Core\Util;
 use CasParser\Inbox\InboxCheckConnectionStatusResponse;
+use CasParser\Inbox\InboxConnectEmailParams\Provider;
 use CasParser\Inbox\InboxConnectEmailResponse;
 use CasParser\Inbox\InboxDisconnectEmailResponse;
 use CasParser\Inbox\InboxListCasFilesParams\CasType;
@@ -18,7 +19,14 @@ use CasParser\ServiceContracts\InboxContract;
 /**
  * Endpoints for importing CAS files directly from user email inboxes.
  *
- * **Supported Providers:** Gmail (more coming soon)
+ * **Supported Providers:**
+ *
+ * - **Gmail** (`gmail`, default) — `@gmail.com` and Google Workspace domains
+ * - **Microsoft** (`outlook`) — personal Microsoft accounts: `@outlook.com`,
+ *   `@hotmail.com`, `@live.com`, `@msn.com`, and localised variants such as
+ *   `@hotmail.co.uk`, `@live.in`, `@hotmail.fr`. Any other address registered
+ *   as a personal Microsoft account also works, including custom domains.
+ * - **Zoho Mail** (`zoho`) — Zoho-hosted mailboxes, including custom domains
  *
  * **How it works:**
  * 1. Call `POST /v4/inbox/connect` to get an OAuth URL
@@ -92,8 +100,26 @@ final class InboxService implements InboxContract
      * - `state` - Your original state parameter
      *
      * **Store the `inbox_token` client-side** and use it for all subsequent inbox API calls.
+     * The token is long-lived (it stores an encrypted refresh token), so a single OAuth
+     * connect gives ongoing access to both historical and future CAS statements in the
+     * user's inbox. Reuse the same token until the user revokes access via
+     * `/v4/inbox/disconnect` or their provider's account settings.
      *
      * @param string $redirectUri Your callback URL to receive the inbox_token (must be http or https)
+     * @param Provider|value-of<Provider> $provider Mail provider to connect. Defaults to `gmail`.
+     *
+     * - `gmail` - Google accounts: `@gmail.com` and Google
+     *   Workspace domains.
+     * - `outlook` - personal Microsoft accounts: `@outlook.com`,
+     *   `@hotmail.com`, `@live.com`, `@msn.com` and localised
+     *   variants (`@hotmail.co.uk`, `@live.in`, `@hotmail.fr`).
+     *   Any other address registered as a personal Microsoft
+     *   account also works, including custom domains.
+     * - `zoho` - Zoho Mail accounts, including custom domains
+     *   hosted on Zoho.
+     *
+     * Any unrecognised value is treated as `gmail`. The resolved
+     * provider is returned in the response.
      * @param string $state State parameter for CSRF protection (returned in redirect)
      * @param RequestOpts|null $requestOptions
      *
@@ -101,11 +127,16 @@ final class InboxService implements InboxContract
      */
     public function connectEmail(
         string $redirectUri,
+        Provider|string $provider = 'gmail',
         ?string $state = null,
         RequestOptions|array|null $requestOptions = null,
     ): InboxConnectEmailResponse {
         $params = Util::removeNulls(
-            ['redirectUri' => $redirectUri, 'state' => $state]
+            [
+                'redirectUri' => $redirectUri,
+                'provider' => $provider,
+                'state' => $state,
+            ],
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.11.0 (2026-08-14)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/CASParser/cas-parser-php/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** api update ([aaebadc](https://github.com/CASParser/cas-parser-php/commit/aaebadcb40240cbbe19d3c2cebb65dbd9d9f3e39))
+* **api:** api update ([2b43dbc](https://github.com/CASParser/cas-parser-php/commit/2b43dbcf6cfb7b88b74a1ae6315e41919a952457))
+
+
+### Chores
+
+* **internal:** codegen related update ([2ab577d](https://github.com/CASParser/cas-parser-php/commit/2ab577dcc8902ab6a68c5066b1ffbc2c7660f6fc))
+
 ## 0.10.0 (2026-08-02)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/CASParser/cas-parser-php/compare/v0.9.0...v0.10.0)
